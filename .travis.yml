@@ -9,5 +9,8 @@ script:
 deploy:
   provider: heroku
   api_key:
-  app:
+    secure: bQY2qcVlUQzL3bLZC+in1YFamHKvMaKn9/xvgFCfWC0fyD5BIBgUJdBYr67PyewqKs9/8aiKjNLZkQJEzEelL74wlATvqf7S6n20A0llfT95Vz0+2w1ubyuu2Sdvsjt79Y/KGWPMihTKNcZwOAjKsucKE4nG3C5V39mdKRto/lWs5SUNDXtMOUpvi731Gm/YCYpDk7u/iDB8jfXRhEp7PEs727PSS+ZzSj0dTTf4BxzT2Z6xQqhkJG9JVqKcyYL25ftbaBP2oC7If3Zf0yHdn5RxPrbhYRtrIIHZLURGDHYPrYwKIbP4juZXGVRlapeXA0XZ6OlC3Is31kDJLSYWr58/2Kq5dlXnvKmMMlC3I4jN3lIcsiQ3bzkHIiBq5zwi3oYRUdyhvZRKJDcfiN1P5HVYLrkGbpIyEYoOAlHAPs4w16u11UXPzUlnoxD/Y3fGWGhGaB8PUMEW5roH/phvOVXzkzLbojbPIeOStB4/atmbfQJFPcROmpnl3FTAbVQq4ZcyypGgd3NHRgWJiXA8tb+LcVZPYglGWLK8KxgJQteddurapZ0dCeZ6dR1+pgSpGQOiwXU4C/hDlB8U715FNs2duEfYJI2cMdLMEEZM7FUTiuwmQIQIJnXbrhlge71THhjyvp8gj2oY/zU6u7XRkbVtO8K6WtW/Xeux2JHsTqk=
+  app: shelf-share
   run: rails db:migrate
+  on:
+    repo: shelf-Share-BEE-Mod3/shelf-share-rails
