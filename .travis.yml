@@ -13,4 +13,5 @@ deploy:
   app: shelf-share
   run: rails db:migrate
   on:
-    repo: shelf-Share-BEE-Mod3/shelf-share-rails
+    repo: Shelf-Share-BEE-Mod3/shelf-share-rails
+    branch: main
