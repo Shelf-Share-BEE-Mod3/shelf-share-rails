@@ -45,10 +45,10 @@ group :development, :test do
   gem 'faker'
   gem 'travis'
   gem 'factory_bot_rails'
+  gem 'rspec-rails'
 end
 
 group :test do
-  gem 'rspec-rails'
   gem 'shoulda-matchers', '~> 4.0'
   gem 'capybara'
   gem 'launchy'
