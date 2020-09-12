@@ -36,10 +36,7 @@ RSpec.describe 'User Friends Index Page' do
   end
 end
 
-# As a registered user
-# When I visit the friends index page
-# I see a search box to add friend's by their email
-# I see a list of my friends
-# I see any new friends requests and buttons to accept or decline
+# Future user stories:
+# I see any new friend requests with buttons to accept or decline
 # I see the book covers I am lending displayed by the friend who has them
 # I see the book covers of books I am borrowing by the friends who own them
