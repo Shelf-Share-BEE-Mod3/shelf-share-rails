@@ -44,7 +44,6 @@ RSpec.feature 'As a user' do
 
     expect(current_user.address).to be_falsey
     click_button 'Submit Address'
-    save_and_open_page
     expect(page).to have_content('Please fill out all required fields')
     expect(page).to have_content("City can't be blank")
     page.should have_field(:address_first, with: @address[:address_first])
