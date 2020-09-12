@@ -10,6 +10,19 @@
   </head>
 
   <body>
+    <nav>
+      <%= link_to "Home", root_path %>
+      <%= link_to "Dashboard" %>
+      <%= link_to "Find Books" %>
+      <%= link_to "Friends" %>
+      <%= link_to "My Books" %>
+      <%= link_to "Account Info" %>
+    </nav>
+    <% flash.each do |name, msg| %>
+      <div class= "<%=name%>-flash">
+        <p><%= msg %></p>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>
