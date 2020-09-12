@@ -5,5 +5,6 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     :prompt => ['select_account', 'consent'],
     :access_type => "offline",
     :scope => ['email', 'profile', 'books'],
+    :skip_jwt => true,
   }
 end
