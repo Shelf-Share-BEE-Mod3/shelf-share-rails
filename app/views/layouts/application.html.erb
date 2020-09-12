@@ -11,12 +11,14 @@
 
   <body>
     <nav>
-      <%= link_to "Home", root_path %>
-      <%= link_to "Dashboard", dashboard_path %>
-      <%= link_to "Find Books", books_path %>
-      <%= link_to "Friends", user_friends_path %>
-      <%= link_to "My Books", user_books_path %>
-      <%= link_to "Account Info", user_account_path %>
+      <% if current_user %>
+        <%= link_to "Home", root_path %>
+        <%= link_to "Dashboard", dashboard_path %>
+        <%= link_to "Find Books", books_path %>
+        <%= link_to "Friends", user_friends_path %>
+        <%= link_to "My Books", user_books_path %>
+        <%= link_to "Account Info", user_account_path %>
+      <% end %>
     </nav>
     <% flash.each do |name, msg| %>
       <div class= "<%=name%>-flash">
