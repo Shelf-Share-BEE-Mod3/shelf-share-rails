@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  describe 'relationships' do
+    it { should have_many :friendships }
+    it { should have_many(:friends).through(:friendships) }
+  end
+
   it 'creates or updates itself from an oauth hash' do
     auth = {
       provider: 'google',
@@ -27,6 +32,5 @@ RSpec.describe User, type: :model do
     expect(new_user.token).to eq('abcdefg12345')
     expect(new_user.refresh_token).to eq('12345abcdefg')
     expect(new_user.oauth_expires_at).to eq(auth[:credentials][:expires_at])
-
   end
 end

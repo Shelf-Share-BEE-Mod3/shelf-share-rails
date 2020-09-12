@@ -10,19 +10,29 @@
   </head>
 
   <body>
+     <% if current_user %>
+      <nav>
+        <%= link_to "Home", root_path %>
+        <%= link_to "Dashboard", user_dashboard_path %>
+        <%= link_to "Find Books", books_path %>
+        <%= link_to "Friends", user_friends_path %>
+        <%= link_to "My Books", user_books_path %>
+        <%= link_to "Account Info", user_account_path %>
+      </nav>
+    <% end %>
     <% flash.each do |name, msg| %>
-    <% if name == "missing_details" %>
-      <% msg.each do |m| %>
+      <% if name == "missing_details" %>
+        <% msg.each do |m| %>
+          <div class= "<%=name%>-flash">
+            <p><%= m %></p>
+          </div>
+        <% end %>
+      <% else %>
         <div class= "<%=name%>-flash">
-          <p><%= m %></p>
+          <p><%= msg %></p>
         </div>
       <% end %>
-    <% else %>
-      <div class= "<%=name%>-flash">
-        <p><%= msg %></p>
-      </div>
     <% end %>
-  <% end %>
     <%= yield %>
   </body>
 </html>
