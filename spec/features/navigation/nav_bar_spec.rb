@@ -6,7 +6,7 @@ RSpec.describe "Navigation Bar" do
 
     within "nav" do
       expect(page).to have_link("Home", href: root_path)
-      expect(page).to have_link("Dashboard", href: dashboard_path)
+      expect(page).to have_link("Dashboard", href: user_dashboard_path)
       expect(page).to have_link("Find Books", href: books_path)
       expect(page).to have_link("Friends", href: user_friends_path)
       expect(page).to have_link("My Books", href: user_books_path)
@@ -18,7 +18,7 @@ RSpec.describe "Navigation Bar" do
   # Check for links to have the working xpath once routes exist
     visit root_path
     click_link "Dashboard"
-    expect(current_path).to eq(dashboard_path)
+    expect(current_path).to eq(user_dashboard_path)
     click_link "Find Books"
     expect(current_path).to eq(books_path)
     click_link "Friends"
