@@ -7,8 +7,8 @@ class User::FriendsController < ApplicationController
       flash[:error] = 'No users with that email'
       redirect_to user_friends_path
     else
-      friend.friend_requests.create(from: current_user)
-      flash[:success] = "Friend Request sent to #{friend.name}"
+      friend.friend_requests.create(from: current_user.id)
+      flash[:success] = "Friend Request sent to #{friend.first_name}"
       redirect_to user_friends_path
     end
   end
