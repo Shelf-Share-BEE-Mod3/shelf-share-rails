@@ -26,4 +26,12 @@ class User < ApplicationRecord
       oauth_expires_at: auth[:credentials][:expires_at]
     }
   end
+
+  def current_friend_requests
+    requests = {}
+    friend_requests.where('status = 0').each do |friend|
+      requests[friend] = User.find(friend.from)
+    end
+    requests
+  end
 end
