@@ -16,5 +16,14 @@ RSpec.describe "User Can Add friends" do
     expect(current_path).to eq(user_friends_path)
     expect(page).to have_content("Friend Request sent to #{@user2.name}")
   end
+  it "fails with an invalid email" do
+    visit user_friends_path
+
+    fill_in :email, with: 'notanemail@email.com'
+    click_on 'Add Friend'
+
+    expect(current_path).to eq(user_friends_path)
+    expect(page).to have_content('No users with that email address')
+  end
 
 end
