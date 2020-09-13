@@ -26,6 +26,7 @@
     <% current_user.current_friend_requests.each do |request, friend| %>
       <p><%= "#{friend.first_name} wants to be your friend" %></p>
       <%= link_to "Accept", user_friend_request_path(request.id), method: :patch %>
+      <%= link_to "Decline", user_friend_request_path(request.id), method: :delete %>
     <% end %>
   <% end %>
 </section>
