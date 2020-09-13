@@ -21,7 +21,7 @@ class User::FriendRequestsController < ApplicationController
   end
 
   def destroy
-    FriendRequest.delete(params[:id])
+    FriendRequest.update(params[:id], status: 2)
     redirect_to user_friends_path
   end
 
