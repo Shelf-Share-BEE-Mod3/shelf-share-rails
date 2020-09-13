@@ -20,6 +20,11 @@ class User::FriendRequestsController < ApplicationController
     redirect_to user_friends_path
   end
 
+  def destroy
+    FriendRequest.delete(params[:id])
+    redirect_to user_friends_path
+  end
+
   def friends_params
     params.permit(:email)
   end
