@@ -92,7 +92,6 @@ RSpec.describe Book, type: :poro do
   expect(book.description).to eq("An expert at simulated war games, Andrew \"Ender\" Wiggin believes that he is engaged in one more computer war game when, in truth, he is commanding the last Earth fleet against an alien race seeking Earth's complete destruction.")
   expect(book.thumbnail).to eq("http://books.google.com/books/content?id=WEW1cC7yaCQC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api")
   expect(book.isbn).to eq("9780765370624")
-
-
+  expect(book.category).to eq('Fiction')
   end
 end
