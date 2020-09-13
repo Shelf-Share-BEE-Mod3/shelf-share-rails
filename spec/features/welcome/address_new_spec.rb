@@ -46,9 +46,9 @@ RSpec.feature 'As a user' do
     click_button 'Submit Address'
     expect(page).to have_content('Please fill out all required fields')
     expect(page).to have_content("City can't be blank")
-    page.should have_field(:address_first, with: @address[:address_first])
-    page.should have_field(:address_second, with: @address[:address_second])
-    page.should have_field(:state, with: @address[:state])
-    page.should have_field(:zip, with: @address[:zip])
+    expect(page).to have_field(:address_first, with: @address[:address_first])
+    expect(page).to have_field(:address_second, with: @address[:address_second])
+    expect(page).to have_field(:state, with: @address[:state])
+    expect(page).to have_field(:zip, with: @address[:zip])
   end
 end
