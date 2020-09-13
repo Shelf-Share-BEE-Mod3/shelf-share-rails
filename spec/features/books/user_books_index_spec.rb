@@ -95,6 +95,11 @@ RSpec.describe 'User Book Index Page' do
       isbn: @book.isbn,
       status: 'available'
       })
+    UserBook.create({
+      user_id: current_user.id,
+      isbn: "123456789",
+      status: 'unavailable'
+      })
     visit 'user/books'
     expect(page).to have_content(@book.isbn)
   end
