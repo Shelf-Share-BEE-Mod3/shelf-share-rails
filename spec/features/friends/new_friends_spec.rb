@@ -42,10 +42,31 @@ RSpec.describe "User Can Add friends" do
     within ".friend-list" do
       expect(page).to have_content("#{@user2.first_name}")
     end
-    
+
     within ".friend-requests" do
       expect(page).to_not have_content("#{@user2.first_name} wants to be your friend")
       expect(page).to_not have_link("Accept")
+    end
+  end
+  it "friend requests appear on the friends page and users can decline" do
+    @user.friend_requests.create!(from: @user2.id)
+
+    visit user_friends_path
+
+    within ".friend-requests" do
+      expect(page).to have_content("#{@user2.first_name} wants to be your friend")
+      click_on "Decline"
+    end
+
+    expect(current_path).to eq(user_friends_path)
+
+    within ".friend-list" do
+      expect(page).to_not have_content("#{@user2.first_name}")
+    end
+
+    within ".friend-requests" do
+      expect(page).to_not have_content("#{@user2.first_name} wants to be your friend")
+      expect(page).to_not have_link("Decline")
     end
   end
 end
