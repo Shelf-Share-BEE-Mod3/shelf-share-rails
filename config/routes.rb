@@ -7,7 +7,8 @@ Rails.application.routes.draw do
 
   namespace :user do
     get '/dashboard', to: 'dashboard#show', as: 'dashboard'
-    resources :friends, only: [:index, :create]
+    resources :friends, only: [:index]
+    resources :friend_requests, only: [:create, :update]
     resources :books, only: [:index]
     get '/account', to: 'account#show', as: 'account'
   end
