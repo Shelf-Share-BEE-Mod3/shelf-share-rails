@@ -1,0 +1,15 @@
+<h3><%= current_user.first_name %>'s Book Shelf</h3>
+
+<% if @userbooks.find_unavailable_books.present?  %>
+  <p>Off The Shelf</p>
+  <% @userbooks.find_unavailable_books.each do |book| %>
+    <%= book.isbn %>
+  <% end %>
+<% end %>
+
+<% if @userbooks.find_available_books.present?  %>
+  <p>On The Shelf</p>
+  <% @userbooks.find_available_books.each do |book| %>
+    <%= book.isbn %>
+  <% end %>
+<% end %>
