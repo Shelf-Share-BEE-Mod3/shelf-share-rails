@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Book, type: :poro do
-  it 'an api call can create a book object' do
+  before :each do
     api_call = {
     "kind": "books#volumes",
     "totalItems": 1,
@@ -85,13 +85,15 @@ RSpec.describe Book, type: :poro do
   }
   json_call = api_call.to_json
   book_attrs = JSON.parse(json_call, symbolize_names: true)
-  book = Book.new(book_attrs)
-  expect(book.class).to eq(Book)
-  expect(book.title).to eq("Ender's Game")
-  expect(book.author).to eq("Orson Scott Card")
-  expect(book.description).to eq("An expert at simulated war games, Andrew \"Ender\" Wiggin believes that he is engaged in one more computer war game when, in truth, he is commanding the last Earth fleet against an alien race seeking Earth's complete destruction.")
-  expect(book.thumbnail).to eq("http://books.google.com/books/content?id=WEW1cC7yaCQC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api")
-  expect(book.isbn).to eq("9780765370624")
-  expect(book.category).to eq('Fiction')
+  @book = Book.new(book_attrs)
+end
+  it 'an api call can create a book object' do
+    expect(@book.class).to eq(Book)
+    expect(@book.title).to eq("Ender's Game")
+    expect(@book.author).to eq("Orson Scott Card")
+    expect(@book.description).to eq("An expert at simulated war games, Andrew \"Ender\" Wiggin believes that he is engaged in one more computer war game when, in truth, he is commanding the last Earth fleet against an alien race seeking Earth's complete destruction.")
+    expect(@book.thumbnail).to eq("http://books.google.com/books/content?id=WEW1cC7yaCQC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api")
+    expect(@book.isbn).to eq("9780765370624")
+    expect(@book.category).to eq('Fiction')
   end
 end

@@ -12,4 +12,8 @@ class Book
     end[:identifier]
     @category = attributes[:items].first[:volumeInfo][:categories].first
   end
+
+  def self.find_by_isbn(isbn)
+
+  end
 end
