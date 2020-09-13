@@ -14,7 +14,8 @@ RSpec.describe "User Can Add friends" do
     click_on 'Add Friend'
 
     expect(current_path).to eq(user_friends_path)
-    expect(page).to have_content("Friend Request sent to #{@user2.name}")
+    expect(page).to have_content("Friend Request sent to #{@user2.first_name}")
+    expect(@user2.friend_requests.size).to eq(1)
   end
   it "fails with an invalid email" do
     visit user_friends_path
