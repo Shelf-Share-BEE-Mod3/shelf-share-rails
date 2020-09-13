@@ -174,7 +174,8 @@ RSpec.describe UserBook, type: :model do
             "quoteSharingAllowed": false
           },
           "searchInfo": {
-            "textSnippet": "An expert at simulated war games, Andrew &quot;Ender&quot; Wiggin believes that he is engaged in one more computer war game when, in truth, he is commanding the last Earth fleet against an alien race seeking Earth&#39;s complete destruction."
+            "textSnippet": "An expert at simulated war games, Andrew &quot;Ender&quot; Wiggin believes that he is engaged in one more computer war game when, in truth, he is commanding the la
+            st Earth fleet against an alien race seeking Earth&#39;s complete destruction."
           }
         }
       ]
