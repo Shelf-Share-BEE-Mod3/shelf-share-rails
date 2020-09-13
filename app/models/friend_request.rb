@@ -5,7 +5,7 @@ class FriendRequest < ApplicationRecord
   validates :status, presence: true
   belongs_to :user
 
-  enum status: %w(pending, accepted, declined)
+  enum status: %w(pending accepted declined)
 
   private
 
