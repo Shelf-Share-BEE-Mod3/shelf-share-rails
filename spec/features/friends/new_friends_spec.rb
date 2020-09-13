@@ -23,7 +23,7 @@ RSpec.describe "User Can Add friends" do
     click_on 'Add Friend'
 
     expect(current_path).to eq(user_friends_path)
-    expect(page).to have_content('No users with that email address')
+    expect(page).to have_content('No users with that email')
   end
 
 end
