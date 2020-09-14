@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
   has_many :friend_requests
+  has_many :user_books
 
   def self.update_or_create(auth)
     User.find_by(uid: auth[:uid]) || new_user(auth)
