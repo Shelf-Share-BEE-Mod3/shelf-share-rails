@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'User Friends Index Page' do
@@ -10,8 +12,8 @@ RSpec.describe 'User Friends Index Page' do
   it 'displays no friends when current_user has no friends' do
     visit user_friends_path
 
-    within ".friend-list" do
-      expect(page).to have_content("no friends")
+    within '.friend-list' do
+      expect(page).to have_content('no friends')
     end
   end
 
@@ -21,7 +23,7 @@ RSpec.describe 'User Friends Index Page' do
 
     visit user_friends_path
 
-    within(".friend-list") do
+    within('.friend-list') do
       expect(page).to have_link(@user2.first_name)
       expect(page).to have_link(@user3.first_name)
     end
@@ -30,9 +32,9 @@ RSpec.describe 'User Friends Index Page' do
   it 'has a form to search and add friends' do
     visit user_friends_path
 
-    expect(page).to have_css(".add-friend-form")
+    expect(page).to have_css('.add-friend-form')
 
-    expect(page).to have_content("Add friends")
+    expect(page).to have_content('Add friends')
   end
 end
 

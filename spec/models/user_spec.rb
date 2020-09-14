@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'relationships' do
     it { should have_many :friendships }
     it { should have_many(:friends).through(:friendships) }
+    it { should have_many :friend_requests }
   end
 
   it 'creates or updates itself from an oauth hash' do
@@ -18,7 +21,7 @@ RSpec.describe User, type: :model do
       credentials: {
         token: 'abcdefg12345',
         refresh_token: '12345abcdefg',
-        expires_at: DateTime.new(2020,9,12,3,4,5)
+        expires_at: DateTime.new(2020, 9, 12, 3, 4, 5)
       }
     }
     User.update_or_create(auth)
