@@ -11,6 +11,5 @@ RSpec.describe "Dashboard Page Scaffold" do
     expect(page).to have_css(".friend-requests")
     expect(page).to have_css(".recommendations")
     expect(page).to have_css(".in-transit")
-    expect(page).to have_link("Add Friends")
   end
 end
