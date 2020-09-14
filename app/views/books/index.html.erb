@@ -1,0 +1,13 @@
+<h1>Browse Books</h1>
+
+<p>Sorted by Friend</p>
+
+<% @friends.each do |friend| %>
+  <section class="friend-book-shelf">
+    <% friend.user_books.each do |book| %>
+      <div class="book">
+        <%= book.isbn %>
+      </div>
+    <% end %>
+  </section>
+<% end %>
