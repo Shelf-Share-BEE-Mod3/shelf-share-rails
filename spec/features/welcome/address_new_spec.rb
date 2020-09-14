@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.feature 'As a user' do
   before :each do
     login_as_user
     @address = {
-      :address_first => '1984 Shelf Space',
-      :address_second => 'Unit 451',
-      :city => 'Castle Rock',
-      :state => 'ME',
-      :zip => '14101'
+      address_first: '1984 Shelf Space',
+      address_second: 'Unit 451',
+      city: 'Castle Rock',
+      state: 'ME',
+      zip: '14101'
     }
   end
 
