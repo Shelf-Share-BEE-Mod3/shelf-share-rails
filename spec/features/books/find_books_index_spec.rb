@@ -19,6 +19,34 @@ RSpec.describe "Find Books Index" do
         isbn: rand(9999999999999).to_s.center(13, rand(9).to_s)
       )
     end
+    attributes = {
+    items: [
+      {
+        volumeInfo: {
+          title: "Ender's Game",
+          authors: [
+            "Orson Scott Card"
+            ],
+            description: "An expert at simulated war games, Andrew \"Ender\" Wiggin believes that he is engaged in one more computer war game when, in truth, he is commanding the last Earth fleet against an alien race seeking Earth's complete destruction.",
+            industryIdentifiers: [
+              {
+                type: "ISBN_13",
+                identifier: "9780765370624"
+              }
+            ],
+          categories: [
+            "Fiction"
+            ],
+          imageLinks: {
+            thumbnail: "http://books.google.com/books/content?id=WEW1cC7yaCQC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            }
+          }
+        }
+      ]
+    }
+    @book_poro = Book.new(attributes)
+    allow_any_instance_of(Book).to receive(:initialize).and_return(@book_poro)
+
     @user.friends << @user2
     @user.friends << @user3
     @book1 = UserBook.first
