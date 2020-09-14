@@ -4,13 +4,11 @@ class Book
   attr_reader :title, :author, :description, :thumbnail, :isbn, :category
 
   def initialize(attributes)
-    @title = attributes[:items].first[:volumeInfo][:title]
-    @author = attributes[:items].first[:volumeInfo][:authors].first
-    @description = attributes[:items].first[:volumeInfo][:description]
-    @thumbnail = attributes[:items].first[:volumeInfo][:imageLinks][:thumbnail]
-    @isbn = attributes[:items].first[:volumeInfo][:industryIdentifiers].find do |e|
-      e[:type] == 'ISBN_13'
-    end[:identifier]
-    @category = attributes[:items].first[:volumeInfo][:categories].first
+    @title = attributes[:data][:attributes][:title]
+    @author = attributes[:data][:attributes][:author]
+    @description = attributes[:data][:attributes][:description]
+    @thumbnail = attributes[:data][:attributes][:thumbnail]
+    @isbn = attributes[:data][:attributes][:isbn]
+    @category = attributes[:data][:attributes][:category]
   end
 end
