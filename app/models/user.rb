@@ -45,7 +45,7 @@ class User < ApplicationRecord
   def create_book_poro(user_book)
     # call api with user_book.isbn
     # book_info = JSON.parse(response.body, symbolize_names: true)
-    book_info = {} #for testing 
+    book_info = {} #for testing
     Book.new(book_info)
   end
 end
