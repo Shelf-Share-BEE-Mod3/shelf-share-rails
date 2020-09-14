@@ -45,6 +45,13 @@ ActiveRecord::Schema.define(version: 2020_09_13_154407) do
     t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
+  create_table "user_books", force: :cascade do |t|
+    t.string "status"
+    t.string "isbn"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_user_books_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -61,4 +68,5 @@ ActiveRecord::Schema.define(version: 2020_09_13_154407) do
   add_foreign_key "addresses", "users"
   add_foreign_key "friend_requests", "users"
   add_foreign_key "friendships", "users"
+  add_foreign_key "user_books", "users"
 end
