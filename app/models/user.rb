@@ -35,4 +35,17 @@ class User < ApplicationRecord
     end
     requests
   end
+
+  def books
+    user_books.map do |user_book|
+      create_book_poro(user_book)
+    end
+  end
+
+  def create_book_poro(user_book)
+    # call api with user_book.isbn
+    # book_info = JSON.parse(response.body, symbolize_names: true)
+    book_info = {} #for testing 
+    Book.new(book_info)
+  end
 end
