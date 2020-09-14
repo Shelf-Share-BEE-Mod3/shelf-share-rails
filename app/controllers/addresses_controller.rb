@@ -1,9 +1,11 @@
-class AddressesController < ApplicationController
+# frozen_string_literal: true
+
+class AddressesController < ApplicationController # rubocop:todo Style/Documentation
   def new
     @address = Address.new(session.delete(:address_params))
   end
 
-  def create
+  def create # rubocop:todo Metrics/AbcSize
     user = User.find(current_user.id)
     @address = Address.create(address_params)
     @address.user_id = user.id

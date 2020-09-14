@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SessionsController < ApplicationController
   def create
     user = User.update_or_create(request.env['omniauth.auth'])
