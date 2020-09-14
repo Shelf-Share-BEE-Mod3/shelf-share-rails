@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe 'Create User Books Spec' do
+  it 'There is a link to add books from my books index page' do
+    login_as_user
+    visit user_books_path
+    expect(page).to have_link("Add Books to My Shelf", href: new_user_book_path)
+  end
+
   it 'I can add a book by searching its ISBN' do
     book = {isbn: '9780441569595', title: 'Neuromancer', author: 'William Gibson'}
 

@@ -1,4 +1,6 @@
 <h3><%= current_user.first_name %>'s Book Shelf</h3>
+<%= link_to "Add Books to My Shelf", new_user_book_path %>
+
 
 <% if @userbooks.find_unavailable_books.present?  %>
   <p>Off The Shelf</p>
