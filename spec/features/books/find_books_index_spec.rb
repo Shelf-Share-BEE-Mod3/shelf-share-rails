@@ -45,7 +45,7 @@ RSpec.describe "Find Books Index" do
       ]
     }
     @book_poro = Book.new(attributes)
-    allow_any_instance_of(Book).to receive(:initialize).and_return(@book_poro)
+    allow(Book).to receive(:new).and_return(@book_poro)
 
     @user.friends << @user2
     @user.friends << @user3
