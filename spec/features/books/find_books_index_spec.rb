@@ -60,12 +60,12 @@ RSpec.describe "Find Books Index" do
     expect(page).to have_css('.friend-book-shelf', count: 2)
     expect(page).to have_css('.book', count: 10)
     within(first(".book")) do
-      expect(page).to have_content(@book1.isbn)
+      # expect(page).to have_content(@book1.isbn)
 
-      # expect(page).to have_content(@book1.title)
-      # expect(page).to have_content(@book1.author)
-      # expect(page).to have_content(@book1.category)
-      # expect(page).to have_css("img[src*='#{@book1.thumbnail}']")
+      expect(page).to have_content(@book_poro.title)
+      expect(page).to have_content(@book_poro.author)
+      expect(page).to have_content(@book_poro.category)
+      expect(page).to have_css("img[src*='#{@book_poro.thumbnail}']")
     end
   end
 end
