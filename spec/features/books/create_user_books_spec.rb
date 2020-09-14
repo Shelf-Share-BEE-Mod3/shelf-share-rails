@@ -16,4 +16,15 @@ RSpec.describe 'Create User Books Spec' do
     visit user_books_path
     expect(page).to have_content(book[:isbn])
   end
+
+  it 'I cannot add a book with an invalid ISBN' do
+    login_as_user
+
+    visit new_user_book_path
+    fill_in :isbn, with: 'x'
+    click_button "Add Book to Shelf"
+
+    expect(current_path).to eq(new_user_book_path)
+    expect(page).to have_content("Oops! That book cannot be found.")
+  end
 end
