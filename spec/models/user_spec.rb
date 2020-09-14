@@ -4,6 +4,7 @@ RSpec.describe User, type: :model do
   describe 'relationships' do
     it { should have_many :friendships }
     it { should have_many(:friends).through(:friendships) }
+    it { should have_many :friend_requests }
   end
 
   it 'creates or updates itself from an oauth hash' do

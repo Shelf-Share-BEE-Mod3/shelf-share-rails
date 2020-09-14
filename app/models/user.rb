@@ -1,8 +1,9 @@
 class User < ApplicationRecord
   has_one :address
-  
+
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
+  has_many :friend_requests
 
   def self.update_or_create(auth)
     User.find_by(uid: auth[:uid]) || new_user(auth)
@@ -24,5 +25,13 @@ class User < ApplicationRecord
       refresh_token: auth[:credentials][:refresh_token],
       oauth_expires_at: auth[:credentials][:expires_at]
     }
+  end
+
+  def current_friend_requests
+    requests = {}
+    friend_requests.where('status = 0').each do |friend|
+      requests[friend] = User.find(friend.from)
+    end
+    requests
   end
 end
