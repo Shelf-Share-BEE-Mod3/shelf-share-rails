@@ -1,0 +1,7 @@
+<h2>Add Books to My Shelf</h2>
+
+<%= form_with(url: "/user/books", method: "post") do |f| %>
+  <%= label_tag(:isbn, "Add books by ISBN-13:") %><br/>
+  <%= text_field_tag(:isbn) %><br/>
+  <%= submit_tag("Add Book to Shelf") %><br/>
+<% end %>
