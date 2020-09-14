@@ -6,6 +6,7 @@ RSpec.describe Book do
     it { should validate_presence_of :author }
     it { should validate_presence_of :description }
     it { should validate_presence_of :isbn }
+    it { should validate_uniqueness_of :isbn }
     it { should validate_presence_of :category }
     it { should validate_presence_of :thumbnail }
   end
