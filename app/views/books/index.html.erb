@@ -4,9 +4,12 @@
 
 <% @friends.each do |friend| %>
   <section class="friend-book-shelf">
-    <% friend.user_books.each do |book| %>
+    <% friend.books.each do |book| %>
       <div class="book">
-        <%= book.isbn %>
+        <%= book.title %>
+        <%= book.author %>
+        <%= book.category %>
+        <%= image_tag(book.thumbnail, alt: "#{book.title} cover image") %>
       </div>
     <% end %>
   </section>
