@@ -4,7 +4,7 @@
 <h5>Off The Shelf</h5>
 <% if @unavailable_books.present?  %>
   <% @unavailable_books.each do |book| %>
-    <%= book.title %>
+    <%= link_to book.title, user_book_path(book) %>
   <% end %>
 <% else %>
 <p>No books are currently unavailable</p>
@@ -13,7 +13,7 @@
 <h5>On The Shelf</h5>
 <% if @available_books.present?  %>
   <% @available_books.each do |book| %>
-    <%= book.title %>
+    <%= link_to book.title, user_book_path(book) %>
   <% end %>
 <% else %>
 <p>No books are currently available</p>

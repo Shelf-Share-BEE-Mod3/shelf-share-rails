@@ -10,4 +10,17 @@ RSpec.describe Book do
     it { should validate_presence_of :category }
     it { should validate_presence_of :thumbnail }
   end
+
+  describe "instance_methods" do
+    it "#find_status" do
+      user = create(:user)
+      book1 = create(:book)
+      book2 = create(:book)
+      user.user_books.create!(isbn: book1.isbn, status: 'available')
+      user.user_books.create!(isbn: book2.isbn, status: 'unavailable')
+
+      expect(book1.find_status).to eq('available')
+      expect(book2.find_status).to eq('unavailable')
+    end
+  end
 end
