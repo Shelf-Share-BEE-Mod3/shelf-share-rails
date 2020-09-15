@@ -1,0 +1,16 @@
+<h1>Browse Books</h1>
+
+<p>Sorted by Friend</p>
+
+<% @friends.each do |friend| %>
+  <section class="friend-book-shelf">
+    <% friend.books.each do |book| %>
+      <div class="book">
+        <%= book.title %>
+        <%= book.author %>
+        <%= book.category %>
+        <%= image_tag(book.thumbnail, alt: "#{book.title} cover image") %>
+      </div>
+    <% end %>
+  </section>
+<% end %>
