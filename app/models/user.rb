@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :friends, through: :friendships
   has_many :friend_requests
   has_many :user_books
+  has_many :borrow_requests, foreign_key: :borrower_id
 
   def self.update_or_create(auth)
     User.find_by(uid: auth[:uid]) || new_user(auth)

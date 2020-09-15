@@ -8,6 +8,7 @@ RSpec.describe User, type: :model do
     it { should have_many(:friends).through(:friendships) }
     it { should have_many :friend_requests }
     it { should have_many :user_books }
+    it { should have_many :borrow_requests}
   end
 
   it 'creates or updates itself from an oauth hash' do
@@ -58,7 +59,7 @@ RSpec.describe User, type: :model do
     end
     it "can get books" do
       book = create(:book)
-      
+
       @new_user.user_books.create(isbn: book.isbn)
       expect(@new_user.books).to eq([book])
     end

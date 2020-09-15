@@ -2,6 +2,7 @@
 
 class UserBook < ApplicationRecord
   belongs_to :user
+  has_many :borrow_requests
 
   validates_presence_of :status, :user_id, :isbn
 
