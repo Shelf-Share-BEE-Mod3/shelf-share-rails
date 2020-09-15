@@ -13,7 +13,15 @@ RSpec.describe 'Friend Book Show Page Spec' do
     visit books_path
     within(first('.friend-book-shelf')) do
       click_link @book.title
-      expect(current_path).to eq(book_path(@book))
     end
+
+    expect(current_path).to eq(book_path(@book))
+
+    expect(page).to have_content(@book.title)
+    expect(page).to have_content(@book.author)
+    expect(page).to have_content("Belongs to #{@user2.first_name}")
+    expect(page).to have_content(@book.description)
+    expect(page).to have_content(@book.category)
+    expect(page).to have_css("img[src*='#{@book.thumbnail}']")
   end
 end
