@@ -40,11 +40,11 @@ class User < ApplicationRecord
 
   def books
     user_books.map do |user_book|
-      create_book_poro(user_book)
+      create_book(user_book)
     end
   end
 
-  def create_book_poro(user_book)
+  def create_book(user_book)
     BookFacade.find_by_isbn(user_book.isbn)
   end
 end
