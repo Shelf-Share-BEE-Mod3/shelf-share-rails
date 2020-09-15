@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Find Books Index" do
+RSpec.describe "Browse Books Index" do
   before :each do
     @user = User.create!(first_name: 'Neal', last_name: 'Stephenson')
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
@@ -52,7 +52,7 @@ RSpec.describe "Find Books Index" do
     @user.friends << @user2
     @user.friends << @user3
   end
-  xit "shows list of books organized by friend" do
+  it "shows list of books organized by friend" do
     visit books_path
 
     book = Book.first
