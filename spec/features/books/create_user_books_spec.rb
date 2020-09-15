@@ -17,7 +17,7 @@ RSpec.describe 'Create User Books Spec' do
 
     expect(current_path).to eq(user_books_path)
     expect(page).to have_content("Added to Shelf: #{book[:title]}, by #{book[:author]}")
-    expect(page).to have_content(book[:isbn])
+    expect(page).to have_content(book[:title])
   end
 
   it 'I cannot add a book with an invalid ISBN' do

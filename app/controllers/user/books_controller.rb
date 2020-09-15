@@ -2,14 +2,15 @@
 
 class User::BooksController < ApplicationController
   def index
-    @userbooks = UserBook.where(user_id: current_user.id)
+    @available_books = UserBook.convert_available_userbooks_to_books(current_user.id)
+    @unavailable_books = UserBook.convert_unavailable_userbooks_to_books(current_user.id)
   end
 
   def new; end
 
   def create
     # if current_user.nil? bounce to 404 page
-    
+
     book = BookFacade.find_by_isbn(params[:isbn])
     if book.isbn.nil?
       flash[:failure] = "Oops! That book cannot be found."
