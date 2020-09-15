@@ -1,0 +1,13 @@
+<header>
+  <p>
+    <%= book.title %><br/>
+    <%= book.author %><br/>
+  </p>
+</header>
+<main>
+  <%= image_tag(book.thumbnail, alt: "#{book.title} cover image") %>
+  <p>
+    <%= book.description %><br/>
+    Genre: <%= book.category %><br/>
+  </p>
+</main>
