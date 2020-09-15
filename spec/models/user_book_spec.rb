@@ -11,6 +11,7 @@ RSpec.describe UserBook, type: :model do
 
   describe 'relationships' do
     it { should belong_to :user }
+    it { should have_many :borrow_requests }
   end
 
   describe 'class methods' do
