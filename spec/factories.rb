@@ -19,4 +19,10 @@ FactoryBot.define do
     refresh_token { 'REFRESH_TOKEN' }
     oauth_expires_at { }
   end
+
+  factory :user_book do
+    user
+    book
+    status { 'available' }
+  end
 end
