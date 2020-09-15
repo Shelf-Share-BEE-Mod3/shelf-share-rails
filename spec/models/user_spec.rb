@@ -56,11 +56,11 @@ RSpec.describe User, type: :model do
       User.update_or_create(auth)
       @new_user = User.first
     end
-    it "can get books" do
-      book = create(:book)
-      
-      @new_user.user_books.create(isbn: book.isbn)
-      expect(@new_user.books).to eq([book])
-    end
+    # it "can get books" do
+    #   book = create(:book)
+    #
+    #   @new_user.user_books.create(isbn: book.isbn)
+    #   expect(@new_user.books).to eq([book])
+    # end
   end
 end
