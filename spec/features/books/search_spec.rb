@@ -4,11 +4,12 @@ RSpec.describe 'Find books search feature' do
   before :each do
     @user = User.create!(first_name: 'Neal', last_name: 'Stephenson')
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
-    visit user_books_path
+    visit books_path
   end
 
   describe 'As a registered user' do
-    xit 'When I visit the find books page, I see a keyword search box' do
+    it 'When I visit the find books page, I see a keyword search box' do
+      save_and_open_page
       within ".search-books" do
         expect(page.has_field? :search).to be_truthy
       end
