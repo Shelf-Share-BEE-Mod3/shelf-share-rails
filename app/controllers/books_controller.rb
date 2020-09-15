@@ -5,5 +5,6 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
+    @friend = User.find(params[:friend_id])
   end
 end
