@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_14_211013) do
+ActiveRecord::Schema.define(version: 2020_09_15_180703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,18 @@ ActiveRecord::Schema.define(version: 2020_09_14_211013) do
     t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "borrow_requests", force: :cascade do |t|
+    t.integer "status"
+    t.datetime "borrowed_at"
+    t.datetime "returned_at"
+    t.bigint "user_book_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "borrower_id"
+    t.index ["borrower_id"], name: "index_borrow_requests_on_borrower_id"
+    t.index ["user_book_id"], name: "index_borrow_requests_on_user_book_id"
   end
 
   create_table "friend_requests", force: :cascade do |t|
@@ -77,6 +89,8 @@ ActiveRecord::Schema.define(version: 2020_09_14_211013) do
   end
 
   add_foreign_key "addresses", "users"
+  add_foreign_key "borrow_requests", "user_books"
+  add_foreign_key "borrow_requests", "users", column: "borrower_id"
   add_foreign_key "friend_requests", "users"
   add_foreign_key "friendships", "users"
   add_foreign_key "user_books", "users"
