@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FriendRequest < ApplicationRecord
   after_initialize :set_status
 
@@ -5,7 +7,7 @@ class FriendRequest < ApplicationRecord
   validates :status, presence: true
   belongs_to :user
 
-  enum status: %w(pending accepted declined)
+  enum status: %w[pending accepted declined]
 
   private
 
