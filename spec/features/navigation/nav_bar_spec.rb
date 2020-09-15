@@ -11,7 +11,7 @@ RSpec.describe 'Navigation Bar' do
     within 'nav' do
       expect(page).to have_link('Home', href: root_path)
       expect(page).to have_link('Dashboard', href: user_dashboard_path)
-      expect(page).to have_link('Find Books', href: books_path)
+      expect(page).to have_link('Browse Books', href: books_path)
       expect(page).to have_link('Friends', href: user_friends_path)
       expect(page).to have_link('My Books', href: user_books_path)
       expect(page).to have_link('Account Info', href: user_account_path)
@@ -25,7 +25,7 @@ RSpec.describe 'Navigation Bar' do
     visit root_path
     click_link 'Dashboard'
     expect(current_path).to eq(user_dashboard_path)
-    click_link 'Find Books'
+    click_link 'Browse Books'
     expect(current_path).to eq(books_path)
     click_link 'Friends'
     expect(current_path).to eq(user_friends_path)
