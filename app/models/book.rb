@@ -6,7 +6,7 @@ class Book < ApplicationRecord
   has_many :users, through: :user_books
 
   def find_status
-    UserBook.find_by(isbn: isbn).status
+    UserBook.find_by(book_id: id).status
   end
 
 end
