@@ -45,9 +45,6 @@ class User < ApplicationRecord
   end
 
   def create_book_poro(user_book)
-    # call api with user_book.isbn
-    # book_info = JSON.parse(response.body, symbolize_names: true)
-    book_info = {} #for testing
-    Book.new(book_info)
+    BookFacade.find_by_isbn(user_book.isbn)
   end
 end
