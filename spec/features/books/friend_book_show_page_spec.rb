@@ -24,4 +24,13 @@ RSpec.describe 'Friend Book Show Page Spec' do
     expect(page).to have_content(@book.category)
     expect(page).to have_css("img[src*='#{@book.thumbnail}']")
   end
+
+  it 'There is a button to borrow a book from a friend' do
+    visit books_path
+    within(first('.friend-book-shelf')) do
+      click_link @book.title
+    end
+
+    expect(page).to have_button('Ask to Borrow')
+  end
 end

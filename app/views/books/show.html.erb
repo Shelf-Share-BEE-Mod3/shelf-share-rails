@@ -5,7 +5,6 @@
     <p>
       <%= @book.title %><br/>
       <%= @book.author %><br/>
-      Belongs to <%= @friend.first_name %>
     </p>
   </header>
   <main>
@@ -15,4 +14,8 @@
       Genre: <%= @book.category %><br/>
     </p>
   </main>
+  <footer>
+    Belongs to <%= @friend.first_name %>
+    <%= button_to "Ask to Borrow" %>
+  </footer>
 </article>
