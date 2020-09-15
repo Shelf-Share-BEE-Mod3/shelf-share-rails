@@ -46,15 +46,4 @@ class User < ApplicationRecord
   def unavailable_books
     books.joins(:user_books).where("user_books.status != 'available'")
   end
-
-  # def books
-  #   user_books.map do |user_book|
-  #     create_book(user_book)
-  #   end
-  # end
-
-  def create_book(user_book)
-    BookFacade.find_by_isbn(user_book.isbn)
-  end
-
 end
