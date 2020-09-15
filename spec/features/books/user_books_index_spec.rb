@@ -21,7 +21,47 @@ RSpec.describe 'User Book Index Page' do
                       status: 'unavailable'
                     })
     visit 'user/books'
-    expect(page).to have_content(@book1.isbn)
-    expect(page).to have_content(@book2.isbn)
+    expect(page).to have_content(@book1.title)
+    expect(page).to have_content(@book2.title)
+    expect(page).to have_content("On The Shelf")
+    expect(page).to have_content("Off The Shelf")
+  end
+
+  it 'If I have no available books, the page will indicate it' do
+    UserBook.create({
+                      user_id: current_user.id,
+                      isbn: @book1.isbn,
+                      status: 'unavailable'
+                    })
+    UserBook.create({
+                      user_id: current_user.id,
+                      isbn: @book2.isbn,
+                      status: 'unavailable'
+                    })
+    visit 'user/books'
+    expect(page).to have_content(@book1.title)
+    expect(page).to have_content(@book2.title)
+    expect(page).to have_content("On The Shelf")
+    expect(page).to have_content("Off The Shelf")
+    expect(page).to have_content("No books are currently available")
+  end
+
+  it 'If I have no unavailable books, the page will indicate it' do
+    UserBook.create({
+                      user_id: current_user.id,
+                      isbn: @book1.isbn,
+                      status: 'available'
+                    })
+    UserBook.create({
+                      user_id: current_user.id,
+                      isbn: @book2.isbn,
+                      status: 'available'
+                    })
+    visit 'user/books'
+    expect(page).to have_content(@book1.title)
+    expect(page).to have_content(@book2.title)
+    expect(page).to have_content("On The Shelf")
+    expect(page).to have_content("Off The Shelf")
+    expect(page).to have_content("No books are currently unavailable")
   end
 end
