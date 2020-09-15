@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_14_211013) do
+ActiveRecord::Schema.define(version: 2020_09_15_155830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,8 +58,9 @@ ActiveRecord::Schema.define(version: 2020_09_14_211013) do
 
   create_table "user_books", force: :cascade do |t|
     t.string "status"
-    t.string "isbn"
     t.bigint "user_id"
+    t.bigint "book_id"
+    t.index ["book_id"], name: "index_user_books_on_book_id"
     t.index ["user_id"], name: "index_user_books_on_user_id"
   end
 
@@ -79,5 +80,6 @@ ActiveRecord::Schema.define(version: 2020_09_14_211013) do
   add_foreign_key "addresses", "users"
   add_foreign_key "friend_requests", "users"
   add_foreign_key "friendships", "users"
+  add_foreign_key "user_books", "books"
   add_foreign_key "user_books", "users"
 end
