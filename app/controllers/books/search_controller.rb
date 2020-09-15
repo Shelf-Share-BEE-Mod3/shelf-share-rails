@@ -1,5 +1,5 @@
 class Books::SearchController < ApplicationController
   def index
-    require "pry"; binding.pry
+    @books = SearchFacade.search(params[:search])
   end
 end
