@@ -9,4 +9,9 @@ class Book < ApplicationRecord
     UserBook.find_by(book_id: id).status
   end
 
+  def self.search(keyword)
+    Book.where('title ILIKE ?', "%#{sanitize_sql_like(keyword)}%").
+      or(Book.where('author ILIKE ?', "%#{sanitize_sql_like(keyword)}%")).
+      or(Book.where('description ILIKE ?', "%#{sanitize_sql_like(keyword)}%"))
+  end
 end
