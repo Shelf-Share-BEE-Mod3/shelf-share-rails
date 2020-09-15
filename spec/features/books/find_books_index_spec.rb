@@ -7,19 +7,31 @@ RSpec.describe "Find Books Index" do
     @user2 = User.create!(first_name: 'John', last_name: 'Scalzi')
     @user3 = User.create!(first_name: 'Robert', last_name: 'Heinlein')
 
-    5.times do
-      @user2.user_books.create(
-        status: 'available',
-        isbn: Faker::Code.isbn(base: 13).tr('-', '')
-      )
-    end
+    @book1 = create(:book)
+    @book2 = create(:book)
 
-    5.times do
-      @user3.user_books.create(
-        status: 'available',
-        isbn: Faker::Code.isbn(base: 13).tr('-', '')
-      )
-    end
+      UserBook.create({
+                        user_id: @user2.id,
+                        book_id: @book1.id,
+                        status: 'available'
+                      })
+      UserBook.create({
+                        user_id: @user2.id,
+                        book_id: @book2.id,
+                        status: 'unavailable'
+                      })
+
+      UserBook.create({
+                        user_id: @user3.id,
+                        book_id: @book1.id,
+                        status: 'available'
+                      })
+      UserBook.create({
+                        user_id: @user3.id,
+                        book_id: @book2.id,
+                        status: 'unavailable'
+                      })
+
 
     attributes = {
       data: {
@@ -48,7 +60,7 @@ RSpec.describe "Find Books Index" do
     expect(page).to have_content("Browse Books")
     expect(page).to have_content("Sorted by Friend")
     expect(page).to have_css('.friend-book-shelf', count: 2)
-    expect(page).to have_css('.book', count: 10)
+    expect(page).to have_css('.book', count: 4)
     within(first(".book")) do
       expect(page).to have_content(book.title)
       expect(page).to have_content(book.author)

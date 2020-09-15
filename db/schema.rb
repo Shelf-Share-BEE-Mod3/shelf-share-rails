@@ -70,8 +70,9 @@ ActiveRecord::Schema.define(version: 2020_09_15_180703) do
 
   create_table "user_books", force: :cascade do |t|
     t.string "status"
-    t.string "isbn"
     t.bigint "user_id"
+    t.bigint "book_id"
+    t.index ["book_id"], name: "index_user_books_on_book_id"
     t.index ["user_id"], name: "index_user_books_on_user_id"
   end
 
@@ -93,5 +94,6 @@ ActiveRecord::Schema.define(version: 2020_09_15_180703) do
   add_foreign_key "borrow_requests", "users", column: "borrower_id"
   add_foreign_key "friend_requests", "users"
   add_foreign_key "friendships", "users"
+  add_foreign_key "user_books", "books"
   add_foreign_key "user_books", "users"
 end
