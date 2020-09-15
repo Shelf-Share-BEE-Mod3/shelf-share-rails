@@ -16,8 +16,8 @@ RSpec.describe Book do
       user = create(:user)
       book1 = create(:book)
       book2 = create(:book)
-      user.user_books.create!(isbn: book1.isbn, status: 'available')
-      user.user_books.create!(isbn: book2.isbn, status: 'unavailable')
+      user.user_books.create!(book_id: book1.id, status: 'available')
+      user.user_books.create!(book_id: book2.id, status: 'unavailable')
 
       expect(book1.find_status).to eq('available')
       expect(book2.find_status).to eq('unavailable')

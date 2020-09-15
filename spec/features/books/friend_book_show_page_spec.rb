@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Friend Book Show Page Spec' do
   before :each do
     @user1, @user2 = create_list(:user, 2)
-    @user2.user_books.create!(isbn: '9780765370624', status: 'available')
-    @book = @user2.books.first
+    @book = create(:book)
+    @user2.user_books.create!(book_id: @book.id, status: 'available')
     @user1.friends << @user2
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user1)
   end

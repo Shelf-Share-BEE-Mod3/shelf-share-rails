@@ -3,9 +3,10 @@ require 'rails_helper'
 RSpec.describe 'Friend Book Show Page Spec' do
   before :each do
     @user1 = create(:user)
-    @user1.user_books.create!(isbn: '9780765370624', status: 'available')
+    @book1, @book2 = create_list(:book, 2)
+    @user1.user_books.create!(book_id: @book1.id, status: 'available')
     @available_book = @user1.books.first
-    @user1.user_books.create!(isbn: '9781594133299', status: 'unavailable')
+    @user1.user_books.create!(book_id: @book2.id, status: 'unavailable')
     @unavailable_book = @user1.books.last
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user1)
   end

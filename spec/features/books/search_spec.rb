@@ -9,7 +9,7 @@ RSpec.describe 'Find books search feature' do
 
   describe 'As a registered user' do
     it 'When I visit the find books page, I see a keyword search box' do
-      save_and_open_page
+      # save_and_open_page
       within ".search-books" do
         expect(page.has_field? :search).to be_truthy
       end
