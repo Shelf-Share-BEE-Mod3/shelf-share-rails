@@ -4,7 +4,7 @@ RSpec.describe BorrowRequest do
   describe "validations" do
     it { should validate_presence_of :borrower_id }
     it { should validate_presence_of :user_book_id }
-    it { should validate_numericality_of(:status).only_integer }
+    it { should define_enum_for(:status).with_values([:pending, :declined, :accepted, :returned]) }
   end
 
   describe "associations" do
