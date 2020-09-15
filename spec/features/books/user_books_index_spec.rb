@@ -12,12 +12,12 @@ RSpec.describe 'User Book Index Page' do
   it 'My books show up on the shelf' do
     UserBook.create({
                       user_id: current_user.id,
-                      isbn: @book1.isbn,
+                      book_id: @book1.id,
                       status: 'available'
                     })
     UserBook.create({
                       user_id: current_user.id,
-                      isbn: @book2.isbn,
+                      book_id: @book2.id,
                       status: 'unavailable'
                     })
     visit 'user/books'
@@ -30,12 +30,12 @@ RSpec.describe 'User Book Index Page' do
   it 'If I have no available books, the page will indicate it' do
     UserBook.create({
                       user_id: current_user.id,
-                      isbn: @book1.isbn,
+                      book_id: @book1.id,
                       status: 'unavailable'
                     })
     UserBook.create({
                       user_id: current_user.id,
-                      isbn: @book2.isbn,
+                      book_id: @book2.id,
                       status: 'unavailable'
                     })
     visit 'user/books'
@@ -49,12 +49,12 @@ RSpec.describe 'User Book Index Page' do
   it 'If I have no unavailable books, the page will indicate it' do
     UserBook.create({
                       user_id: current_user.id,
-                      isbn: @book1.isbn,
+                      book_id: @book1.id,
                       status: 'available'
                     })
     UserBook.create({
                       user_id: current_user.id,
-                      isbn: @book2.isbn,
+                      book_id: @book2.id,
                       status: 'available'
                     })
     visit 'user/books'
