@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy'
   resources :addresses, only: %i[new create]
-  resources :books, only: [:index]
+  resources :books, only: [:index, :show]
 
   namespace :user do
     get '/dashboard', to: 'dashboard#show', as: 'dashboard'
