@@ -1,7 +1,7 @@
 <h3><%= current_user.first_name %>'s Book Shelf</h3>
 <%= link_to "Add Books to My Shelf", new_user_book_path %>
 
-<p>Off The Shelf</p>
+<h5>Off The Shelf</h5>
 <% if @unavailable_books.present?  %>
   <% @unavailable_books.each do |book| %>
     <%= book.title %>
@@ -10,7 +10,7 @@
 <p>No books are currently unavailable</p>
 <% end %>
 
-<p>On The Shelf</p>
+<h5>On The Shelf</h5>
 <% if @available_books.present?  %>
   <% @available_books.each do |book| %>
     <%= book.title %>
