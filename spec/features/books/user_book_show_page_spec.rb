@@ -23,7 +23,10 @@ RSpec.describe 'Friend Book Show Page Spec' do
     expect(page).to have_content(@available_book.author)
     expect(page).to have_content(@available_book.description)
     expect(page).to have_content(@available_book.category)
+    expect(page).to have_content(@available_book.find_status)
     expect(page).to have_css("img[src*='#{@available_book.thumbnail}']")
+    expect(page).to have_button("Change Status")
+    expect(page).to have_button("Remove Book")
   end
 
   it "I can visit my book show page for an UNavailable book in my shelf" do
@@ -39,6 +42,9 @@ RSpec.describe 'Friend Book Show Page Spec' do
     expect(page).to have_content(@unavailable_book.author)
     expect(page).to have_content(@unavailable_book.description)
     expect(page).to have_content(@unavailable_book.category)
+    expect(page).to have_content(@unavailable_book.find_status)
     expect(page).to have_css("img[src*='#{@unavailable_book.thumbnail}']")
+    expect(page).to have_button("Change Status")
+    expect(page).to have_button("Remove Book")
   end
 end
