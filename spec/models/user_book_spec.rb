@@ -30,12 +30,20 @@ RSpec.describe UserBook, type: :model do
                              })
     end
 
-    it 'find_available_books' do
-      expect(UserBook.find_available_books).to eq([@ub1])
+    it 'find_available_userbooks' do
+      expect(UserBook.find_available_userbooks).to eq([@ub1])
     end
 
-    it 'find_unavailable_books' do
-      expect(UserBook.find_unavailable_books).to eq([@ub2])
+    it 'find_unavailable_userbooks' do
+      expect(UserBook.find_unavailable_userbooks).to eq([@ub2])
+    end
+
+    it "convert_available_userbooks_to_books" do
+      expect(UserBook.convert_available_userbooks_to_books(@user.id)).to eq([@book1])
+    end
+
+    it "convert_unavailable_userbooks_to_books" do
+      expect(UserBook.convert_unavailable_userbooks_to_books(@user.id)).to eq([@book2])
     end
   end
 end
