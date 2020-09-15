@@ -14,8 +14,11 @@ RSpec.describe 'Friend Book Show Page Spec' do
     visit user_books_path
 
     click_link @available_book.title
-    expect(current_path).to eq(book_path(@available_book))
+    expect(current_path).to eq(user_book_path(@available_book))
+  end
 
+  it "I can visit one of my book show page" do
+    visit user_book_path(@available_book)
     expect(page).to have_content(@available_book.title)
     expect(page).to have_content(@available_book.author)
     expect(page).to have_content(@available_book.description)
@@ -27,8 +30,11 @@ RSpec.describe 'Friend Book Show Page Spec' do
     visit user_books_path
 
     click_link @unavailable_book.title
-    expect(current_path).to eq(book_path(@unavailable_book))
+    expect(current_path).to eq(user_book_path(@unavailable_book))
+  end
 
+  it "I can visit another one of my book show page" do
+    visit user_book_path(@unavailable_book)
     expect(page).to have_content(@unavailable_book.title)
     expect(page).to have_content(@unavailable_book.author)
     expect(page).to have_content(@unavailable_book.description)
