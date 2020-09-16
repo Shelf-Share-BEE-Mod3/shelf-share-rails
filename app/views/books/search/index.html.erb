@@ -1,0 +1,22 @@
+<h1><%= "Search Results for #{@keyword}" %></h1>
+
+<p>Find Books by Title</p>
+<section class= 'search-books'>
+  <%= form_tag books_search_index_path, method: :get do %>
+  <%= search_field_tag :search,nil, placeholder: 'Enter keyword'%><br>
+  <%= submit_tag 'Find Books' %>
+  <% end  %>
+</section>
+
+
+<% @books.each do |book| %>
+  <article class="book">
+    <%= render partial: 'partials/book_index', locals: {book: book} %>
+    <footer>
+      Borrow from these friends:
+      <% current_user.friends.who_owns_this_book(book).each do |friend| %>
+        <%= link_to friend.first_name, book_path(book, friend_id: friend.id) %>
+      <% end %>
+    </footer>
+  </article>
+<% end %>

@@ -10,7 +10,10 @@ RSpec.describe Book do
     it { should validate_presence_of :category }
     it { should validate_presence_of :thumbnail }
   end
-
+  describe 'relationships' do
+    it { should have_many :user_books }
+    it { should have_many(:users).through(:user_books) }
+  end
   describe "instance_methods" do
     it "#find_status" do
       user = create(:user)
@@ -41,6 +44,24 @@ RSpec.describe Book do
 
     it "#available" do
       expect(Book.available).to eq([@book2])
+
+  describe 'class methods' do
+    it 'search' do
+      book1 = create(:book)
+      book2 = create(:book)
+      book3 = create(:book)
+
+      # Exact matches
+      expect(Book.search(book1.title)).to eq([book1])
+      expect(Book.search(book1.author)).to eq([book1])
+      expect(Book.search(book1.isbn)).to eq([book1])
+      expect(Book.search(book1.description)).to eq([book1])
+
+      # fragments
+      expect(Book.search(book2.title[1..4])).to eq([book2])
+      expect(Book.search(book2.author[0..2])).to eq([book2])
+      expect(Book.search(book2.isbn[7..12])).to eq([book2])
+      expect(Book.search(book2.description[0..5])).to eq([book2])
     end
   end
 end

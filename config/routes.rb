@@ -5,6 +5,11 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy'
   resources :addresses, only: %i[new create]
+
+  namespace :books do
+    resources :search, only: [:index]
+  end
+  
   resources :books, only: [:index, :show]
 
   namespace :user do
@@ -14,4 +19,5 @@ Rails.application.routes.draw do
     resources :books, only: [:index, :new, :create, :show]
     get '/account', to: 'account#show', as: 'account'
   end
+
 end

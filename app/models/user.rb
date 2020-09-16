@@ -47,4 +47,9 @@ class User < ApplicationRecord
   def unavailable_books
     books.joins(:user_books).where("user_books.status != 'available'")
   end
+
+  def self.who_owns_this_book(book)
+    ids = book.user_books.where(user_id: self.ids).pluck(:user_id)
+    self.where(id: ids)
+  end
 end
