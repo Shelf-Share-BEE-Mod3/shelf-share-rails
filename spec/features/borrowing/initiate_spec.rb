@@ -22,6 +22,7 @@ RSpec.describe "Borrowing Spec 1/?" do
     visit books_path
     click_link @book.title
     expect(page).to_not have_button "Ask to Borrow"
+    expect(page).to have_content("Borrow Request sent to #{@user2.full_name}")
 
     # expect(current_path).to eq(new_borrow_path)
     # expect(page).to have_content("Confirm New Borrow Request")
@@ -42,6 +43,5 @@ RSpec.describe "Borrowing Spec 1/?" do
     # end.to change { BorrowRequest.count }.by(1)
     #
     # expect(current_path).to eq(books_path)
-    # expect(page).to have_content("Borrow Request sent to #{@user2.full_name}")
   end
 end
