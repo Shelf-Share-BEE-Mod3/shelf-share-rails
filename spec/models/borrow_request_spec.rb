@@ -35,4 +35,29 @@ RSpec.describe BorrowRequest do
       expect(req.status).to eq('returned')
     end
   end
+
+  describe 'class methods' do
+    before :each do
+      @user1 = create(:user)
+      @user2 = create(:user)
+      @book1 = create(:book)
+      @ub1 = UserBook.create({
+                               user_id: @user2.id,
+                               book_id: @book1.id,
+                               status: 'available'
+                             })
+      @borrow_request = BorrowRequest.create({
+                              borrower_id: @user1.id,
+                              user_book_id: @ub1.id,
+                              status: 2
+                            })
+    end
+
+    it "can find all approved borrow requests" do
+      expect(BorrowRequest.find_approved_requests).to eq([@borrow_request])
+    end
+    it "can change status of returned book to returned" do
+      expect(@borrow_request.status_changed_to_returned).to eq(@borrow_request.status = 3)
+    end
+  end
 end

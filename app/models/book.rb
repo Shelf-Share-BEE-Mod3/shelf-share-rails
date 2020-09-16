@@ -17,7 +17,7 @@ class Book < ApplicationRecord
     joins(:user_books).where(user_books: {status: 'available'})
   end
 
-  def self.search(keyword)
+  def self.search(keyword) ##double check SQL that its only doing a single query
     Book.where('title ILIKE ?', "%#{sanitize_sql_like(keyword)}%").
       or(Book.where('isbn ILIKE ?', "%#{sanitize_sql_like(keyword)}%")).
       or(Book.where('author ILIKE ?', "%#{sanitize_sql_like(keyword)}%")).

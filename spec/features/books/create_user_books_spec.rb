@@ -28,5 +28,6 @@ RSpec.describe 'Create User Books Spec' do
 
     expect(current_path).to eq(new_user_book_path)
     expect(page).to have_content("Oops! That book cannot be found.")
+    save_and_open_page
   end
 end

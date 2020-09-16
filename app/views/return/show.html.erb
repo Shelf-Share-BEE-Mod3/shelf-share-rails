@@ -1,0 +1,14 @@
+<h2>Hope you enjoyed <%= @user_book.book.title %>!</h2>
+
+<p>Please copy the below address. For improved security, you will not be allowed to access this address after leaving this page!</p>
+
+<h4><%= @friend.first_name %> Address:</h4>
+
+<ul style="list-style-type:none;">
+  <li><%= @friend.full_name %></li>
+  <li><%= @friend.address.address_first %></li>
+  <% if @friend.address.address_second.present? %>
+  <li><%= @friend.address.address_second %></li>
+  <% end %>
+  <li><%= @friend.address.city %>, <%= @friend.address.state %>, <%= @friend.address.zip %> </li>
+</ul>
