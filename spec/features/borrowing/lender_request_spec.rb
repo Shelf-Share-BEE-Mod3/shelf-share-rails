@@ -11,6 +11,7 @@ RSpec.describe "Borrowing Spec 2/?" do
     @borrow_request = create(:borrow_request, borrower: @user1, user_book: @user_book)
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user2)
   end
+
   it "I am notified of new borrow requests on my dashboard" do
     visit user_dashboard_path
 
@@ -25,6 +26,7 @@ RSpec.describe "Borrowing Spec 2/?" do
       expect(request).to have_button("Decline")
     end
   end
+
   it "I can accept a request from the dashboard" do
     visit user_dashboard_path
 
@@ -60,5 +62,9 @@ RSpec.describe "Borrowing Spec 2/?" do
       expect(page).to_not have_css(".request")
     end
   end
+
+  it "I can decline a request from the dashboard" do
+  end
+
 end
 # Denying the request will send a notification to my friend, and the request is removed from my dashboard.

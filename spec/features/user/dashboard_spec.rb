@@ -12,7 +12,7 @@ RSpec.describe 'As a registered user' do
 
       @ub1 = UserBook.create({
         user_id: @user.id,
-        isbn: "123456789",
+        book_id: create(:book).id,
         status: "available"
       })
 
