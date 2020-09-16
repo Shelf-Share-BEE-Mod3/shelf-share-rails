@@ -7,7 +7,7 @@ RSpec.describe 'Return Book Index Page' do
     @address = create(:address, user: @user2, address_second: "Apt 101")
     current_user.friends << @user2
     @book = create(:book)
-    @user_book = create(:user_book, user: @user2, book: @book)
+    @user_book = create(:user_book, user: @user2, book: @book, status: "unavailable")
     @borrow_request = create(:borrow_request, borrower: current_user, user_book: @user_book, status: 2 )
 
   end
@@ -36,5 +36,14 @@ RSpec.describe 'Return Book Index Page' do
     expect(page).to have_content(@user2.address.state)
     expect(page).to have_content(@user2.address.zip)
 
+  end
+
+  it "Clicking Return will change the user book status to available" do
+    expect(@user_book.status).to eq("unavailable")
+
+    visit "/return"
+    click_button("Return")
+
+    expect(@user_book.reload.status).to eq("available")
   end
 end
