@@ -1,4 +1,8 @@
 class BorrowRequestsController < ApplicationController
+  def show
+
+  end
+
   def create
     friend_book = UserBook.where(user_id: params[:friend_id], book_id: params[:friend_book_id]).first
     if friend_book.status == 'available'
