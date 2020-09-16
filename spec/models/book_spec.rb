@@ -10,7 +10,10 @@ RSpec.describe Book do
     it { should validate_presence_of :category }
     it { should validate_presence_of :thumbnail }
   end
-
+  describe 'relationships' do
+    it { should have_many :user_books }
+    it { should have_many(:users).through(:user_books) }
+  end
   describe "instance_methods" do
     it "#find_status" do
       user = create(:user)
