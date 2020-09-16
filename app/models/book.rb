@@ -11,7 +11,10 @@ class Book < ApplicationRecord
 
   def self.lent_to_user(id)
     joins(user_books: :borrow_requests).where(borrow_requests: { borrower_id: id, status: 2 })
-    # BorrowRequest.where(borrower_id: id).where(status: 2)
+  end
+
+  def self.available
+    joins(:user_books).where(user_books: {status: 'available'})
   end
 
 end

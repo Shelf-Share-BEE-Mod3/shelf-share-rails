@@ -13,7 +13,7 @@ RSpec.describe 'Friend Book Index Page' do
     current_user.borrow_requests.create!(user_book: @ub2, status: 2)
   end
 
-  it "I can visit a friends book index page, and it shows all of that friends available books" do
+  it "I can visit a friends book index page, and it shows all of the friends available books" do
 
     visit "/user/friends/#{@friend1.id}"
     expect(page).to have_content("#{@friend1.first_name}'s Books")
@@ -21,7 +21,7 @@ RSpec.describe 'Friend Book Index Page' do
     expect(page).to have_css("img[src*='#{@friend1_books[1].thumbnail}']")
     expect(page).to have_css("img[src*='#{@friend1_books[2].thumbnail}']")
 
-    expected_count = @friend1_books.count
+    expected_count = @friend1.books.available.count
     expect(page).to have_css(".available_book", count: expected_count)
 
     book_link = find(:xpath, "//a[contains(@href,#{@friend1_books[0].id})]")
@@ -29,9 +29,12 @@ RSpec.describe 'Friend Book Index Page' do
     expect(current_path).to eq("/books/#{@friend1_books[0].id}")
   end
 
-  xit 'The view page will show books that my friend is lending to me' do
+  it 'The view page will show books that my friend is lending to me' do
     visit "/user/friends/#{@friend1.id}"
     expect(page).to have_css(".lent_to_user", count: 1)
-    book_link = find(:xpath, "//a[contains(@href,#{@friend1_books[2].id})]")
+    within('.lent_to_user') do
+      find(:xpath, "//a[contains(@href,#{@friend1_books[2].id})]")
+    end
+    # book_link = find(:xpath, "//a[contains(@href,#{@friend1_books[2].id})]")
   end
 end
