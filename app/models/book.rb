@@ -11,6 +11,7 @@ class Book < ApplicationRecord
 
   def self.search(keyword)
     Book.where('title ILIKE ?', "%#{sanitize_sql_like(keyword)}%").
+      or(Book.where('isbn ILIKE ?', "%#{sanitize_sql_like(keyword)}%")).
       or(Book.where('author ILIKE ?', "%#{sanitize_sql_like(keyword)}%")).
       or(Book.where('description ILIKE ?', "%#{sanitize_sql_like(keyword)}%"))
   end
