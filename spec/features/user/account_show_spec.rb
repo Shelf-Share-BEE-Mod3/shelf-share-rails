@@ -45,7 +45,7 @@ RSpec.describe 'Account Info Page' do
     click_on 'Submit'
 
     expect(current_path).to eq(user_account_path)
-    expect(page).to have_conten("Address updated successfully")
+    expect(page).to have_content("Address updated successfully")
     expect(page).to have_content(updated[:address_first])
     expect(page).to have_content(updated[:address_second])
     expect(page).to have_content(updated[:city])
