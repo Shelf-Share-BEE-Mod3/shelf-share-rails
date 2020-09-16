@@ -51,4 +51,9 @@ class User < ApplicationRecord
   def full_name
     first_name + " " + last_name
   end
+
+  def self.who_owns_this_book(book)
+    ids = book.user_books.where(user_id: self.ids).pluck(:user_id)
+    self.where(id: ids)
+  end
 end

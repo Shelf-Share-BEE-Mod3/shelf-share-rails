@@ -15,13 +15,37 @@ RSpec.describe 'Find books search feature' do
       end
     end
 
-    xit 'When I fill in the text field with a book title and click the find books button, I am redirected to the books index where I see the results for my search' do
+    it 'When I fill in the text field with a book title and click the find books button, I am redirected to the books index where I see the results for my search' do
+      @user2 = User.create!(first_name: 'John', last_name: 'Scalzi')
+      @user3 = User.create!(first_name: 'Robert', last_name: 'Heinlein')
+
+      @user.friends << @user2
+      @user2.friends << @user
+      @user.friends << @user3
+      @user3.friends << @user
+
+      5.times do
+        create(:book)
+      end
+
+      Book.create!(title: 'Meditations',
+        author: 'Marcus Aurelius',
+        description: 'For the Stoic',
+        isbn: 1231231234567,
+        category: 'Philosophy',
+        thumbnail: 'https://upload.wikimedia.org/wikipedia/commons/b/b8/Indian_Election_Symbol_Book.svg'
+      )
+
+      Book.all.each do |book|
+        @user2.user_books.create!(book_id: book.id, status: 'available')
+      end
+
       within ".search-books" do
         fill_in :search, with: "Meditations"
         click_on "Find Books"
       end
 
-      expect(current_path).to eq('/books')
+      expect(current_path).to eq(books_search_index_path)
       expect(page).to have_content("Meditations")
     end
   end

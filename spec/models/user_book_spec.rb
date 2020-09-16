@@ -10,6 +10,7 @@ RSpec.describe UserBook, type: :model do
 
   describe 'relationships' do
     it { should belong_to :user }
+    it { should belong_to :book }
     it { should have_many :borrow_requests }
   end
 
@@ -20,12 +21,20 @@ RSpec.describe UserBook, type: :model do
       @user = User.create(id: 1)
       @ub1 = UserBook.create({
                                user_id: @user.id,
+                               book_id: @book1.id,
                                status: 'available'
                              })
       @ub2 = UserBook.create({
                                user_id: @user.id,
+                               book_id: @book2.id,
                                status: 'unavailable'
                              })
+    end
+    it "finds available user_books" do
+      expect(UserBook.find_available_userbooks).to eq([@ub1])
+    end
+    it "finds unavailable user_books" do
+      expect(UserBook.find_unavailable_userbooks).to eq([@ub2])
     end
   end
 end
