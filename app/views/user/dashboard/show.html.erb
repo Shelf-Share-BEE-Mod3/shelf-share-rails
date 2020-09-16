@@ -8,7 +8,8 @@
     <% @borrow_requests.each do |request| %>
       <article class="request">
         <%= "#{request.borrower} wants to borrow #{request.book_title}" %>
-
+        <%= button_to "Accept" %>
+        <%= button_to "Decline" %>
       </article>
     <% end %>
   </section>
