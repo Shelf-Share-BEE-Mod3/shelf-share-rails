@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   namespace :books do
     resources :search, only: [:index]
   end
-  
+
   resources :books, only: [:index, :show]
 
   namespace :user do
@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     resources :friends, only: [:index]
     resources :friend_requests, only: %i[create update destroy]
     resources :books, only: [:index, :new, :create, :show]
-    get '/account', to: 'account#show', as: 'account'
+    resources :account, only: [:show]
   end
 
 end
