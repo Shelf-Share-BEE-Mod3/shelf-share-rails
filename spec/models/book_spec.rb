@@ -23,4 +23,23 @@ RSpec.describe Book do
       expect(book2.find_status).to eq('unavailable')
     end
   end
+  describe 'class methods' do
+    it 'search' do
+      book1 = create(:book)
+      book2 = create(:book)
+      book3 = create(:book)
+
+      # Exact matches
+      expect(Book.search(book1.title)).to eq([book1])
+      expect(Book.search(book1.author)).to eq([book1])
+      expect(Book.search(book1.isbn)).to eq([book1])
+      expect(Book.search(book1.description)).to eq([book1])
+
+      # fragments
+      expect(Book.search(book2.title[1..4])).to eq([book2])
+      expect(Book.search(book2.author[0..2])).to eq([book2])
+      expect(Book.search(book2.isbn[7..12])).to eq([book2])
+      expect(Book.search(book2.description[0..5])).to eq([book2])
+    end
+  end
 end
