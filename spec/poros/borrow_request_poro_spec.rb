@@ -9,6 +9,7 @@ RSpec.describe BorrowRequestPoro, type: :model do
     @borrow_request = create(:borrow_request, user_book: @user_book, borrower: @book_borrower)
 
     @params = {
+      id: @borrow_request.id,
       belongs_to: @book_owner.full_name,
       borrower: @book_borrower.full_name,
       book_title: @book.title
@@ -22,6 +23,7 @@ RSpec.describe BorrowRequestPoro, type: :model do
   end
 
   it 'has_attributes' do
+    expect(@book_request.id).to eq(@borrow_request.id)
     expect(@book_request.book_title).to eq(@book.title)
     expect(@book_request.belongs_to).to eq(@book_owner.full_name)
     expect(@book_request.borrower).to eq(@book_borrower.full_name)
