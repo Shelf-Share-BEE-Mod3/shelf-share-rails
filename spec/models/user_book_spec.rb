@@ -72,5 +72,8 @@ RSpec.describe UserBook, type: :model do
       expect(@ub1.find_book_from_userbook).to eq(@book1)
       expect(@ub2.find_book_from_userbook).to eq(@book2)
     end
+    it "can change the books status to available" do
+      expect(@ub2.status_change_to_available).to eq(@ub2.status = "available")
+    end
   end
 end
