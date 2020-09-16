@@ -24,7 +24,7 @@ RSpec.describe 'Return Book Index Page' do
 
     visit "/return"
     expect(page).to have_css(".borrowed-books", count: 1)
-
+    expect(page).to have_button("Return")
   end
 
 

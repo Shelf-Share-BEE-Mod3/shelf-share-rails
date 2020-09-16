@@ -14,4 +14,12 @@ class UserBook < ApplicationRecord
   def self.find_unavailable_userbooks
     where.not(status: 'available')
   end
+
+  def self.userbooks_lent_to_user(id)
+    joins(:borrow_requests).where(borrow_requests: { borrower_id: id, status: 2 })
+  end
+
+  def find_book_from_userbook
+    Book.find(book_id)
+  end
 end

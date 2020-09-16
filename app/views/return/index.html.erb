@@ -1,8 +1,13 @@
 <h2>All Borrowed Books</h2>
 
+<!-- Userbooks where current_user is currently borrowing -->
+<!-- Convert userbook to book to show cover -->
+<!-- Need book owner info from userbook for return path -->
+
 
 <% Book.lent_to_user(current_user.id).each do |book| %>
   <div class="borrowed-books" id="book-<%= book.id %>">
-    <%= book.title %>
+    <%= image_tag(book.thumbnail, alt: "#{book.title} cover image") %>
+    <%= button_to "Return" %>
   </div>
 <% end  %>
