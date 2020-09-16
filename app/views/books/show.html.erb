@@ -4,6 +4,8 @@
   <%= render partial: 'partials/book_show', locals: {book: @book} %>
   <footer>
     Belongs to <%= @friend.first_name %>
-    <%= button_to "Ask to Borrow" %>
+    <% if @book.find_status == 'available' %>
+      <%= button_to "Ask to Borrow", borrow_index_path, params: { friend_book_id: @book.id, friend_id: @friend.id, user_id: current_user.id }, method: :post %>
+    <% end %>
   </footer>
 </article>

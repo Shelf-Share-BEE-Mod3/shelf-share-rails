@@ -39,6 +39,7 @@ RSpec.describe User, type: :model do
     expect(new_user.refresh_token).to eq('12345abcdefg')
     expect(new_user.oauth_expires_at).to eq(auth[:credentials][:expires_at])
   end
+
   describe 'instance methods' do
     before :each do
 
@@ -80,6 +81,13 @@ RSpec.describe User, type: :model do
 
     it "can find unavailable_books" do
       expect(@new_user.unavailable_books).to eq([@book2])
+    end
+  end
+
+  describe "full name instance method" do
+    it "has a full name" do
+      user = create(:user)
+      expect(user.full_name).to eq("#{user.first_name} #{user.last_name}")
     end
   end
 end
