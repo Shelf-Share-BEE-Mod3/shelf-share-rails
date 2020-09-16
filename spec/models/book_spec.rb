@@ -44,6 +44,8 @@ RSpec.describe Book do
 
     it "#available" do
       expect(Book.available).to eq([@book2])
+    end 
+  end 
 
   describe 'class methods' do
     it 'search' do
