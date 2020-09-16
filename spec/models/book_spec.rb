@@ -23,4 +23,17 @@ RSpec.describe Book do
       expect(book2.find_status).to eq('unavailable')
     end
   end
+
+  describe "#class_methods" do
+    it "#lent_to_user(id)" do
+      user1 = create(:user)
+      user2 = create(:user)
+      book1 = create(:book)
+      book2 = create(:book)
+      userbook1 = user1.user_books.create!(book_id: book1.id, status: 'unavailable')
+      userbook2 = user1.user_books.create!(book_id: book2.id, status: 'available')
+      borrow_request = userbook2.borrow_requests.create(borrower_id: user2.id, status: 2)
+      expect(Book.lent_to_user(user2.id)).to eq([book1])
+    end
+  end
 end
