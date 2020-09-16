@@ -47,4 +47,8 @@ class User < ApplicationRecord
   def unavailable_books
     books.joins(:user_books).where("user_books.status != 'available'")
   end
+
+  def full_name
+    first_name + " " + last_name
+  end
 end
