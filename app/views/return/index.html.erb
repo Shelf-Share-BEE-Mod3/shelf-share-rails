@@ -4,10 +4,10 @@
 <!-- Convert userbook to book to show cover -->
 <!-- Need book owner info from userbook for return path -->
 
-
-<% Book.lent_to_user(current_user.id).each do |book| %>
-  <div class="borrowed-books" id="book-<%= book.id %>">
-    <%= image_tag(book.thumbnail, alt: "#{book.title} cover image") %>
-    <%= button_to "Return" %>
-  </div>
-<% end  %>
+<% UserBook.userbooks_lent_to_user(current_user.id).each do |ub| %>
+<div class="borrowed-books" id="book-<%= ub.id %>">
+  <% book = ub.find_book_from_userbook  %>
+  <%= image_tag(book.thumbnail, alt: "#{book.title} cover image") %>
+  <%= button_to "Return" %>
+</div>
+<% end %>
