@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :friend_requests
   has_many :user_books
   has_many :borrow_requests, foreign_key: :borrower_id
+  has_many :books, through: :user_books
 
   def self.update_or_create(auth)
     User.find_by(uid: auth[:uid]) || new_user(auth)
@@ -39,13 +40,16 @@ class User < ApplicationRecord
     requests
   end
 
-  def books
-    user_books.map do |user_book|
-      create_book(user_book)
-    end
+  def available_books
+    books.joins(:user_books).where("user_books.status = 'available'")
   end
 
-  def create_book(user_book)
-    BookFacade.find_by_isbn(user_book.isbn)
+  def unavailable_books
+    books.joins(:user_books).where("user_books.status != 'available'")
+  end
+
+  def self.who_owns_this_book(book)
+    ids = book.user_books.where(user_id: self.ids).pluck(:user_id)
+    self.where(id: ids)
   end
 end

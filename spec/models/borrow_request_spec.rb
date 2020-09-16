@@ -15,22 +15,23 @@ RSpec.describe BorrowRequest do
   describe 'status enum' do
     before :each do
       @user1, @user2 = create_list(:user, 2)
-      @book = @user1.user_books.create!(isbn: 'x', status: 'available')
+      @book = create(:book)
+      @userbook = @user1.user_books.create!(book_id: @book.id, status: 'available')
     end
     it 'pending' do
-      req = @user2.borrow_requests.create!(user_book_id: @book.id, status: 0)
+      req = @user2.borrow_requests.create!(user_book_id: @userbook.id, status: 0)
       expect(req.status).to eq('pending')
     end
     it 'declined' do
-      req = @user2.borrow_requests.create!(user_book_id: @book.id, status: 1)
+      req = @user2.borrow_requests.create!(user_book_id: @userbook.id, status: 1)
       expect(req.status).to eq('declined')
     end
     it 'accepted' do
-      req = @user2.borrow_requests.create!(user_book_id: @book.id, status: 2)
+      req = @user2.borrow_requests.create!(user_book_id: @userbook.id, status: 2)
       expect(req.status).to eq('accepted')
     end
     it 'returned' do
-      req = @user2.borrow_requests.create!(user_book_id: @book.id, status: 3)
+      req = @user2.borrow_requests.create!(user_book_id: @userbook.id, status: 3)
       expect(req.status).to eq('returned')
     end
   end

@@ -8,6 +8,7 @@ RSpec.describe User, type: :model do
     it { should have_many(:friends).through(:friendships) }
     it { should have_many :friend_requests }
     it { should have_many :user_books }
+    it { should have_many(:books).through(:user_books) }
     it { should have_many :borrow_requests}
   end
 
@@ -40,6 +41,7 @@ RSpec.describe User, type: :model do
   end
   describe 'instance methods' do
     before :each do
+
       auth = {
         provider: 'google',
         uid: '12345678910',
@@ -56,12 +58,28 @@ RSpec.describe User, type: :model do
       }
       User.update_or_create(auth)
       @new_user = User.first
-    end
-    it "can get books" do
-      book = create(:book)
 
-      @new_user.user_books.create(isbn: book.isbn)
-      expect(@new_user.books).to eq([book])
+      @book1 = create(:book)
+      @book2 = create(:book)
+      @user = User.create(id: 1)
+      @ub1 = UserBook.create({
+                               user_id: @new_user.id,
+                                book_id: @book1.id,
+                               status: 'available'
+                             })
+      @ub2 = UserBook.create({
+                               user_id: @new_user.id,
+                               book_id: @book2.id,
+                               status: 'unavailable'
+                             })
+    end
+
+    it "can find available_books" do
+      expect(@new_user.available_books).to eq([@book1])
+    end
+
+    it "can find unavailable_books" do
+      expect(@new_user.unavailable_books).to eq([@book2])
     end
   end
 end

@@ -1,5 +1,13 @@
 <h1>Browse Books</h1>
 
+<p>Find Books by Title</p>
+<section class= 'search-books'>
+  <%= form_tag books_search_index_path, method: :get do %>
+  <%= search_field_tag :search,nil, placeholder: 'Enter keyword or ISBN'%><br>
+  <%= submit_tag 'Find Books' %>
+  <% end  %>
+</section>
+
 <p>Sorted by Friend</p>
 
 <% @friends.each do |friend| %>
