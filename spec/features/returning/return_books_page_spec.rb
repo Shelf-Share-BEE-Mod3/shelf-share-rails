@@ -40,10 +40,14 @@ RSpec.describe 'Return Book Index Page' do
 
   it "Clicking Return will change the user book status to available" do
     expect(@user_book.status).to eq("unavailable")
-
     visit "/return"
     click_button("Return")
-
     expect(@user_book.reload.status).to eq("available")
+  end
+  it "Clicking Return will change the borrow request status to returned" do
+    expect(@borrow_request.status).to eq("accepted")
+    visit "/return"
+    click_button("Return")
+    expect(@borrow_request.reload.status).to eq("returned")
   end
 end

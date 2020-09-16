@@ -56,5 +56,8 @@ RSpec.describe BorrowRequest do
     it "can find all approved borrow requests" do
       expect(BorrowRequest.find_approved_requests).to eq([@borrow_request])
     end
+    it "can change status of returned book to returned" do
+      expect(@borrow_request.status_changed_to_returned).to eq(@borrow_request.status = 3)
+    end
   end
 end

@@ -9,4 +9,8 @@ class BorrowRequest < ApplicationRecord
   def self.find_approved_requests
     where(status: 2)
   end
+
+  def status_changed_to_returned
+    self.status = 3
+  end
 end
