@@ -22,4 +22,8 @@ class UserBook < ApplicationRecord
   def find_book_from_userbook
     Book.find(book_id)
   end
+
+  def status_change_to_available
+    self.status = "available"
+  end
 end
