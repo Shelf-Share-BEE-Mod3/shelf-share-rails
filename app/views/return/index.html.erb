@@ -9,6 +9,6 @@
 <div class="borrowed-books" id="borrow-<%= br.id %>">
   <%= book = br.user_book.book %>
   <%= image_tag(book.thumbnail, alt: "#{book.title} cover image") %>
-  <%= button_to "Return", "/return/#{br.user_book.user_id}", method: :get %>
+  <%= button_to "Return", "/return/#{br.user_book.user_id}", params:{user_book_id: br.user_book.id}, method: :get %>
 </div>
 <% end %>
