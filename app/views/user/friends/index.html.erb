@@ -5,7 +5,7 @@
     <p>You have no friends :(<p>
   <% else %>
     <% current_user.friends.each do |friend| %>
-      <%= link_to friend.first_name %>
+      <%= link_to friend.first_name, "/user/friends/#{friend.id}" %>
       <!-- make link to friend's shelf -->
     <% end %>
   <% end %>
