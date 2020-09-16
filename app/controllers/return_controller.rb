@@ -6,6 +6,7 @@ class ReturnController < ApplicationController
 
   def show
     @friend = User.find(params[:id])
+    @user_book = UserBook.find(params[:user_book_id])
     StatusFacade.change_user_book_status_to_available(params[:user_book_id])
     StatusFacade.change_borrow_request_status_to_returned(params[:borrow_request_id])
   end
