@@ -4,6 +4,14 @@
   <header>
     <h4>Book Requests</h4>
   </header>
+  <section class="pending-requests">
+    <% @borrow_requests.each do |request| %>
+      <article class="request">
+        <%= "#{request.borrower} wants to borrow #{request.book_title}" %>
+
+      </article>
+    <% end %>
+  </section>
 </section>
 
 <section class="borrowed-books">
