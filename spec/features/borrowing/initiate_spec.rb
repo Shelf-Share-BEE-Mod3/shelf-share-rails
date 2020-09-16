@@ -20,28 +20,7 @@ RSpec.describe "Borrowing Spec 1/?" do
 
     expect(current_path).to eq(books_path)
     expect(page).to have_content("Borrow Request sent to #{@user2.full_name}")
-    
     click_link @book.title
     expect(page).to_not have_button "Ask to Borrow"
-
-    # expect(current_path).to eq(new_borrow_path)
-    # expect(page).to have_content("Confirm New Borrow Request")
-    # expect(page).to have_content("You are requesting to borrow #{@user1.full_name}'s copy of #{@book.title}.")
-    # expect(page).to have_content("They will be able to see your address:")
-    # within ".address" do
-    #   expect(page).to have_content(@address.address_first)
-    #   expect(page).to have_content(@address.address_second)
-    #   expect(page).to have_content(@address.city)
-    #   expect(page).to have_content(@address.state)
-    #   expect(page).to have_content(@address.zip)
-    # end
-    # expect(page).to have_button("Submit")
-    # expect(page).to have_button("Cancel")
-    #
-    # expect do
-    #   click_button "Submit"
-    # end.to change { BorrowRequest.count }.by(1)
-    #
-    # expect(current_path).to eq(books_path)
   end
 end
