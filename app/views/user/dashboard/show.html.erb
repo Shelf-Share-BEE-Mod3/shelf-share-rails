@@ -8,7 +8,7 @@
     <% @borrow_requests.each do |request| %>
       <article class="request">
         <%= "#{request.borrower} wants to borrow #{request.book_title}" %>
-        <%= button_to "Accept" %>
+        <%= button_to "Accept", borrow_path(request.id), { method: :get } %>
         <%= button_to "Decline" %>
       </article>
     <% end %>

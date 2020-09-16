@@ -1,0 +1,14 @@
+<h1>Borrow Request Approved!</h1>
+
+<section class="address">
+  <p class="warning">
+    This is the only time you'll be shown <%= @address.user.full_name %>'s address. Write it down!
+  </p>
+  <p class="shipping-info">
+    <%= @address.address_first %><br/>
+    <%= @address.address_second %><br/>
+    <%= @address.city %><br/>
+    <%= @address.state %><br/>
+    <%= @address.zip %><br/>
+  </p>
+</section>

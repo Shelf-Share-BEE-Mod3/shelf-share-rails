@@ -1,6 +1,8 @@
 class BorrowRequestsController < ApplicationController
   def show
-
+    borrow_request = BorrowRequest.find(params[:id])
+    approve_request(borrow_request)
+    @address = Address.includes(:user).find_by(user_id: borrow_request.borrower_id)
   end
 
   def create
@@ -11,5 +13,10 @@ class BorrowRequestsController < ApplicationController
       flash[:success] = "Borrow Request sent to #{User.find(params[:friend_id]).full_name}"
       redirect_to books_path
     end
+  end
+
+  def approve_request(request)
+    request.user_book.update(status: 'unavailable')
+    request.accepted!
   end
 end
