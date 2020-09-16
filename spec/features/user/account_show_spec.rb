@@ -32,9 +32,9 @@ RSpec.describe 'Account Info Page' do
     }
     visit user_account_path
 
-    expect(page).to have_link(edit_address_path)
+    expect(page).to have_link("Update Address")
     click_on "Update Address"
-    expect(current_path).to eq(edit_address_path)
+    expect(current_path).to eq(edit_address_path(@user.address.id))
 
     fill_in :address_first, with: updated[:address_first]
     fill_in :address_second, with: updated[:address_second]
