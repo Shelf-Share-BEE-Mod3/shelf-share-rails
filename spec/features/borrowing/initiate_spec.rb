@@ -20,7 +20,6 @@ RSpec.describe "Borrowing Spec 1/?" do
 
     expect(current_path).to eq(books_path)
     expect(page).to have_content("Borrow Request sent to #{@user2.full_name}")
-    save_and_open_page
     click_link @book.title
     expect(page).to_not have_button "Ask to Borrow"
 
