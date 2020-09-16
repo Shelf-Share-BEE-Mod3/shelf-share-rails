@@ -44,7 +44,7 @@ RSpec.describe 'Find books search feature' do
         fill_in :search, with: "Meditations"
         click_on "Find Books"
       end
-save_and_open_page
+
       expect(current_path).to eq(books_search_index_path)
       expect(page).to have_content("Meditations")
     end
