@@ -31,4 +31,12 @@ FactoryBot.define do
     user_book
     status { 'pending' }
   end
+
+  factory :address do
+    user
+    address_first { Faker::Address.street_address }
+    city { Faker::Address.city }
+    state { Faker::Address.state_abbr }
+    zip { Faker::Address.zip }
+  end
 end
