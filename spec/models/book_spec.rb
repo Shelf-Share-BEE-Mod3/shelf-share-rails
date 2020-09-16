@@ -54,16 +54,16 @@ RSpec.describe Book do
       book3 = create(:book)
 
       # Exact matches
-      expect(Book.search(book1.title)).to eq([book1])
-      expect(Book.search(book1.author)).to eq([book1])
-      expect(Book.search(book1.isbn)).to eq([book1])
-      expect(Book.search(book1.description)).to eq([book1])
+      expect(Book.search(book1.title).first).to eq(book1)
+      expect(Book.search(book1.author).first).to eq(book1)
+      expect(Book.search(book1.isbn).first).to eq(book1)
+      expect(Book.search(book1.description).first).to eq(book1)
 
       # fragments
-      expect(Book.search(book2.title[1..4])).to eq([book2])
-      expect(Book.search(book2.author[0..2])).to eq([book2])
-      expect(Book.search(book2.isbn[7..12])).to eq([book2])
-      expect(Book.search(book2.description[0..5])).to eq([book2])
+      expect(Book.search(book2.title[1..4]).first).to eq(book2)
+      expect(Book.search(book2.author[0..2]).first).to eq(book2)
+      expect(Book.search(book2.isbn[7..12]).first).to eq(book2)
+      expect(Book.search(book2.description[0..5]).first).to eq(book2)
     end
   end
 end

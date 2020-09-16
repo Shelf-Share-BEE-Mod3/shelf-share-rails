@@ -1,0 +1,10 @@
+<h1>Account Information</h1>
+
+<h2>Current Address</h2>
+<%= @address.address_first %>
+<%= @address.address_second %>
+<%= @address.city %>
+<%= @address.state %>
+<%= @address.zip %>
+
+<%= link_to "Update Address", edit_address_path(@address.id) %>

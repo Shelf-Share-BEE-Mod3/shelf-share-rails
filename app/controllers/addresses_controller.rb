@@ -20,6 +20,23 @@ class AddressesController < ApplicationController # rubocop:todo Style/Documenta
     end
   end
 
+  def edit
+    @address = Address.find(params[:id])
+  end
+
+  def update
+    if current_user.address.update(address_params)
+      flash[:success] = 'Address updated successfully'
+      redirect_to user_account_path
+    else
+      flash[:failure] = 'Please fill out all required fields'
+      flash[:error] = address.errors.full_messages.to_sentence
+      session[:params] = address_params
+      render :edit
+    end
+
+  end
+
   private
 
   def address_params
