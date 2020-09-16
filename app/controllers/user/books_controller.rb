@@ -19,10 +19,10 @@ class User::BooksController < ApplicationController
     user_book = UserBook.new(status: 'available', user_id: current_user.id, book_id: book.id)
     if user_book.save
       flash[:success] = "Added to Shelf: #{book.title}, by #{book.author}"
-      redirect_to user_books_path
+      redirect_to user_books_path and return
     else
       flash[:failure] = "Something happened, try again."
-      redirect_to new_user_book_path
+      redirect_to new_user_book_path and return
     end
   end
 
