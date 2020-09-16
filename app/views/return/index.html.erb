@@ -3,11 +3,12 @@
 <!-- Userbooks where current_user is currently borrowing -->
 <!-- Convert userbook to book to show cover -->
 <!-- Need book owner info from userbook for return path -->
-
-<% UserBook.userbooks_lent_to_user(current_user.id).each do |ub| %>
-<div class="borrowed-books" id="book-<%= ub.id %>">
-  <% book = ub.find_book_from_userbook  %>
+<!-- userbook.book -->
+<!-- borrow_request.user_book.book -->
+<% @borrow_requests.each do |br| %>
+<div class="borrowed-books" id="borrow-<%= br.id %>">
+  <%= book = br.user_book.book %>
   <%= image_tag(book.thumbnail, alt: "#{book.title} cover image") %>
-  <%= button_to "Return" %>
+  <%= button_to "Return", "/return/#{br.user_book.user_id}", method: :get %>
 </div>
 <% end %>

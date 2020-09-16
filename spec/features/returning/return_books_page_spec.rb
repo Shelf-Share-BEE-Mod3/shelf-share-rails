@@ -21,11 +21,20 @@ RSpec.describe 'Return Book Index Page' do
   end
 
   it "On the borrowed books index page, I see a list of all books I am borrowing" do
-
     visit "/return"
     expect(page).to have_css(".borrowed-books", count: 1)
     expect(page).to have_button("Return")
   end
 
+  it "Clicking Return by a book sends me to the return show page, where the address of the book owner is shown" do
+    visit "/return"
+    click_button("Return")
+    expect(current_path).to eq("/return/#{@user2.id}")
+    expect(page).to have_content(@user2.full_name)
+    expect(page).to have_content(@user2.address.address_first)
+    expect(page).to have_content(@user2.address.city)
+    expect(page).to have_content(@user2.address.state)
+    expect(page).to have_content(@user2.address.zip)
 
+  end
 end

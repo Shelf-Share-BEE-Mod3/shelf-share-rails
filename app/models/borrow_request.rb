@@ -5,4 +5,8 @@ class BorrowRequest < ApplicationRecord
   belongs_to :user_book
 
   enum status: [:pending, :declined, :accepted, :returned]
+
+  def self.find_approved_requests
+    where(status: 2)
+  end
 end
