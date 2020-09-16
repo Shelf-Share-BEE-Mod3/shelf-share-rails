@@ -1,0 +1,8 @@
+<h2>All Borrowed Books</h2>
+
+
+<% Book.lent_to_user(current_user.id).each do |book| %>
+  <div class="borrowed-books" id="book-<%= book.id %>">
+    <%= book.title %>
+  </div>
+<% end  %>
