@@ -44,14 +44,21 @@ RSpec.describe Book do
 
     it "#available" do
       expect(Book.available).to eq([@book2])
-    end 
-  end 
+    end
+  end
 
   describe 'class methods' do
     it 'search' do
       book1 = create(:book)
       book2 = create(:book)
-      book3 = create(:book)
+      book3 = Book.create!(
+        title: 'Test Book',
+        author: 'Author',
+        description: 'This is a book',
+        thumbnail: 'https://upload.wikimedia.org/wikipedia/commons/b/b8/Indian_Election_Symbol_Book.svg',
+        isbn: 1234123412341,
+        category: 'Real Book'
+      )
 
       # Exact matches
       expect(Book.search(book1.title).first).to eq(book1)
@@ -60,10 +67,10 @@ RSpec.describe Book do
       expect(Book.search(book1.description).first).to eq(book1)
 
       # fragments
-      expect(Book.search(book2.title[1..4]).first).to eq(book2)
-      expect(Book.search(book2.author[0..2]).first).to eq(book2)
-      expect(Book.search(book2.isbn[7..12]).first).to eq(book2)
-      expect(Book.search(book2.description[0..5]).first).to eq(book2)
+      expect(Book.search('Test').first).to eq(book3)
+      expect(Book.search('author').first).to eq(book3)
+      expect(Book.search('12341234').first).to eq(book3)
+      expect(Book.search('book').first).to eq(book3)
     end
   end
 end
