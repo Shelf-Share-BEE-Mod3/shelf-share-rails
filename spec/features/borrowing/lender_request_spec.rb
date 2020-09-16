@@ -28,12 +28,34 @@ RSpec.describe "Borrowing Spec 2/?" do
   it "I can accept a request from the dashboard" do
     visit user_dashboard_path
 
+    expect(@borrow_request.status).to eq('pending')
+    expect(@user_book.status).to eq('available')
+
     within ".pending-requests" do
-      request = find(first(".request"))
-      expect(request).to have_content("#{@user1.full_name} wants to borrow #{@book.title}")
+      request = find((".request"), match: :first)
       click_button("Accept")
     end
+
+    expect(@borrow_request.status).to eq('accepted')
+    expect(@user_book.status).to eq('unavailable')
+
     expect(current_path).to eq(borrow_path(@borrow_request))
+
+    within ".address" do
+      warning = "This is the only time you'll be shown #{@user1.full_name}'s address. Write it down!"
+      expect(page).to have_content(warning)
+
+      expect(page).to have_content(@address.address_first)
+      expect(page).to have_content(@address.address_second)
+      expect(page).to have_content(@address.city)
+      expect(page).to have_content(@address.state)
+      expect(page).to have_content(@address.zip)
+    end
+
+    visit user_dashboard_path
+    within ".pending-requests" do
+      expect(page).to_not have_css(".request")
+    end
   end
 end
 
@@ -42,6 +64,6 @@ end
 # I can see the request on the dashboard.
 # I am given an option to accept or deny the request.
 # Accepting the request takes me to the request show page,
-# Where I can see my friends mailing address and a confirmation link that I am sending the book.
+# Where I can see my friends mailing address and a confirmation message to  that I am sending the book.
 #
 # Denying the request will send a notification to my friend, and the request is removed from my dashboard.
