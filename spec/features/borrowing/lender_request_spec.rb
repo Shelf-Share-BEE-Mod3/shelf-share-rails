@@ -36,10 +36,13 @@ RSpec.describe "Borrowing Spec 2/?" do
       click_button("Accept")
     end
 
+    @borrow_request.reload
+    @user_book.reload
+
+    expect(current_path).to eq(borrow_path(@borrow_request))
     expect(@borrow_request.status).to eq('accepted')
     expect(@user_book.status).to eq('unavailable')
 
-    expect(current_path).to eq(borrow_path(@borrow_request))
 
     within ".address" do
       warning = "This is the only time you'll be shown #{@user1.full_name}'s address. Write it down!"
@@ -58,12 +61,4 @@ RSpec.describe "Borrowing Spec 2/?" do
     end
   end
 end
-
-# As a user (lender),
-# When a friend asks to borrow one of my books,
-# I can see the request on the dashboard.
-# I am given an option to accept or deny the request.
-# Accepting the request takes me to the request show page,
-# Where I can see my friends mailing address and a confirmation message to  that I am sending the book.
-#
 # Denying the request will send a notification to my friend, and the request is removed from my dashboard.
