@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   resources :addresses, only: %i[new create update edit]
 
   get 'address/prompt', to: 'address_prompt#new'
-  post 'address/prompt', to: 'address_prompt#create'
 
   namespace :books do
     resources :search, only: [:index]

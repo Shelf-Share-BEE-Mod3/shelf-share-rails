@@ -11,12 +11,12 @@ class AddressesController < ApplicationController # rubocop:todo Style/Documenta
     @address.user_id = user.id
     if @address.save
       flash[:success] = 'Address successfully saved'
-      redirect_to root_path
+      redirect_to user_dashboard_path
     else
       flash[:failure] = 'Please fill out all required fields'
       flash[:error] = @address.errors.full_messages.to_sentence
-      session[:params] = address_params
-      render :new
+      session[:address_params] = address_params
+      redirect_to request.referrer
     end
   end
 

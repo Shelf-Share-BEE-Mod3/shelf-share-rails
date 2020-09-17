@@ -1,4 +1,4 @@
-<%= form_tag path, method: :post do %>
+<%= form_tag addresses_path do %>
   <%= label_tag :address_first, 'Address: *' %>
   <%= text_field_tag :address_first, "#{@address.address_first}"%><br>
 
@@ -16,4 +16,3 @@
 
   <%= submit_tag 'Submit Address' %>
 <% end %>
-<p>*Required Field</p>

@@ -4,11 +4,11 @@
     ShelfShare is a platform for sharing books via mail. <br/>
     You can borrow and lend books with your friends! <br/>
     To participate fully in the shipping process, we kindly ask for your address. <br/>
-    Your address will be shown to other users when only when it is necessary to ship a book. <br/>
+    Your address will be shown to other users only when it is necessary to ship a book. <br/>
     You can edit or delete your address at any time by visiting your profile. <br/>
   </p>
   <section class="new-address-form">
-    <%= render partial: 'partials/new_address_form', locals: { address: @address, path: 'prompt' } %>
+    <%= render partial: 'partials/new_address_form', locals: { address: @address } %>
   </section>
   <p>
     DISCLAIMER: The ShelfShare platform is a proof-of-concept and not likely to be maintained over time. <br/>
