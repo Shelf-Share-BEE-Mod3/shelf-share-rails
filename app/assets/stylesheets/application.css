@@ -45,6 +45,10 @@ body {
   height: 300px;
 }
 
+.flash-messages {
+  display: grid;
+}
+
 .page {
   margin-top: 1rem;
 }

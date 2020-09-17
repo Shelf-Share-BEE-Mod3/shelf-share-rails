@@ -1,12 +1,27 @@
 <h1>Borrow Requests</h1>
 
-<section class="pending-requests">
+<section class="incoming-pending-requests">
   <h1>Incoming Borrow Requests</h1>
-  <% @requests.each do |request| %>
-    <article class="book-request">
-      <%= "#{request.borrower.full_name} wants to borrow #{request.user_book.book.title}" %>
-      <%= button_to "Approve", borrow_path(request), method: :patch %>
-      <%= button_to "Decline", borrow_path(request), method: :delete %>
-    </article>
+  <% unless @incoming_requests.nil? %>
+    <% @incoming_requests.each do |request| %>
+      <article class="book-request">
+        <%= "#{request.borrower.full_name} wants to borrow #{request.user_book.book.title}" %>
+        <%= button_to "Approve", borrow_path(request), method: :patch %>
+        <%= button_to "Decline", borrow_path(request), method: :delete %>
+      </article>
+    <% end %>
+    <%= tag.p "You have no requests" if @incoming_requests.nil? %>
   <% end %>
+</section>
+
+<section class="outgoing-pending-requests">
+  <h1>Outgoing Borrow Requests</h1>
+  <% unless @outgoing_requests.nil? %>
+    <% @outgoing_requests.each do |request| %>
+      <article class="book-request">
+        You asked to borrow <%= request.user_book.book.title %> from <%= request.borrower.full_name %>
+      </article>
+    <% end %>
+  <% end %>
+  <%= tag.p "You have no requests" if @outgoing_requests.nil? %>
 </section>
