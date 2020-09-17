@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   resources :books, only: [:index, :show]
 
-  resources :borrow_requests, as: 'borrow', only: [:show, :create]
+  resources :borrow_requests, as: 'borrow', only: [:show, :create, :update]
 
   resources :return, only: [:index, :show]
   namespace :user do

@@ -15,6 +15,17 @@ class BorrowRequestsController < ApplicationController
     end
   end
 
+  def update
+    borrow_request = BorrowRequest.find(params[:id])
+    borrow_request.declined!
+    decline_message = "You have declined #{borrow_request.borrower.first_name}'s " +
+                      "request to borrow #{borrow_request.user_book.book.title}"
+    flash[:success] = decline_message
+    redirect_to user_dashboard_path
+  end
+
+  private
+
   def approve_request(request)
     request.user_book.update(status: 'unavailable')
     request.accepted!

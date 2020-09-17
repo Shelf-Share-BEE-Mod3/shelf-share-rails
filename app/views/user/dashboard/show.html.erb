@@ -9,7 +9,7 @@
       <article class="request">
         <%= "#{request.borrower} wants to borrow #{request.book_title}" %>
         <%= button_to "Accept", borrow_path(request.id), { method: :get } %>
-        <%= button_to "Decline" %>
+        <%= button_to "Decline", borrow_path(request.id), { method: :patch } %>
       </article>
     <% end %>
   </section>
