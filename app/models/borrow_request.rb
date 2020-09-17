@@ -13,4 +13,11 @@ class BorrowRequest < ApplicationRecord
   def status_changed_to_returned
     self.status = 3
   end
+
+  def approve_request
+    self.update(status: 2)
+    self.save
+    user_book.update(status: 'unavailable')
+    user_book.save
+  end
 end
