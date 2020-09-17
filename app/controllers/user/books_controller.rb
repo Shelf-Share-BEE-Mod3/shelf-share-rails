@@ -29,4 +29,9 @@ class User::BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
   end
+
+  def destroy
+    current_user.user_books.where(book: Book.find(params[:id])).first.destroy
+    redirect_to user_dashboard_path
+  end
 end
