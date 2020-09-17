@@ -28,6 +28,14 @@ body {
   grid-template-columns: 2fr 12fr;
 }
 
+.skip-link {
+  color: white;
+}
+
+.skip-link:focus {
+  color: blue;
+}
+
 .nav {
   display: grid;
   justify-items: center;
