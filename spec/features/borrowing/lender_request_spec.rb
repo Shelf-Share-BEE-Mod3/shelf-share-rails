@@ -42,6 +42,8 @@ RSpec.describe "Borrowing Spec 2/?" do
 
     expect(current_path).to eq(address_path(@address1))
 
+    # TODO
+    # this is pretty much story #
     # expect page to have all the content
     # including a flash message
 
