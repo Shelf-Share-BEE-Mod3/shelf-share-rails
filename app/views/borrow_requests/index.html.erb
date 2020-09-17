@@ -1,0 +1,10 @@
+<h1>Borrow Requests</h1>
+
+<section class="pending-requests">
+  <h1>Incoming Borrow Requests</h1>
+  <% @requests.each do |request| %>
+    <article class="book-request">
+      <%= "#{request.borrower.full_name} wants to borrow #{request.user_book.book.title}" %>
+    </article>
+  <% end %>
+</section>

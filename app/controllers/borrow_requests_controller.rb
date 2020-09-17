@@ -1,4 +1,8 @@
 class BorrowRequestsController < ApplicationController
+  def index
+    @requests = current_user.incoming_book_borrow_requests
+  end
+
   def show
     borrow_request = BorrowRequest.find(params[:id])
     approve_request(borrow_request)
