@@ -28,8 +28,11 @@ RSpec.describe 'Friend Book Index Page' do
     expected_count = @friend1.books.available.count
     expect(page).to have_css(".available_book", count: expected_count)
 
-    book_link = find(:xpath, "//a[contains(@href,#{@friend1_books[0].id})]")
-    book_link.click
+    within "#book-#{@friend1_books[0].id}" do
+      book_link = find(:xpath, "//a[contains(@href,#{@friend1_books[0].id})]")
+      book_link.click
+    end
+
     expect(current_path).to eq("/books/#{@friend1_books[0].id}")
   end
 
@@ -48,6 +51,5 @@ RSpec.describe 'Friend Book Index Page' do
       find(:xpath, "//a[contains(@href,#{@book.id})]").click
     end
     expect(current_path).to eq("/books/#{@book.id}")
-
   end
 end
