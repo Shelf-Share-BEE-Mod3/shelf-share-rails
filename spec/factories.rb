@@ -26,7 +26,7 @@ FactoryBot.define do
     status { 'available' }
   end
 
-  factory :borrow_request do
+  factory :borrow_request, aliases: [:request] do
     borrower
     user_book
     status { 'pending' }
