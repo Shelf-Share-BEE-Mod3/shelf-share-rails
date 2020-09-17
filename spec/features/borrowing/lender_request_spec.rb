@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe "Borrowing Spec 2/?" do
   before :each do
     @user1, @user2 = create_list(:user, 2)
-    @address = create(:address, user: @user1, address_second: "Apt 101")
+    @address1 = create(:address, user: @user1, address_second: "Apt 101")
+    @address2 = create(:address, user: @user2, address_second: "Apt 222")
     @user1.friends << @user2
     @user2.friends << @user1
     @book = create(:book)
@@ -16,54 +17,43 @@ RSpec.describe "Borrowing Spec 2/?" do
     visit user_dashboard_path
 
     within ".book-requests" do
-      expect(page).to have_css(".pending-requests")
-    end
-
-    within ".pending-requests" do
-      request = find((".request"), match: :first)
-      expect(request).to have_content("#{@user1.full_name} wants to borrow #{@book.title}")
-      expect(request).to have_button("Accept")
-      expect(request).to have_button("Decline")
+      expect(page).to have_content("You have 1 new book request")
     end
   end
 
-  it "I can accept a request from the dashboard" do
-    visit user_dashboard_path
+  it "Each borrow request has buttons to approve or decline" do
+    visit borrow_index_path
+
+    request = find((".book-request"), match: :first)
+    expect(request).to have_button "Approve"
+    expect(request).to have_button "Decline"
+  end
+
+  it "I can accept a borrow request and see the borrrower's address" do
+    visit borrow_index_path
 
     expect(@borrow_request.status).to eq('pending')
     expect(@user_book.status).to eq('available')
 
-    within ".pending-requests" do
-      request = find((".request"), match: :first)
-      click_button("Accept")
+    request = find((".book-request"), match: :first)
+    within request do
+      click_button "Approve"
     end
+
+    expect(current_path).to eq(address_path(@address1))
+
+    # expect page to have all the content
 
     @borrow_request.reload
     @user_book.reload
 
-    expect(current_path).to eq(borrow_path(@borrow_request))
     expect(@borrow_request.status).to eq('accepted')
     expect(@user_book.status).to eq('unavailable')
 
-
-    within ".address" do
-      warning = "This is the only time you'll be shown #{@user1.full_name}'s address. Write it down!"
-      expect(page).to have_content(warning)
-
-      expect(page).to have_content(@address.address_first)
-      expect(page).to have_content(@address.address_second)
-      expect(page).to have_content(@address.city)
-      expect(page).to have_content(@address.state)
-      expect(page).to have_content(@address.zip)
-    end
-
-    visit user_dashboard_path
-    within ".pending-requests" do
-      expect(page).to_not have_css(".request")
-    end
+    visit borrow_index_path
   end
 
-  it "I can decline a request from the dashboard" do
+  xit "I can decline a request from the dashboard" do
     visit user_dashboard_path
 
     expect(@borrow_request.status).to eq('pending')
