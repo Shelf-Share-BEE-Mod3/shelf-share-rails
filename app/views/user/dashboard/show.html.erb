@@ -14,15 +14,6 @@
       </a>
     </p>
   <% end %>
-  <section class="pending-requests">
-    <% @book_requests.each do |request| %>
-      <article class="request" tabindex="0">
-        <%= "#{request.borrower} wants to borrow #{request.book_title}" %>
-        <%= button_to "Accept", borrow_path(request.id), { method: :get } %>
-        <%= button_to "Decline", borrow_path(request.id), { method: :patch } %>
-      </article>
-    <% end %>
-  </section>
 </section>
 
 <section class="borrowed-books" tabindex="0">
