@@ -6,7 +6,7 @@ RSpec.describe "Address Prompt Page Spec" do
               "ShelfShare is a platform for sharing books via mail. " +
               "You can borrow and lend books with your friends! " +
               "To participate fully in the shipping process, we kindly ask for your address. " +
-              "Your address will be shown to other users when only when it is necessary to ship a book. " +
+              "Your address will be shown to other users only when it is necessary to ship a book. " +
               "You can edit or delete your address at any time by visiting your profile."
 
     @disclaimer = "DISCLAIMER: " +
@@ -46,7 +46,6 @@ RSpec.describe "Address Prompt Page Spec" do
     expect(current_path).to eq(user_dashboard_path)
     expect(page).to have_content('Address successfully saved')
 
-    visit root_path
     click_link "Logout"
     click_link 'Sign in with Google'
 
