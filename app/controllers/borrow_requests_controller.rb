@@ -15,6 +15,12 @@ class BorrowRequestsController < ApplicationController
     redirect_to address_path(borrow_request.borrower.address)
   end
 
+  def create
+    user_book_id = UserBook.find_by(user_id: params[:friend_id], book_id: params[:friend_book_id], status: 'available').id
+    a = BorrowRequest.new(status: 0, user_book_id: user_book_id, borrower_id: params[:user_id])
+    a.save
+  end
+
   def destroy
     borrow_request = BorrowRequest.find(params[:id])
     borrow_request.update(status: 1)
