@@ -56,6 +56,7 @@ RSpec.describe 'Find books search feature' do
         fill_in :search, with: "Meditations"
         click_on "Find Books"
       end
+      expect(page).to have_content("Meditations")
       expect(page).to_not have_content("Meditations on a Rock")
     end
   end
