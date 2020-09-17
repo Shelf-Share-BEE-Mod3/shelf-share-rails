@@ -2,6 +2,7 @@ class BorrowRequestsController < ApplicationController
   def index
     @incoming_requests = current_user.incoming_book_borrow_requests
     @outgoing_requests = current_user.borrow_requests.where(status: 'pending')
+    #consider outsourcing to facade. Use BR PORO 
   end
 
   def show
