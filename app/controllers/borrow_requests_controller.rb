@@ -28,6 +28,6 @@ class BorrowRequestsController < ApplicationController
 
   def approve_request(request)
     request.user_book.update(status: 'unavailable')
-    request.accepted!
+    request.update(status: 2)
   end
 end

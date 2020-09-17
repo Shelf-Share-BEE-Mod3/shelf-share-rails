@@ -17,7 +17,8 @@ RSpec.describe "Borrowing Spec 1/?" do
       click_link @book.title
       click_button "Ask to Borrow"
     end.to change { BorrowRequest.count }.by(1)
-
+    request = BorrowRequest.first
+    expect(request.status).to eq("accepted")
     expect(current_path).to eq(books_path)
     expect(page).to have_content("Borrow Request sent to #{@user2.full_name}")
     click_link @book.title
