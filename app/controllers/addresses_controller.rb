@@ -6,6 +6,7 @@ class AddressesController < ApplicationController # rubocop:todo Style/Documenta
   end
 
   def show
+    @borrower = Address.find(params[:id]).user
   end
 
   def create # rubocop:todo Metrics/AbcSize

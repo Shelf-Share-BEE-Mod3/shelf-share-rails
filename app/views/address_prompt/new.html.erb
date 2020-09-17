@@ -10,11 +10,6 @@
   <section class="new-address-form">
     <%= render partial: 'partials/new_address_form', locals: { address: @address } %>
   </section>
-  <p>
-    DISCLAIMER: The ShelfShare platform is a proof-of-concept and not likely to be maintained over time. <br/>
-    Thus, any address information submitted will remain in our database indefinitely unless you delete it. <br/>
-    For concerns regarding your privacy, please do not submit any real location information to this website.
-  </p>
 <% end %>
 
 <% unless current_user.address.nil? %>
