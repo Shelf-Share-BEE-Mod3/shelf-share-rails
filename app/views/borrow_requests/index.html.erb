@@ -5,6 +5,8 @@
   <% @requests.each do |request| %>
     <article class="book-request">
       <%= "#{request.borrower.full_name} wants to borrow #{request.user_book.book.title}" %>
+      <%= button_to "Approve", borrow_path(request), method: :patch %>
+      <%= button_to "Decline" %>
     </article>
   <% end %>
 </section>
