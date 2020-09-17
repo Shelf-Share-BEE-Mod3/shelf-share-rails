@@ -48,4 +48,11 @@ RSpec.describe 'Friend Book Show Page Spec' do
     expect(page).to have_button("Change Status")
     expect(page).to have_button("Remove Book")
   end
+  it "can remove a book from the shelf" do
+    visit user_book_path(@available_book)
+    expect(page).to have_content(@available_book.title)
+    click_button 'Remove Book'
+    expect(current_path).to eq(user_dashboard_path)
+    expect(page).to_not have_content(@available_book.title)
+  end
 end
