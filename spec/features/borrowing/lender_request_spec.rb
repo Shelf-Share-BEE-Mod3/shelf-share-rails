@@ -51,6 +51,7 @@ RSpec.describe "Borrowing Spec 2/?" do
     expect(@user_book.status).to eq('unavailable')
 
     visit borrow_index_path
+    expect(page).to_not have_css(".book-request")
   end
 
   xit "I can decline a request from the dashboard" do
