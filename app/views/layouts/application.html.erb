@@ -12,9 +12,13 @@
   <body>
      <% if current_user %>
       <nav>
-        <%= link_to "Home", root_path %>
+        <header>
+          <a class="skip-link" href='#main'>Skip to content</a>
+        </header>
+
+        <%= link_to "ShelfShare", root_path %>
         <%= link_to "Dashboard", user_dashboard_path %>
-        <%= link_to "Browse Books", books_path %>
+        <%= link_to "Books", books_path %>
         <%= link_to "Friends", user_friends_path %>
         <%= link_to "Profile", user_books_path %>
         <span>
@@ -24,7 +28,6 @@
           (<%= link_to "Logout", logout_path %>)
         </span>
       </nav>
-
     <% end %>
     <% flash.each do |name, msg| %>
       <% if name == "missing_details" %>
@@ -39,6 +42,8 @@
         </div>
       <% end %>
     <% end %>
-    <%= yield %>
+    <main id="main" tabindex="-1">
+      <%= yield %>
+    </main>
   </body>
 </html>
