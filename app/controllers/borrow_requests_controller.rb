@@ -4,12 +4,6 @@ class BorrowRequestsController < ApplicationController
     @outgoing_requests = current_user.borrow_requests.where(status: 'pending')
   end
 
-  def show
-    borrow_request = BorrowRequest.find(params[:id])
-    approve_request(borrow_request)
-    @address = Address.includes(:user).find_by(user_id: borrow_request.borrower_id)
-  end
-
   def update
     begin
       borrow_request = BorrowRequest.find(params[:id])
