@@ -20,7 +20,7 @@ RSpec.describe 'User Book Index Page' do
                       book_id: @book2.id,
                       status: 'unavailable'
                     })
-    visit 'user/books'
+    visit user_books_path
     expect(page).to have_content(@book1.title)
     expect(page).to have_content(@book2.title)
     expect(page).to have_content("On The Shelf")
@@ -38,7 +38,7 @@ RSpec.describe 'User Book Index Page' do
                       book_id: @book2.id,
                       status: 'unavailable'
                     })
-    visit 'user/books'
+    visit user_books_path
     expect(page).to have_content(@book1.title)
     expect(page).to have_content(@book2.title)
     expect(page).to have_content("On The Shelf")
@@ -57,7 +57,7 @@ RSpec.describe 'User Book Index Page' do
                       book_id: @book2.id,
                       status: 'available'
                     })
-    visit 'user/books'
+    visit user_books_path
     expect(page).to have_content(@book1.title)
     expect(page).to have_content(@book2.title)
     expect(page).to have_content("On The Shelf")
