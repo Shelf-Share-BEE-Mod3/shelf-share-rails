@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>ShelfShare</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>ShelfShare</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
-  </head>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+</head>
 
-  <body>
-     <% if current_user %>
-      <nav>
-        <%= link_to "Home", root_path %>
-        <%= link_to "Dashboard", user_dashboard_path %>
-        <%= link_to "Browse Books", books_path %>
-        <%= link_to "Friends", user_friends_path %>
-        <%= link_to "My Books", user_books_path %>
-        <%= link_to "Account Info", user_account_path %>
-      </nav>
-    <% end %>
+<body>
+  <% if current_user %>
+  <nav class="nav">
+    <%= link_to "Home", root_path %>
+    <%= link_to "Dashboard", user_dashboard_path %>
+    <%= link_to "Browse Books", books_path %>
+    <%= link_to "Friends", user_friends_path %>
+    <%= link_to "My Books", user_books_path %>
+    <%= link_to "Account Info", user_account_path %>
+  </nav>
+  <% end %>
+  <div class="page">
     <% flash.each do |name, msg| %>
       <% if name == "missing_details" %>
         <% msg.each do |m| %>
@@ -28,11 +29,12 @@
           </div>
         <% end %>
       <% else %>
-        <div class= "<%=name%>-flash">
-          <p><%= msg %></p>
-        </div>
+      <div class= "<%=name%>-flash">
+        <p><%= msg %></p>
+      </div>
       <% end %>
     <% end %>
     <%= yield %>
-  </body>
+  </div>
+</body>
 </html>
