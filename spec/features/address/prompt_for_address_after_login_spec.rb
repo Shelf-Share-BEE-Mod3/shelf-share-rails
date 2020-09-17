@@ -23,7 +23,7 @@ RSpec.describe "Address Prompt Page Spec" do
     expect(current_path).to eq('/address/prompt')
     expect(page).to have_content(@prompt)
     expect(page).to have_content(@disclaimer)
-    expect(page).to have_link("Add Address", href: new_address_path)
+    expect(page).to have_css(".new-address-form")
   end
 
   it "I can add my address from the address prompt page and I won't be prompted again" do
@@ -31,19 +31,20 @@ RSpec.describe "Address Prompt Page Spec" do
 
     login_as_user
     expect(current_path).to eq('/address/prompt')
-    click_link("Add Address")
-    expect(current_path).to eq(new_address_path)
 
-    fill_in :address_first, with: address.address_first
-    fill_in :address_second, with: address.address_second
-    fill_in :city, with: address.city
-    fill_in :state, with: address.state
-    fill_in :zip, with: address.zip
+    expect do
+      within ".new-address-form" do
+        fill_in :address_first, with: address.address_first
+        fill_in :address_second, with: address.address_second
+        fill_in :city, with: address.city
+        fill_in :state, with: address.state
+        fill_in :zip, with: address.zip
+        click_button 'Submit Address'
+      end
+    end.to change { current_user.address }.from(nil).to(be_truthy)
 
-    expect(current_user.address).to be_falsey
-    click_button 'Submit Address'
+    expect(current_path).to eq(user_dashboard_path)
     expect(page).to have_content('Address successfully saved')
-    expect(current_user.address).to be_truthy
 
     visit root_path
     click_link "Logout"
