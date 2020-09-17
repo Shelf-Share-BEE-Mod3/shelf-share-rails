@@ -31,7 +31,9 @@ class User::BooksController < ApplicationController
   end
 
   def destroy
-    current_user.user_books.where(book: Book.find(params[:id])).first.destroy
+    book = Book.find(params[:id])
+    current_user.user_books.where(book: book).first.destroy
+    flash[:success] = "#{book.title} removed from your shelf"
     redirect_to user_dashboard_path
   end
 end
