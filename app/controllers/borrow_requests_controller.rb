@@ -1,6 +1,7 @@
 class BorrowRequestsController < ApplicationController
   def index
-    @requests = current_user.incoming_book_borrow_requests
+    @incoming_requests = current_user.incoming_book_borrow_requests
+    @outgoing_requests = current_user.borrow_requests.where(status: 'pending')
   end
 
   def show
@@ -17,8 +18,9 @@ class BorrowRequestsController < ApplicationController
 
   def create
     user_book_id = UserBook.find_by(user_id: params[:friend_id], book_id: params[:friend_book_id], status: 'available').id
-    a = BorrowRequest.new(status: 0, user_book_id: user_book_id, borrower_id: params[:user_id])
-    a.save
+    borrow_request = BorrowRequest.new(status: 0, user_book_id: user_book_id, borrower_id: params[:user_id])
+    borrow_request.save
+    redirect_to borrow_index_path
   end
 
   def destroy
