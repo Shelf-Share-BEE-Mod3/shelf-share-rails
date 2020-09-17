@@ -43,7 +43,7 @@ RSpec.describe "Borrow Requests Index Page Spec" do
     end
     it 'the index only has pending book requests' do
       visit borrow_index_path
-      within ".pending-requests" do
+      within ".incoming-pending-requests" do
         expect(page).to have_content("Incoming Borrow Requests")
         book_request = find(".book-request", match: :first)
         message = "#{@borrow_request1.borrower.full_name} wants to borrow #{@borrow_request1.user_book.book.title}"
