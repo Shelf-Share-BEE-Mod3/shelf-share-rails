@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   resources :books, only: [:index, :show]
 
-  resources :borrow_requests, as: 'borrow', only: [:show, :create, :update, :index]
+  resources :borrow_requests, as: 'borrow', only: [:show, :create, :update, :index, :destroy]
 
   resources :return, only: [:index, :show]
   namespace :user do
