@@ -41,7 +41,8 @@ RSpec.describe 'Account Info Page' do
     fill_in :city, with: updated[:city]
     fill_in :state, with: updated[:state]
     fill_in :zip, with: updated[:zip]
-
+    save_and_open_page
+    expect(page).to have_content("Address Line 1")
     click_on 'Submit'
 
     expect(current_path).to eq(user_account_path)
