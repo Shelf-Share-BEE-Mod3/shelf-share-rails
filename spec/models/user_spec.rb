@@ -99,11 +99,10 @@ RSpec.describe User, type: :model do
       @user_book1 = create(:user_book, user: @user2, book: @book)
       @user_book2 = create(:user_book, user: @user2, book: @book, status: 'unavailable')
       @borrow_request1 = create(:borrow_request, borrower: @user1, user_book: @user_book1)
-      @borrow_request2 = create(:borrow_request, borrower: @user1, user_book: @user_book1, status: 1)
+      @borrow_request2 = create(:borrow_request, borrower: @user1, user_book: @user_book2, status: 2)
       # user1 is asking for a book from user2
     end
     it 'incoming_book_borrow_requests' do
-
       expect(@user2.incoming_book_borrow_requests).to include(@borrow_request1)
       expect(@user2.incoming_book_borrow_requests).to_not include(@borrow_request2)
     end

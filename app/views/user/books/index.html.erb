@@ -1,6 +1,8 @@
 <h3><%= current_user.first_name %>'s Book Shelf</h3>
 <%= link_to "Add Books to My Shelf", new_user_book_path %>
 
+<%= link_to "My Shipping Information", current_user.address.nil? ? new_address_path : user_account_path %>
+
 <section class="available-books">
 <h5>On The Shelf</h5>
 <% if @available_books.present?  %>
@@ -8,17 +10,17 @@
     <%= link_to book.title, user_book_path(book) %>
   <% end %>
 <% else %>
-<p>No books are currently available</p>
+  <p>No books are currently available</p>
 <% end %>
 </section>
 
 <section class="unavailable-books">
-<h5>Off The Shelf</h5>
-<% if @unavailable_books.present?  %>
-  <% @unavailable_books.each do |book| %>
-    <%= link_to book.title, user_book_path(book) %>
+  <h5>Off The Shelf</h5>
+  <% if @unavailable_books.present?  %>
+    <% @unavailable_books.each do |book| %>
+      <%= link_to book.title, user_book_path(book) %>
+    <% end %>
+  <% else %>
+    <p>No books are currently unavailable</p>
   <% end %>
-<% else %>
-<p>No books are currently unavailable</p>
-<% end %>
-</section class="unavailable-books">
+</section>

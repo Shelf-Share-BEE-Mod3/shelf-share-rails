@@ -1,46 +1,51 @@
 <h1>My Dashboard</h1>
 
-<section class="book-requests">
+<section class="book-requests" tabindex="0">
   <header>
     <h4>Book Requests</h4>
   </header>
-  <section class="pending-requests">
-    <% @borrow_requests.each do |request| %>
-      <article class="request">
-        <%= "#{request.borrower} wants to borrow #{request.book_title}" %>
-        <%= button_to "Accept", borrow_path(request.id), { method: :get } %>
-        <%= button_to "Decline", borrow_path(request.id), { method: :patch } %>
-      </article>
-    <% end %>
-  </section>
+  <% if @book_requests.empty? %>
+    <p>No current requests</p>
+  <% else %>
+    <p>
+      You have
+      <a href="<%= borrow_index_path %>">
+        <%= pluralize @book_requests.size, "new book request" %>
+      </a>
+    </p>
+  <% end %>
 </section>
 
-<section class="borrowed-books">
+<section class="borrowed-books" tabindex="0">
   <header>
     <h4>Borrowed Books</h4>
     <%= button_to "See all borrowed books", "/return", method: :get %>
   </header>
 </section>
 
-<section class="loaned-books">
+<section class="loaned-books" tabindex="0">
   <header>
     <h4>Loaned books</h4>
   </header>
 </section>
 
-<section class="friend-requests">
+<section class="friend-requests" tabindex="0">
   <header>
     <h4>Friend Requests</h4>
   </header>
+  <% if @friend_requests.empty? %>
+    <p>No pending friend requests</p>
+  <% else %>
+    <p>
+      You have
+      <a href="<%= user_friends_path %>">
+        <%= pluralize @friend_requests.size, "new friend request" %>
+      </a>
+    </p>
+  <% end %>
 </section>
 
-<section class="recommendations">
-  <header>
-    <h4>Recommendations</h4>
-  </header>
-</section>
-
-<section class="in-transit">
+<section class="in-transit" tabindex="0">
   <header>
     <h4>In Transit</h4>
   </header>

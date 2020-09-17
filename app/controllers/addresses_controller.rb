@@ -5,18 +5,22 @@ class AddressesController < ApplicationController # rubocop:todo Style/Documenta
     @address = Address.new(session.delete(:address_params))
   end
 
+  def show
+    @borrower = Address.find(params[:id]).user
+  end
+
   def create # rubocop:todo Metrics/AbcSize
     user = User.find(current_user.id)
     @address = Address.create(address_params)
     @address.user_id = user.id
     if @address.save
       flash[:success] = 'Address successfully saved'
-      redirect_to root_path
+      redirect_to user_dashboard_path
     else
       flash[:failure] = 'Please fill out all required fields'
       flash[:error] = @address.errors.full_messages.to_sentence
-      session[:params] = address_params
-      render :new
+      session[:address_params] = address_params
+      redirect_to request.referrer
     end
   end
 

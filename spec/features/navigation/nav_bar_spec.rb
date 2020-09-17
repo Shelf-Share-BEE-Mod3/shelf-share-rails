@@ -11,26 +11,32 @@ RSpec.describe 'Navigation Bar' do
   end
   it 'has the correct content' do
     within 'nav' do
-      expect(page).to have_link('Home', href: root_path)
+      expect(page).to have_link('ShelfShare', href: root_path)
       expect(page).to have_link('Dashboard', href: user_dashboard_path)
-      expect(page).to have_link('Browse Books', href: books_path)
+      expect(page).to have_link('Books', href: books_path)
       expect(page).to have_link('Friends', href: user_friends_path)
-      expect(page).to have_link('My Books', href: user_books_path)
-      expect(page).to have_link('Account Info', href: user_account_path)
+      expect(page).to have_link('Profile', href: user_books_path)
+      # expect(page).to have_link('Account Info', href: user_account_path)
+      expect(page).to have_content("Logged in as #{@user.first_name}. (Logout)")
+      expect(page).to have_link('Logout', href: logout_path)
     end
   end
   it 'has working paths for all links' do
     click_link 'Dashboard'
     expect(current_path).to eq(user_dashboard_path)
-    click_link 'Browse Books'
+    click_link 'Books'
     expect(current_path).to eq(books_path)
     click_link 'Friends'
     expect(current_path).to eq(user_friends_path)
-    click_link 'My Books'
+    click_link 'Profile'
     expect(current_path).to eq(user_books_path)
-    click_link 'Account Info'
-    expect(current_path).to eq(user_account_path)
-    click_link 'Home'
+    # click_link 'Account Info'
+    # expect(current_path).to eq(user_account_path)
+    click_link 'ShelfShare'
+    expect(current_path).to eq(root_path)
+    within 'nav' do
+      click_link 'Logout'
+    end
     expect(current_path).to eq(root_path)
   end
 end

@@ -7,7 +7,7 @@
 <!-- borrow_request.user_book.book -->
 <% @borrow_requests.each do |br| %>
 <div class="borrowed-books" id="borrow-<%= br.id %>">
-  <%= book = br.user_book.book %>
+  <% book = br.user_book.book %>
   <%= image_tag(book.thumbnail, alt: "#{book.title} cover image") %>
   <%= button_to "Return", "/return/#{br.user_book.user_id}", params:{user_book_id: br.user_book.id, borrow_request_id: br.id}, method: :get %>
 </div>

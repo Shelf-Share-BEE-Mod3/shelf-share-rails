@@ -60,4 +60,19 @@ RSpec.describe BorrowRequest do
       expect(@borrow_request.status_changed_to_returned).to eq(@borrow_request.status = 3)
     end
   end
+
+  describe '#instance methods' do
+    it "#approve_request" do
+      request = create(:request)
+      user_book = request.user_book
+
+      expect(request.status).to eq('pending')
+      expect(user_book.status).to eq('available')
+
+      request.approve_request
+
+      expect(request.status).to eq('accepted')
+      expect(user_book.status).to eq('unavailable')
+    end
+  end
 end

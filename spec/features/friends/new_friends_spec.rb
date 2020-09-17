@@ -29,7 +29,19 @@ RSpec.describe 'User Can Add friends' do
     expect(page).to have_content('No users with that email')
   end
   it 'friend requests appear on the friends page and users can accept' do
+    visit user_dashboard_path
+    within '.friend-requests' do
+      expect(page).to have_content("No pending friend requests")
+    end
+
     @user.friend_requests.create!(from: @user2.id)
+
+    visit user_dashboard_path
+    within '.friend-requests' do
+      expect(page).to_not have_content("No pending friend requests")
+      expect(page).to have_content("You have 1 new friend request")
+    end
+
 
     visit user_friends_path
 

@@ -2,25 +2,17 @@
 
 require 'rails_helper'
 
-RSpec.feature 'As a user' do
+RSpec.feature 'As a user who did not add an address yet' do
   before :each do
     login_as_user
-    @address = {
-      address_first: '1984 Shelf Space',
-      address_second: 'Unit 451',
-      city: 'Castle Rock',
-      state: 'ME',
-      zip: '14101'
-    }
+    @address = build(:address)
   end
 
-  scenario 'After logging in for the first time, there is a button on the welcome page to take me to the address entry form page' do
-    expect(page).to have_button('Add Address')
-  end
-
-  scenario 'Clicking on the button sends me to a form to provide my address' do
-    click_button 'Add Address'
+  scenario 'My Shipping Information will tell me to add an address if I do not have one' do
+    visit user_books_path
+    click_link 'My Shipping Information'
     expect(current_path).to eq('/addresses/new')
+    expect(page).to have_content("You haven't added an address yet. Please fill out the form below.")
 
     fill_in :address_first, with: @address[:address_first]
     fill_in :address_second, with: @address[:address_second]
@@ -35,8 +27,10 @@ RSpec.feature 'As a user' do
   end
 
   scenario 'Submitting an incomplete form redirects me to the form page with a flash message indicating the error. All fields are pre-populated with what was initially submitted' do
-    click_button 'Add Address'
+    visit user_books_path
+    click_link 'My Shipping Information'
     expect(current_path).to eq('/addresses/new')
+    expect(page).to have_content("You haven't added an address yet. Please fill out the form below.")
 
     fill_in :address_first, with: @address[:address_first]
     fill_in :address_second, with: @address[:address_second]
@@ -52,5 +46,13 @@ RSpec.feature 'As a user' do
     expect(page).to have_field(:address_second, with: @address[:address_second])
     expect(page).to have_field(:state, with: @address[:state])
     expect(page).to have_field(:zip, with: @address[:zip])
+  end
+
+  scenario 'My Shipping Information lets me view and edit my already added address' do
+    address = create :address, user: current_user
+
+    visit user_books_path
+    click_link 'My Shipping Information'
+    expect(current_path).to eq(user_account_path)
   end
 end

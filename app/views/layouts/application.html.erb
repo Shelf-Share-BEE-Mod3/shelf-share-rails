@@ -1,23 +1,32 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>ShelfShare</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>ShelfShare</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
-  </head>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+</head>
 
   <body>
      <% if current_user %>
-      <nav>
-        <%= link_to "Home", root_path %>
+      <nav class="nav">
+        <header>
+          <a class="skip-link" href='#main'>Skip to content</a>
+        </header>
+
+        <%= link_to "ShelfShare", root_path %>
         <%= link_to "Dashboard", user_dashboard_path %>
-        <%= link_to "Browse Books", books_path %>
+        <%= link_to "Books", books_path %>
         <%= link_to "Friends", user_friends_path %>
-        <%= link_to "My Books", user_books_path %>
-        <%= link_to "Account Info", user_account_path %>
+        <%= link_to "Profile", user_books_path %>
+        <span>
+          <%= "Logged in as #{current_user.first_name}"%>.
+        </span>
+        <span>
+          (<%= link_to "Logout", logout_path %>)
+        </span>
       </nav>
     <% end %>
     <% flash.each do |name, msg| %>
@@ -28,11 +37,13 @@
           </div>
         <% end %>
       <% else %>
-        <div class= "<%=name%>-flash">
-          <p><%= msg %></p>
-        </div>
+      <div class= "<%=name%>-flash">
+        <p><%= msg %></p>
+      </div>
       <% end %>
     <% end %>
-    <%= yield %>
+    <main id="main" tabindex="-1">
+      <%= yield %>
+    </main>
   </body>
 </html>

@@ -8,7 +8,7 @@ FactoryBot.define do
     category { Faker::Book.genre }
   end
 
-  factory :user, aliases: [:borrower] do
+  factory :user, aliases: [:borrower, :friend] do
     faker_omniauth = Faker::Omniauth.new
     provider { 'google' }
     uid { Faker::Internet.uuid }
@@ -26,7 +26,7 @@ FactoryBot.define do
     status { 'available' }
   end
 
-  factory :borrow_request do
+  factory :borrow_request, aliases: [:request] do
     borrower
     user_book
     status { 'pending' }

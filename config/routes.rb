@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy'
-  resources :addresses, only: %i[new create update edit]
+  resources :addresses, only: %i[new create update edit show]
+
+  get 'address/prompt', to: 'address_prompt#new'
 
   namespace :books do
     resources :search, only: [:index]
@@ -12,7 +14,7 @@ Rails.application.routes.draw do
 
   resources :books, only: [:index, :show]
 
-  resources :borrow_requests, as: 'borrow', only: [:show, :create, :update]
+  resources :borrow_requests, as: 'borrow', except: [:new, :edit] # [:show, :update, :index, :destroy, :create]
 
   resources :return, only: [:index, :show]
   namespace :user do
