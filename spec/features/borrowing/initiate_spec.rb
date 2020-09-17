@@ -12,13 +12,17 @@ RSpec.describe "Borrowing Spec 1/?" do
   it "I can send a borrow request from my friend's book show page" do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user1)
 
+    expect(BorrowRequest.count).to eq(0)
+
     expect do
       visit books_path
       click_link @book.title
       click_button "Ask to Borrow"
     end.to change { BorrowRequest.count }.by(1)
+
     request = BorrowRequest.first
-    expect(request.status).to eq("accepted")
+    expect(request.status).to eq("pending")
+
     expect(current_path).to eq(books_path)
     expect(page).to have_content("Borrow Request sent to #{@user2.full_name}")
     click_link @book.title
