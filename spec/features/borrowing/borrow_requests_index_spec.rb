@@ -2,25 +2,31 @@ require "rails_helper"
 
 RSpec.describe "Borrow Requests Index Page Spec" do
   before :each do
-    @user1, @user2 = create_list(:user, 2)
-    @user1.friends << @user2
-    @user2.friends << @user1
+    @borrower = create(:borrower)
+    @book_owner = create(:user)
+
+    @borrower.friends << @book_owner
+    @book_owner.friends << @borrower
     @book = create(:book)
-    @user_book1 = create(:user_book, user: @user2, book: @book)
-    @user_book2 = create(:user_book, user: @user2, book: @book, status: 'unavailable')
-    @borrow_request1 = create(:borrow_request, borrower: @user1, user_book: @user_book1)
-    @borrow_request2 = create(:borrow_request, borrower: @user1, user_book: @user_book2, status: 2)
-    # user1 is asking for a book from user2
+
+    #pending request
+    @user_book1 = create(:user_book, user: @book_owner, book: @book)
+    @borrow_request1 = create(:borrow_request, borrower: @borrower, user_book: @user_book1)
+
+    # accepted request
+    @user_book2 = create(:user_book, user: @book_owner, book: @book, status: 'unavailable')
+    @borrow_request2 = create(:borrow_request, borrower: @borrower, user_book: @user_book2, status: 2)
+    # user1 is asking for a book from book_owner
   end
 
   it 'can pass the model assertions for incoming_book_borrow_requests' do
-    expect(@user2.incoming_book_borrow_requests).to include(@borrow_request1)
-    expect(@user2.incoming_book_borrow_requests).to_not include(@borrow_request2)
+    expect(@book_owner.incoming_book_borrow_requests).to include(@borrow_request1) # pending
+    expect(@book_owner.incoming_book_borrow_requests).to_not include(@borrow_request2) # accepted
   end
 
   describe 'feature' do
     before :each do
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user2)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@book_owner)
     end
     it 'has borrow_request notification on the dashboard' do
       visit user_dashboard_path
@@ -43,6 +49,8 @@ RSpec.describe "Borrow Requests Index Page Spec" do
         message = "#{@borrow_request1.borrower.full_name} wants to borrow #{@borrow_request1.user_book.book.title}"
         expect(page).to have_content(message)
         expect(page).to_not have_content(@borrow_request2.user_book.book)
+        expect(page).to have_button "Approve"
+        expect(page).to have_button "Decline"
       end
     end
   end
