@@ -64,7 +64,28 @@ RSpec.describe "Borrowing Spec 2/?" do
   end
 
   it "I can decline a request from the dashboard" do
-  end
+    visit user_dashboard_path
 
+    expect(@borrow_request.status).to eq('pending')
+    expect(@user_book.status).to eq('available')
+
+    within ".pending-requests" do
+      request = find((".request"), match: :first)
+      click_button("Decline")
+    end
+
+    @borrow_request.reload
+    @user_book.reload
+
+    expect(current_path).to eq(user_dashboard_path)
+
+    expect(@borrow_request.status).to eq('declined')
+    expect(@user_book.status).to eq('available')
+
+    expect(page).to have_content("You have declined #{@user1.first_name}'s request to borrow #{@book.title}")
+
+    within ".pending-requests" do
+      expect(page).to_not have_css(".request")
+    end
+  end
 end
-# Denying the request will send a notification to my friend, and the request is removed from my dashboard.
