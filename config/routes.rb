@@ -12,8 +12,9 @@ Rails.application.routes.draw do
 
   resources :books, only: [:index, :show]
 
-  resources :borrow_requests, as: 'borrow', only: :create
+  resources :borrow_requests, as: 'borrow', only: [:show, :create, :update]
 
+  resources :return, only: [:index, :show]
   namespace :user do
     get '/dashboard', to: 'dashboard#show', as: 'dashboard'
     resources :friends, only: [:index, :show]

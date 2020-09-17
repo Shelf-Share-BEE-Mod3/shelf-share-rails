@@ -56,4 +56,9 @@ class User < ApplicationRecord
     ids = book.user_books.where(user_id: self.ids).pluck(:user_id)
     self.where(id: ids)
   end
+
+  def incoming_book_borrow_requests
+    ids = user_books.joins(:borrow_requests).where(status: 'available').pluck(:id)
+    BorrowRequest.where(user_book_id: ids, status: 0)
+  end
 end

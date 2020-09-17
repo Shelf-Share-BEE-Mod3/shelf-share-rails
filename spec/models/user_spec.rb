@@ -90,4 +90,22 @@ RSpec.describe User, type: :model do
       expect(user.full_name).to eq("#{user.first_name} #{user.last_name}")
     end
   end
+  describe 'incoming requests instance method' do
+    before :each do
+      @user1, @user2 = create_list(:user, 2)
+      @user1.friends << @user2
+      @user2.friends << @user1
+      @book = create(:book)
+      @user_book1 = create(:user_book, user: @user2, book: @book)
+      @user_book2 = create(:user_book, user: @user2, book: @book, status: 'unavailable')
+      @borrow_request1 = create(:borrow_request, borrower: @user1, user_book: @user_book1)
+      @borrow_request2 = create(:borrow_request, borrower: @user1, user_book: @user_book1, status: 1)
+      # user1 is asking for a book from user2
+    end
+    it 'incoming_book_borrow_requests' do
+
+      expect(@user2.incoming_book_borrow_requests).to include(@borrow_request1)
+      expect(@user2.incoming_book_borrow_requests).to_not include(@borrow_request2)
+    end
+  end
 end

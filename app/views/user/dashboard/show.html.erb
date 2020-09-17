@@ -4,11 +4,21 @@
   <header>
     <h4>Book Requests</h4>
   </header>
+  <section class="pending-requests">
+    <% @borrow_requests.each do |request| %>
+      <article class="request">
+        <%= "#{request.borrower} wants to borrow #{request.book_title}" %>
+        <%= button_to "Accept", borrow_path(request.id), { method: :get } %>
+        <%= button_to "Decline", borrow_path(request.id), { method: :patch } %>
+      </article>
+    <% end %>
+  </section>
 </section>
 
 <section class="borrowed-books">
   <header>
     <h4>Borrowed Books</h4>
+    <%= button_to "See all borrowed books", "/return", method: :get %>
   </header>
 </section>
 

@@ -3,11 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe 'Navigation Bar' do
-  it 'has the correct content' do
+  before :each do
     @user = User.create!(first_name: 'Neal', last_name: 'Stephenson')
+    create(:address, user: @user)
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
     visit root_path
-
+  end
+  it 'has the correct content' do
     within 'nav' do
       expect(page).to have_link('Home', href: root_path)
       expect(page).to have_link('Dashboard', href: user_dashboard_path)
@@ -18,11 +20,6 @@ RSpec.describe 'Navigation Bar' do
     end
   end
   it 'has working paths for all links' do
-    @user = User.create!(first_name: 'Neal', last_name: 'Stephenson')
-    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
-    skip "paths don't exist yet"
-    # Check for links to have the working xpath once routes exist
-    visit root_path
     click_link 'Dashboard'
     expect(current_path).to eq(user_dashboard_path)
     click_link 'Browse Books'
