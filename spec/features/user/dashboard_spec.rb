@@ -2,22 +2,26 @@ require 'rails_helper'
 
 RSpec.describe 'As a registered user' do
   describe 'When I visit my dashboard' do
-    before :each do
-      @user = User.create!(first_name: 'Neal', last_name: 'Stephenson')
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
 
-      @user2 = User.create!(first_name: 'John', last_name: 'Scalzi')
-      @user3 = User.create!(first_name: 'Robert', last_name: 'Heinlein')
-      @user.friend_requests.create!(from: @user2.id)
+    it 'I see a section telling me about any new friend requests' do
+      user = create(:user)
 
-      @ub1 = UserBook.create({
-        user_id: @user.id,
-        book_id: create(:book).id,
-        status: "available"
-      })
+      create_list(:friend, 5).each do |friend|
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(friend)
+        visit user_friends_path
+        fill_in :email, with: user.email
+        click_on 'Add Friend'
+      end
 
-      visit user_dashboard_path # Is this the correct route? Double check.
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+      visit user_dashboard_path
+      within ".friend-requests" do
+        expect(page).to have_content("You have 5 new friend requests")
+      end
     end
+
+    # before :each do
+    # end
 
     xit 'I see a section listing current requests for my books, or a message if no books are being requested' do
       within ".current-requests" do
@@ -47,14 +51,6 @@ RSpec.describe 'As a registered user' do
         expect(page).to have_content("You have #{@user.lent_books} books lent out") # Create a lent_books method?
         expect(page).to have_content("Books: #{@user.lent_book_titles}")
         expect(page).to have_content("Lent To: #{@user.lent_book_to}")
-      end
-    end
-
-    xit 'I see a section telling me about any new friend requests' do
-      within ".friend-requests" do
-
-        count = @user.friend_requests.count
-        expect(page).to have_content("#{count} New Friend Requests")
       end
     end
 
