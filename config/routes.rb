@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy'
-  resources :addresses, only: %i[new create update edit]
+  resources :addresses, only: %i[new create update edit show]
 
   get 'address/prompt', to: 'address_prompt#new'
 

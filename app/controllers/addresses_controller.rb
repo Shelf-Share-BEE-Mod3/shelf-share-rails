@@ -5,6 +5,9 @@ class AddressesController < ApplicationController # rubocop:todo Style/Documenta
     @address = Address.new(session.delete(:address_params))
   end
 
+  def show
+  end
+
   def create # rubocop:todo Metrics/AbcSize
     user = User.find(current_user.id)
     @address = Address.create(address_params)
