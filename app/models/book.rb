@@ -23,4 +23,9 @@ class Book < ApplicationRecord
       or(Book.where('author ILIKE ?', "%#{sanitize_sql_like(keyword)}%")).
       or(Book.where('description ILIKE ?', "%#{sanitize_sql_like(keyword)}%"))
   end
+
+  def self.find_friends_available_books(id)
+    ids = Friendship.where(user_id: id).pluck(:friend_id)
+    joins(:user_books, :users).where(user_books: {user_id: ids, status: 'available'})
+  end
 end
