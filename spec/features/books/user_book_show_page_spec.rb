@@ -52,7 +52,7 @@ RSpec.describe 'Friend Book Show Page Spec' do
     visit user_book_path(@available_book)
     expect(page).to have_content(@available_book.title)
     click_button 'Remove Book'
-    expect(current_path).to eq(user_dashboard_path)
+    expect(current_path).to eq(user_books_path)
     expect(page).to have_content("#{@available_book.title} removed from your shelf")
     visit user_books_path
     expect(page).to_not have_content(@available_book.title)
@@ -62,7 +62,9 @@ RSpec.describe 'Friend Book Show Page Spec' do
     visit user_book_path(@available_book)
     expect(page).to have_content(@available_book.title)
     click_button 'Change Status'
-    expect(current_path).to eq(user_dashboard_path)
+    expect(current_path).to eq(user_books_path)
+    expect(page).to have_content("#{@available_book.title} removed from your shelf")
+
     expect(page).to_not have_content(@available_book.title)
   end
 end

@@ -34,6 +34,6 @@ class User::BooksController < ApplicationController
     book = Book.find(params[:id])
     current_user.user_books.where(book: book).first.destroy
     flash[:success] = "#{book.title} removed from your shelf"
-    redirect_to user_dashboard_path
+    redirect_to user_books_path
   end
 end
