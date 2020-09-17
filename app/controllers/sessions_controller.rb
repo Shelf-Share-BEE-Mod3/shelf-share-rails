@@ -4,6 +4,7 @@ class SessionsController < ApplicationController
   def create
     user = User.update_or_create(request.env['omniauth.auth'])
     session[:id] = user.id
+    flash[:success] = "Welcome #{user.full_name}!"
     if user.address.nil?
       redirect_to '/address/prompt'
     else
