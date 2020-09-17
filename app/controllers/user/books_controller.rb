@@ -29,4 +29,23 @@ class User::BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
   end
+
+  def update
+    book = Book.find(params[:id])
+    ub = current_user.user_books.where(book: book).first
+    if ub.status == 'available'
+      ub.update(status: 'unavailable')
+    else
+      ub.update(status: 'available')
+    end
+    flash[:success] = "Status changed for #{book.title}"
+    redirect_to user_books_path
+  end
+
+  def destroy
+    book = Book.find(params[:id])
+    current_user.user_books.where(book: book).first.destroy
+    flash[:success] = "#{book.title} removed from your shelf"
+    redirect_to user_books_path
+  end
 end

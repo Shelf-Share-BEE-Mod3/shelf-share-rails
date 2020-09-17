@@ -4,7 +4,7 @@
   <%= render partial: 'partials/book_show', locals: {book: @book} %>
   <footer>
     <%= tag.p "Status: #{@book.find_status}" %>
-    <%= button_to "Change Status" %>
-    <%= button_to "Remove Book" %>
+    <%= button_to "Change Status", "/user/books/#{@book.id}", method: :patch %>
+    <%= button_to "Remove Book", "/user/books/#{@book.id}", method: :delete %>
   </footer>
 </article>
