@@ -68,6 +68,7 @@ Here's why:
 A list of commonly used resources and references that our team found helpful in the creation of this project are listed in acknowledgements.
 
 ### Built With
+
 * [Sinatra](https://github.com/sinatra/sinatra)
 * [Rails](https://github.com/rails/rails)
 * [Ruby](https://github.com/ruby/ruby)
@@ -98,11 +99,16 @@ rake db:migrate
 ```
 
 ### Schema
+
 After running your migrations, your schema will look something like this!
 <br />
 <p align="center">
     <img src="app/assets/images/db.png" alt="database" width="800" height="800">
   </a>
+
+### Architecture
+
+To view the project board we used for the architecture and wireframe design of ShelfShare, please visit our Miro Board  [here](https://miro.com/app/board/o9J_klm2Drc=/).
 
 ### Installation
 
@@ -133,6 +139,7 @@ GOOGLE_CLIENT_SECRET: 'ENTER IN YOUR SECRET API KEY'
 
 <!-- USAGE EXAMPLES -->
 ## Usage
+
 Run ```rails s``` in your terminal and navigate to ```http://localhost:3000/``` in your local browser.
 
 Once you sign in with Google, you will be asked to allow Shelf Share access to your Google Books. This will only be triggered the first time you log in.
@@ -172,7 +179,7 @@ Contributions are what make this community such an amazing and fun place to lear
 <!-- LICENSE -->
 ## License
 
-DISCLAIMER:  The ShelfShare platform is a proof-of-concept and not likely to be maintained over time. Thus, any address information submitted will remain in our database indefinitely unless you delete it.  For concerns regarding your privacy, please do not submit any real location information to this website.
+DISCLAIMER: The ShelfShare platform is a proof-of-concept and not likely to be maintained over time. Thus, any address information submitted will remain in our database indefinitely unless you delete it.  For concerns regarding your privacy, please do not submit any real location information to this website.
 
 
 <!-- CONTACT -->
