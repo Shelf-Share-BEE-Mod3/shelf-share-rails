@@ -1,6 +1,8 @@
 <h3><%= current_user.first_name %>'s Book Shelf</h3>
 <%= link_to "Add Books to My Shelf", new_user_book_path %>
 
+<%= link_to "My Shipping Information", current_user.address.nil? ? new_address_path : user_account_path %>
+
 <h5>Off The Shelf</h5>
 <% if @unavailable_books.present?  %>
   <% @unavailable_books.each do |book| %>
