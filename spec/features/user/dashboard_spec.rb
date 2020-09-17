@@ -17,24 +17,27 @@ RSpec.describe 'As a registered user' do
       visit user_dashboard_path
       within ".friend-requests" do
         expect(page).to have_content("You have 5 new friend requests")
+        expect(page).to have_link("5 new friend requests", href: user_friends_path)
       end
     end
 
-    # before :each do
-    # end
+    it 'I see a section listing current requests for my books, or a message if no books are being requested' do
+      user1, user2 = create_list(:user, 2)
+      user1.friends << user2
+      user2.friends << user1
+      book = create(:book)
+      user_book1 = create(:user_book, user: user2, book: book)
+      user_book2 = create(:user_book, user: user2, book: book, status: 'unavailable')
+      borrow_request1 = create(:borrow_request, borrower: user1, user_book: user_book1)
+      borrow_request2 = create(:borrow_request, borrower: user1, user_book: user_book2, status: 1)
+      # user1 wants to borrow from user2
 
-    xit 'I see a section listing current requests for my books, or a message if no books are being requested' do
-      within ".current-requests" do
-        expect(page).to have_content("No current requests")
-      end
-
-      # Request a book here
-
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user2)
       visit user_dashboard_path
-
-      within ".current-requests" do
-        expect(page).to have_content("You have #{@user.current_book_requests} book requests") # Create a requests method that counts the number of requests?
-        expect(page).to have_content("Books: #{@user.requested_book_titles}") # Do we want the book title to show up as well? How do we grab this information?
+      within ".book-requests" do
+        expect(page).to have_content("You have 1 new book request")
+        expect(page).to have_link("1 new book request", href: borrow_index_path)
+        expect(page).to_not have_content("No current requests")
       end
     end
 

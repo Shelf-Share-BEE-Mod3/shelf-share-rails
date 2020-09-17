@@ -4,8 +4,18 @@
   <header>
     <h4>Book Requests</h4>
   </header>
-  <section class="pending-requests"">
-    <% @borrow_requests.each do |request| %>
+  <% if @book_requests.empty? %>
+    <p>No current requests</p>
+  <% else %>
+    <p>
+      You have
+      <a href="<%= borrow_index_path %>">
+        <%= pluralize @book_requests.size, "new book request" %>
+      </a>
+    </p>
+  <% end %>
+  <section class="pending-requests">
+    <% @book_requests.each do |request| %>
       <article class="request" tabindex="0">
         <%= "#{request.borrower} wants to borrow #{request.book_title}" %>
         <%= button_to "Accept", borrow_path(request.id), { method: :get } %>
@@ -32,24 +42,16 @@
   <header>
     <h4>Friend Requests</h4>
   </header>
-  <% friend_requests = current_user.current_friend_requests %>
-  <% if friend_requests.empty? %>
+  <% if @friend_requests.empty? %>
     <p>No pending friend requests</p>
   <% else %>
-
     <p>
       You have
       <a href="<%= user_friends_path %>">
-        <%= pluralize friend_requests.size, "new friend request" %>
+        <%= pluralize @friend_requests.size, "new friend request" %>
       </a>
     </p>
   <% end %>
-</section>
-
-<section class="recommendations" tabindex="0">
-  <header>
-    <h4>Recommendations</h4>
-  </header>
 </section>
 
 <section class="in-transit" tabindex="0">
