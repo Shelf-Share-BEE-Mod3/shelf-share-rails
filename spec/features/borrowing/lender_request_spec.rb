@@ -43,6 +43,7 @@ RSpec.describe "Borrowing Spec 2/?" do
     expect(current_path).to eq(address_path(@address1))
 
     # expect page to have all the content
+    # including a flash message
 
     @borrow_request.reload
     @user_book.reload
@@ -54,15 +55,15 @@ RSpec.describe "Borrowing Spec 2/?" do
     expect(page).to_not have_css(".book-request")
   end
 
-  xit "I can decline a request from the dashboard" do
-    visit user_dashboard_path
+  it "I can decline a request" do
+    visit borrow_index_path
 
     expect(@borrow_request.status).to eq('pending')
     expect(@user_book.status).to eq('available')
 
-    within ".pending-requests" do
-      request = find((".request"), match: :first)
-      click_button("Decline")
+    request = find((".book-request"), match: :first)
+    within request do
+      click_button "Decline"
     end
 
     @borrow_request.reload
@@ -75,8 +76,7 @@ RSpec.describe "Borrowing Spec 2/?" do
 
     expect(page).to have_content("You have declined #{@user1.first_name}'s request to borrow #{@book.title}")
 
-    within ".pending-requests" do
-      expect(page).to_not have_css(".request")
-    end
+    visit borrow_index_path
+    expect(page).to_not have_css(".book-request")
   end
 end
