@@ -41,11 +41,11 @@ RSpec.describe "Borrowing Spec 2/?" do
     end
 
     expect(current_path).to eq(address_path(@address1))
-
-    # TODO
-    # this is pretty much story #
-    # expect page to have all the content
-    # including a flash message
+    expect(page).to have_content(@address1.address_first)
+    expect(page).to have_content(@address1.address_second)
+    expect(page).to have_content(@address1.city)
+    expect(page).to have_content(@address1.state)
+    expect(page).to have_content(@address1.zip)
 
     @borrow_request.reload
     @user_book.reload
