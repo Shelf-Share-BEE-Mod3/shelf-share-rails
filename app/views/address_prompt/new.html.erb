@@ -1,0 +1,24 @@
+<% if current_user.address.nil? %>
+  <p>
+    Thank you for authorizing ShelfShare to manage your books! <br/>
+    ShelfShare is a platform for sharing books via mail. <br/>
+    You can borrow and lend books with your friends! <br/>
+    To participate fully in the shipping process, we kindly ask for your address. <br/>
+    Your address will be shown to other users when only when it is necessary to ship a book. <br/>
+    You can edit or delete your address at any time by visiting your profile. <br/>
+  </p>
+  <section class="new-address-form">
+    <%= render partial: 'partials/new_address_form', locals: { address: @address, path: 'prompt' } %>
+  </section>
+  <p>
+    DISCLAIMER: The ShelfShare platform is a proof-of-concept and not likely to be maintained over time. <br/>
+    Thus, any address information submitted will remain in our database indefinitely unless you delete it. <br/>
+    For concerns regarding your privacy, please do not submit any real location information to this website.
+  </p>
+<% end %>
+
+<% unless current_user.address.nil? %>
+  <p>
+    You have already added an address. You can manage your address information from your <%= link_to 'profile page', '/profile'%>.
+  </p>
+<% end %>

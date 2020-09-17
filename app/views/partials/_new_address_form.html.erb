@@ -1,0 +1,19 @@
+<%= form_tag path, method: :post do %>
+  <%= label_tag :address_first, 'Address: *' %>
+  <%= text_field_tag :address_first, "#{@address.address_first}"%><br>
+
+  <%= label_tag :address_second, 'Address: ' %>
+  <%= text_field_tag :address_second, "#{@address.address_second}" %><br>
+
+  <%= label_tag :city, 'City: *' %>
+  <%= text_field_tag :city, "#{@address.city}" %><br>
+
+  <%= label_tag :state, 'State: *' %>
+  <%= text_field_tag :state, "#{@address.state}" %><br>
+
+  <%= label_tag :zip, 'Zip: *' %>
+  <%= text_field_tag :zip, "#{@address.zip}" %><br>
+
+  <%= submit_tag 'Submit Address' %>
+<% end %>
+<p>*Required Field</p>
