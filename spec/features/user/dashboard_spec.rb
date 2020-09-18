@@ -51,7 +51,7 @@ RSpec.describe 'As a registered user' do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user2)
 
       visit user_dashboard_path
-      expect(page).to_not have_content("No current requests")
+      expect(page).to have_content("No borrowed books")
 
       user_book2 = create(:user_book, user: user1, book: book, status: 'unavailable')
       borrow_request2 = create(:borrow_request, borrower: user2, user_book: user_book2, status: 2)
@@ -60,12 +60,27 @@ RSpec.describe 'As a registered user' do
       within ".borrowed-books" do
         expect(page).to have_content("You are borrowing 1 book")
         expect(page).to have_link("1 book", href: return_index_path)
-        expect(page).to_not have_content("No current requests")
+        expect(page).to_not have_content("No borrowed books")
       end
     end
 
     xit 'I see a section listing the books I have currently lent out and to whom' do
-      within ".lent-out" do
+      user1, user2 = create_list(:user, 2)
+      user1.friends << user2
+      user2.friends << user1
+      book = create(:book)
+      user_book1 = create(:user_book, user: user2, book: book)
+      borrow_request1 = create(:borrow_request, borrower: user1, user_book: user_book1)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user2)
+
+      visit user_dashboard_path
+      expect(page).to_not have_content("No borrowed books")
+
+      user_book2 = create(:user_book, user: user1, book: book, status: 'unavailable')
+      borrow_request2 = create(:borrow_request, borrower: user2, user_book: user_book2, status: 2)
+      visit user_dashboard_path
+
+      within ".loaned-books" do
         expect(page).to have_content("You have #{@user.lent_books} books lent out") # Create a lent_books method?
         expect(page).to have_content("Books: #{@user.lent_book_titles}")
         expect(page).to have_content("Lent To: #{@user.lent_book_to}")
