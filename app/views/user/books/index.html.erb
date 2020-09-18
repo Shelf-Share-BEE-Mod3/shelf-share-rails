@@ -1,8 +1,8 @@
-<h1><%= current_user.first_name %>'s Book Shelf</h1>
-<%= link_to "Add Books to My Shelf", new_user_book_path %>
-<br/>
-<br/>
-<%= link_to "My Shipping Information", current_user.address.nil? ? new_address_path : user_account_path %>
+<h1 class="header"><%= current_user.first_name %>'s Book Shelf</h1>
+<div class="profile-links">
+  <%= link_to "Add Books to My Shelf", new_user_book_path %>
+  <%= link_to "My Shipping Information", current_user.address.nil? ? new_address_path : user_account_path %>
+</div>
 
 <section class='available'>
 <h2>On The Shelf</h2>

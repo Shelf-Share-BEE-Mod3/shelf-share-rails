@@ -1,6 +1,6 @@
-<h1>Friends</h1>
+<h1 class="header">Friends</h1>
 
-<section class="friend-requests">
+<section class="friend-requests header">
   <% if current_user.current_friend_requests.empty? %>
     <p>No friend requests<p>
   <% else %>
@@ -12,7 +12,7 @@
   <% end %>
 </section>
 
-<section class="add-friend-form">
+<section class="add-friend-form header">
   <%= form_tag user_friend_requests_path, method: :post do %>
     <%= label_tag "Add Friends" %>
     <%= text_field_tag :email, nil, placeholder: "Friend's Email" %>
