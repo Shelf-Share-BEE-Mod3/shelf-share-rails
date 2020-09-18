@@ -1,8 +1,14 @@
 <article class="book-card">
-  <%= tag.h2 (link_to book.title, book_path(book, friend_id: friend_id )) %><br>
+  <%= tag.h2 (link_to book.title, book_path(book, friend_id: friend_id )) %>
   <%= render partial: '/partials/book_thumbnail', locals: { book: book } %>
-  <%= tag.h3 book.author %><br>
+  <%= tag.h3 book.author %>
   <% if extra %>
-    <p class="extra"><%= extra %></p>
+    <% if extra.class == Array %>
+      <% extra.each do |x| %>
+        <p class="extra"><%= x %></p>
+      <% end %>
+    <% else %>
+      <p class="extra"><%= extra %></p>
+    <% end %>
   <% end %>
 </article>
