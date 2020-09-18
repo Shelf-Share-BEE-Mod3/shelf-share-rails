@@ -11,14 +11,9 @@
 <p>Sorted by Friend</p>
 
 <% @friends.each do |friend| %>
-  <section class="friend-book-shelf">
+  <section class="friend-book-shelf book-shelf">
     <% friend.books.each do |book| %>
-      <div class="book">
-        <%= link_to book.title, book_path(book, friend_id: friend.id) %>
-        <%= book.author %>
-        <%= book.category %>
-        <%= render partial: '/partials/book_thumbnail', locals: { book: book } %>
-      </div>
+      <%= render partial: '/partials/book_card', locals: { book: book, friend_id: friend.id, extra: "Belongs to #{friend.first_name}" } %>
     <% end %>
   </section>
 <% end %>
