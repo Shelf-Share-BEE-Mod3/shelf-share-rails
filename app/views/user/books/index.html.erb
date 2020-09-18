@@ -8,7 +8,7 @@
 <% if @available_books.present?  %>
   <% @available_books.each do |book| %>
     <div class="available_book" id="book-<%= book.id %>">
-    <%= link_to(image_tag(book.thumbnail, alt: "#{book.title} cover image"), user_book_path(book)) %>
+      <%= render partial: '/partials/book_card', locals: { book: book, friend_id: current_user.id, extra: nil } %>
     </div>
   <% end %>
 <% else %>
@@ -21,7 +21,7 @@
 <% if @unavailable_books.present?  %>
   <% @unavailable_books.each do |book| %>
     <div class="unavailable_book" id="book-<%= book.id %>">
-    <%= link_to(image_tag(book.thumbnail, alt: "#{book.title} cover image"), user_book_path(book)) %>
+      <%= render partial: '/partials/book_card', locals: { book: book, friend_id: current_user.id, extra: nil } %>
   </div>
   <% end %>
 <% else %>
