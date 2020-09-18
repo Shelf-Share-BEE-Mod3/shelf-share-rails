@@ -7,7 +7,7 @@ RSpec.describe 'Create User Books Spec' do
     expect(page).to have_link("Add Books to My Shelf", href: new_user_book_path)
   end
 
-  it 'I can add a book by searching its ISBN' do
+  xit 'I can add a book by searching its ISBN' do
     book = {isbn: '9780441569595', title: 'Neuromancer', author: 'William Gibson'}
 
     login_as_user
