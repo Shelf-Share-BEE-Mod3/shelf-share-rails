@@ -45,11 +45,9 @@ RSpec.describe Book do
     it "#available" do
       expect(Book.available).to eq([@book2])
     end
-  end
 
-  describe 'class methods' do
     it 'search' do
-      book1 = create(:book)
+      book1 = create(:book, title: "Test Case")
       book2 = create(:book)
       book3 = Book.create!(
         title: 'Test Book',
@@ -67,10 +65,21 @@ RSpec.describe Book do
       expect(Book.search(book1.description).first).to eq(book1)
 
       # fragments
-      expect(Book.search('Test').first).to eq(book3)
+      expect(Book.search('Test')).to eq([book1,book3])
       expect(Book.search('author').first).to eq(book3)
       expect(Book.search('12341234').first).to eq(book3)
       expect(Book.search('book').first).to eq(book3)
+    end
+
+    it 'friends_books' do
+      @user1.friends << @user2
+      @user2.friends << @user1
+      stranger = create(:user)
+      book4 = create(:book, title: "Test Case")
+      book5 = create(:book, title: "Test Book")
+      UserBook.create!(book_id: book4.id, user_id: @user1.id, status: 'available')
+      UserBook.create!(book_id: book5.id, user_id: stranger.id, status: 'available')
+      expect(Book.find_friends_available_books(@user2.id)).to eq([@book2, book4])
     end
   end
 end
