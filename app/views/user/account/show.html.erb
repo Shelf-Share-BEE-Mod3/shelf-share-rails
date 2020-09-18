@@ -6,5 +6,7 @@
 <%= @address.city %>
 <%= @address.state %>
 <%= @address.zip %>
-
+<br>
 <%= link_to "Update Address", edit_address_path(@address.id) %>
+<br>
+<p>Email Address: <%= current_user.email %></p>

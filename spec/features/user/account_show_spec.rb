@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Account Info Page' do
   before :each do
-    @user = User.create!(first_name: 'Neal', last_name: 'Stephenson')
+    @user = User.create!(first_name: 'Neal', last_name: 'Stephenson', email: "email@email.com")
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
     Address.create!(
       address_first: '123 Main St',
@@ -15,7 +15,6 @@ RSpec.describe 'Account Info Page' do
   end
   it 'displays users current address' do
     visit user_account_path
-
     expect(page).to have_content(@user.address.address_first)
     expect(page).to have_content(@user.address.address_second)
     expect(page).to have_content(@user.address.city)
@@ -43,7 +42,6 @@ RSpec.describe 'Account Info Page' do
     fill_in :zip, with: updated[:zip]
     expect(page).to have_content("Address Line 1")
     click_on 'Submit'
-
     expect(current_path).to eq(user_account_path)
     expect(page).to have_content("Address updated successfully")
     expect(page).to have_content(updated[:address_first])
@@ -51,5 +49,9 @@ RSpec.describe 'Account Info Page' do
     expect(page).to have_content(updated[:city])
     expect(page).to have_content(updated[:state])
     expect(page).to have_content(updated[:zip])
+  end
+  it "displays user email address" do
+    visit user_account_path
+    expect(page).to have_content(@user.email)
   end
 end
