@@ -32,4 +32,16 @@ RSpec.describe "Borrowing Without Address Sad Path / Edge Case" do
       expect(@library_book.status).to eq("available")
     end
   end
+
+  describe "borrower will be prompted to add address before borrowing a book" do
+    it "They will be redirected to the new address form instead" do
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@borrower)
+      visit books_path
+      click_link @book.title
+      expect do
+        click_button "Ask to Borrow"
+      end.to_not change { BorrowRequest.count }
+      expect(current_path).to eq(address_prompt_path)
+    end
+  end
 end
