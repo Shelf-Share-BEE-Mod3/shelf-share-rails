@@ -13,7 +13,9 @@
 <% @friends.each do |friend| %>
   <section class="friend-book-shelf book-shelf">
     <% friend.books.each do |book| %>
-      <%= render partial: '/partials/book_card', locals: { book: book, friend_id: friend.id, extra: "Belongs to #{friend.first_name}" } %>
+    <div class="book">
+      <%= render partial: '/partials/book_card', locals: { book: book, friend_id: friend.id, extra: "#{book.category}\nBelongs to #{friend.first_name}" } %>
+    </div>
     <% end %>
   </section>
 <% end %>

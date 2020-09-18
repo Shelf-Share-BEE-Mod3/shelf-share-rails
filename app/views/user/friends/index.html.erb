@@ -25,7 +25,7 @@
     <p>You have no friends :(<p>
   <% else %>
     <% @friends.each do |friend| %>
-      <h2 class="librarian-name"><%= link_to "#{friend.first_name}'s Books" %></h2>
+      <h2 class="librarian-name"><%= link_to "#{friend.first_name}'s Books", user_friend_path(friend) %></h2>
       <section class="book-shelf">
         <% friend.books[0..5].shuffle.each do |book| %>
           <%= render partial: '/partials/book_card', locals: {book: book, friend_id: friend.id, extra: "#{book.category}"} %>
