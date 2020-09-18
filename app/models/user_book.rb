@@ -26,4 +26,12 @@ class UserBook < ApplicationRecord
   def status_change_to_available
     self.status = "available"
   end
+
+  def change_status
+    if self.status == "available"
+      self.status = 'unavailable'
+    else
+      self.status = 'available'
+    end
+  end
 end

@@ -19,7 +19,7 @@
   <% unless @outgoing_requests.nil? %>
     <% @outgoing_requests.each do |request| %>
       <article class="book-request">
-        You asked to borrow <%= request.user_book.book.title %> from <%= request.borrower.full_name %>
+        You asked to borrow <%= request.user_book.book.title %> from <%= request.user_book.user.full_name %>
       </article>
     <% end %>
   <% end %>

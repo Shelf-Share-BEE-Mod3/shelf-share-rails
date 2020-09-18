@@ -2,15 +2,15 @@
 
 <section class="friend-requests">
   <% if current_user.current_friend_requests.empty? %>
-  <p>No friend requests<p>
-    <% else %>
-    <% current_user.current_friend_requests.each do |request, friend| %>
-    <p><%= "#{friend.first_name} wants to be your friend" %></p>
-    <%= link_to "Accept", user_friend_request_path(request.id), method: :patch %>
-    <%= link_to "Decline", user_friend_request_path(request.id), method: :delete %>
+    <p>No friend requests<p>
+  <% else %>
+    <% @friend_requests.each do |friend_request| %>
+      <p><%= "#{friend_request.friend.first_name} wants to be your friend" %></p>
+      <%= link_to "Accept", user_friend_request_path(friend_request.request.id), method: :patch %>
+      <%= link_to "Decline", user_friend_request_path(friend_request.request.id), method: :delete %>
     <% end %>
-    <% end %>
-  </section>
+  <% end %>
+</section>
 
 <section class="add-friend-form">
   <%= form_tag user_friend_requests_path, method: :post do %>

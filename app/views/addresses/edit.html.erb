@@ -1,11 +1,12 @@
 <h3><%= current_user.first_name %> <%= current_user.last_name %></h3>
 <h4>Address</h4>
 
+
 <%= form_tag( {:action => 'update'}, {method: :patch}) do %>
-  <%= label_tag :address_first, 'Address: *' %>
+  <%= label_tag :address_first, 'Address Line 1: *' %>
   <%= text_field_tag :address_first, "#{@address.address_first}"%><br>
 
-  <%= label_tag :address_second, 'Address: ' %>
+  <%= label_tag :address_second, 'Address Line 2: ' %>
   <%= text_field_tag :address_second, "#{@address.address_second}" %><br>
 
   <%= label_tag :city, 'City: *' %>
@@ -20,3 +21,5 @@
   <%= submit_tag 'Submit Address' %>
 <% end %>
 <p>*Required Field</p>
+
+<%= render 'partials/address_disclaimer' %>

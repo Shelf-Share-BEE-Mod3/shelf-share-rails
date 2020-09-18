@@ -37,8 +37,3 @@ RSpec.describe 'User Friends Index Page' do
     expect(page).to have_content('Add friends')
   end
 end
-
-# Future user stories:
-# I see any new friend requests with buttons to accept or decline
-# I see the book covers I am lending displayed by the friend who has them
-# I see the book covers of books I am borrowing by the friends who own them

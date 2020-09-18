@@ -23,4 +23,15 @@ class Book < ApplicationRecord
       or(Book.where('author ILIKE ?', "%#{sanitize_sql_like(keyword)}%")).
       or(Book.where('description ILIKE ?', "%#{sanitize_sql_like(keyword)}%"))
   end
+
+  def self.find_friends_available_books(id)
+    ids = Friendship.where(user_id: id).pluck(:friend_id)
+    joins(:user_books, :users).where(user_books: {user_id: ids, status: 'available'})
+  end
+
+  def find_borrower(lender_id)
+    userbook = UserBook.where({user_id: lender_id, book_id: self.id, status: 'unavailable'})[0]
+    borrow_request = BorrowRequest.where(user_book_id: userbook.id).find_by(status: 2)
+    User.find(borrow_request.borrower_id)
+  end
 end

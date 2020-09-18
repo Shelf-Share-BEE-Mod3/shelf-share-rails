@@ -1,0 +1,9 @@
+<h1>Books Out On Loan</h1>
+
+<% @loaned_books.each do |loan_book| %>
+<div class="borrowed-books" id="borrow-<%= loan_book.id %>">
+  <% borrower = loan_book.find_borrower(current_user.id) %>
+  <%= image_tag(loan_book.thumbnail, alt: "#{loan_book.title} cover image") %>
+  <p><%= "Currently lent to #{borrower.full_name}" %></p>
+</div>
+<% end %>

@@ -6,7 +6,7 @@ class BookBuddyService
 
     if response.success?
       JSON.parse(response.body, symbolize_names: true)
-    else
+    else #outsource to microservice
       failure = { data: {
         id: nil,
         type: 'error',

@@ -7,7 +7,7 @@ RSpec.describe 'Create User Books Spec' do
     expect(page).to have_link("Add Books to My Shelf", href: new_user_book_path)
   end
 
-  xit 'I can add a book by searching its ISBN' do
+  it 'I can add a book by searching its ISBN', :vcr do
     book = {isbn: '9780441569595', title: 'Neuromancer', author: 'William Gibson'}
 
     login_as_user
@@ -20,7 +20,7 @@ RSpec.describe 'Create User Books Spec' do
     expect(page).to have_content(book[:title])
   end
 
-  it 'I cannot add a book with an invalid ISBN' do
+  it 'I cannot add a book with an invalid ISBN', :vcr do
     login_as_user
     visit new_user_book_path
     fill_in :isbn, with: 'x'

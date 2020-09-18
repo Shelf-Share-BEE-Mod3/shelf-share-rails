@@ -25,6 +25,19 @@ RSpec.describe Book do
       expect(book1.find_status).to eq('available')
       expect(book2.find_status).to eq('unavailable')
     end
+    it "#find_borrower" do
+      lender = create(:user)
+      borrower = create(:user)
+      faker = create(:user)
+      book1 = create(:book)
+      book2 = create(:book)
+      userbook1 = book1.user_books.create(user_id: lender.id, status: 'unavailable')
+      userbook2 = book2.user_books.create(user_id: lender.id, status: 'unavailable')
+      BorrowRequest.create!(user_book_id: userbook1.id, borrower_id: faker.id, status: 3)
+      BorrowRequest.create!(user_book_id: userbook2.id, borrower_id: faker.id, status: 2)
+      BorrowRequest.create!(user_book_id: userbook1.id, borrower_id: borrower.id, status: 2)
+      expect(book1.find_borrower(lender.id)).to eq(borrower)
+    end
   end
 
   describe "#class_methods" do
@@ -45,11 +58,9 @@ RSpec.describe Book do
     it "#available" do
       expect(Book.available).to eq([@book2])
     end
-  end
 
-  describe 'class methods' do
     it 'search' do
-      book1 = create(:book)
+      book1 = create(:book, title: "Test Case")
       book2 = create(:book)
       book3 = Book.create!(
         title: 'Test Book',
@@ -67,10 +78,21 @@ RSpec.describe Book do
       expect(Book.search(book1.description).first).to eq(book1)
 
       # fragments
-      expect(Book.search('Test').first).to eq(book3)
+      expect(Book.search('Test')).to eq([book1,book3])
       expect(Book.search('author').first).to eq(book3)
       expect(Book.search('12341234').first).to eq(book3)
       expect(Book.search('book').first).to eq(book3)
+    end
+
+    it 'friends_books' do
+      @user1.friends << @user2
+      @user2.friends << @user1
+      stranger = create(:user)
+      book4 = create(:book, title: "Test Case")
+      book5 = create(:book, title: "Test Book")
+      UserBook.create!(book_id: book4.id, user_id: @user1.id, status: 'available')
+      UserBook.create!(book_id: book5.id, user_id: stranger.id, status: 'available')
+      expect(Book.find_friends_available_books(@user2.id)).to eq([@book2, book4])
     end
   end
 end

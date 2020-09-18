@@ -15,9 +15,9 @@ RSpec.describe 'Return Book Index Page' do
   it 'On the dashboard, there is a link to show all books I am borrowing' do
     visit user_dashboard_path
     within ('.borrowed-books') do
-      expect(page).to have_button("See all borrowed books")
+      expect(page).to have_link("1 book")
     end
-    click_button("See all borrowed books")
+    click_link("1 book")
   end
 
   it "On the borrowed books index page, I see a list of all books I am borrowing" do

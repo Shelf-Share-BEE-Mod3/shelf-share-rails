@@ -9,6 +9,5 @@ RSpec.describe "Dashboard Page Scaffold" do
     expect(page).to have_css(".borrowed-books")
     expect(page).to have_css(".loaned-books")
     expect(page).to have_css(".friend-requests")
-    expect(page).to have_css(".in-transit")
   end
 end
