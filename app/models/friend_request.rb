@@ -3,7 +3,7 @@
 class FriendRequest < ApplicationRecord
   after_initialize :set_status
 
-  validates :from, presence: true, uniqueness: true
+  validates :from, presence: true
   validates :status, presence: true
   belongs_to :user
 
