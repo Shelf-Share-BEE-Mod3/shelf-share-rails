@@ -41,11 +41,26 @@ RSpec.describe 'As a registered user' do
       end
     end
 
-    xit 'I see a section listing books I have currently borrowed and their owners' do
-      within ".currently-barrowed" do
-        expect(page).to have_content("You have #{@user.barrowed_book} barrowed books") # Create a barrowed method?
-        expect(page).to have_content("Books: #{@user.barrowed_book_titles}")
-        expect(page).to have_content("Book Owner: #{@user.barrowed_book_owners}") # Might be better verbiage to use here?
+    it 'I see a section listing books I have currently borrowed and their owners' do
+      user1, user2 = create_list(:user, 2)
+      user1.friends << user2
+      user2.friends << user1
+      book = create(:book)
+      user_book1 = create(:user_book, user: user2, book: book)
+      borrow_request1 = create(:borrow_request, borrower: user1, user_book: user_book1)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user2)
+
+      visit user_dashboard_path
+      expect(page).to_not have_content("No current requests")
+
+      user_book2 = create(:user_book, user: user1, book: book, status: 'unavailable')
+      borrow_request2 = create(:borrow_request, borrower: user2, user_book: user_book2, status: 2)
+      visit user_dashboard_path
+
+      within ".borrowed-books" do
+        expect(page).to have_content("You are borrowing 1 book")
+        expect(page).to have_link("1 book", href: return_index_path)
+        expect(page).to_not have_content("No current requests")
       end
     end
 
