@@ -23,8 +23,6 @@
   <% if current_user.current_friend_requests.empty? %>
     <p>No friend requests<p>
   <% else %>
-
-
       <% @friend_requests.each do |friend_request| %>
         <p><%= "#{friend_request.friend.first_name} wants to be your friend" %></p>
         <%= link_to "Accept", user_friend_request_path(friend_request.request.id), method: :patch %>
