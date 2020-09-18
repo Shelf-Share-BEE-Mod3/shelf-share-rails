@@ -88,3 +88,7 @@ body {
 /* .dashboard-component { */
   /* display: grid; */
 /* } */
+
+.book {
+  width: 400px;
+}
