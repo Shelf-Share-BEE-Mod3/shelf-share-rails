@@ -11,14 +11,11 @@
 <p>Sorted by Friend</p>
 
 <% @friends.each do |friend| %>
-  <section class="friend-book-shelf">
+  <section class="friend-book-shelf book-shelf">
     <% friend.books.each do |book| %>
-      <div class="book">
-        <%= link_to book.title, book_path(book, friend_id: friend.id) %>
-        <%= book.author %>
-        <%= book.category %>
-        <%= image_tag(book.thumbnail, alt: "#{book.title} cover image") %>
-      </div>
+    <div class="book">
+      <%= render partial: '/partials/book_card', locals: { book: book, friend_id: friend.id, extra: "#{book.category}\nBelongs to #{friend.first_name}" } %>
+    </div>
     <% end %>
   </section>
 <% end %>

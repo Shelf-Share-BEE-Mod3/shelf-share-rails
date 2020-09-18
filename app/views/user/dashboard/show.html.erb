@@ -1,65 +1,66 @@
 <h1>My Dashboard</h1>
-
-<section class="book-requests" tabindex="0">
-  <header>
-    <h4>Book Requests</h4>
-  </header>
-  <% if @book_requests.empty? %>
+<!-- <div class="dashboard-container"> -->
+  <section class="book-requests dashboard-component" tabindex="0">
+    <header>
+      <h4>Book Requests</h4>
+    </header>
+    <% if @book_requests.empty? %>
     <p>No current requests</p>
-  <% else %>
+    <% else %>
     <p>
       You have
       <a href="<%= borrow_index_path %>">
         <%= pluralize @book_requests.size, "new book request" %>
       </a>
     </p>
-  <% end %>
-</section>
+    <% end %>
+  </section>
 
-<section class="borrowed-books" tabindex="0">
-  <header>
-    <h4>Borrowed Books</h4>
-    <% if @borrowed_books.empty? %>
+  <section class="borrowed-books dashboard-component" tabindex="0">
+    <header>
+      <h4>Borrowed Books</h4>
+      <% if @borrowed_books.empty? %>
       <p>No borrowed books</p>
-    <% else %>
+      <% else %>
       <p>
         You are borrowing
         <a href="<%= return_index_path %>">
           <%= pluralize @borrowed_books.size, "book" %>
         </a>
       </p>
-    <% end %>
-  </header>
-</section>
+      <% end %>
+    </header>
+  </section>
 
-<section class="loaned-books" tabindex="0">
-  <header>
-    <h4>Loaned books</h4>
-    <% if @loaned_books.empty? %>
+  <section class="loaned-books dashboard-component" tabindex="0">
+    <header>
+      <h4>Loaned books</h4>
+      <% if @loaned_books.empty? %>
       <p>No loaned books</p>
-    <% else %>
+      <% else %>
       <p>
         You have loaned
         <a href="<%= loan_index_path %>">
           <%= pluralize @loaned_books.size, "book" %>
         </a>
       </p>
-    <% end %>
-  </header>
-</section>
+      <% end %>
+    </header>
+  </section>
 
-<section class="friend-requests" tabindex="0">
-  <header>
-    <h4>Friend Requests</h4>
-  </header>
-  <% if @friend_requests.empty? %>
+  <section class="friend-requests dashboard-component" tabindex="0">
+    <header>
+      <h4>Friend Requests</h4>
+    </header>
+    <% if @friend_requests.empty? %>
     <p>No pending friend requests</p>
-  <% else %>
+    <% else %>
     <p>
       You have
       <a href="<%= user_friends_path %>">
         <%= pluralize @friend_requests.size, "new friend request" %>
       </a>
     </p>
-  <% end %>
-</section>
+    <% end %>
+  </section>
+<!-- </div> -->
