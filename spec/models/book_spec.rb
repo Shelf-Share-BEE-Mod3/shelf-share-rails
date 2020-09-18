@@ -25,6 +25,19 @@ RSpec.describe Book do
       expect(book1.find_status).to eq('available')
       expect(book2.find_status).to eq('unavailable')
     end
+    it "#find_borrower" do
+      lender = create(:user)
+      borrower = create(:user)
+      faker = create(:user)
+      book1 = create(:book)
+      book2 = create(:book)
+      userbook1 = book1.user_books.create(user_id: lender.id, status: 'unavailable')
+      userbook2 = book2.user_books.create(user_id: lender.id, status: 'unavailable')
+      BorrowRequest.create!(user_book_id: userbook1.id, borrower_id: faker.id, status: 3)
+      BorrowRequest.create!(user_book_id: userbook2.id, borrower_id: faker.id, status: 2)
+      BorrowRequest.create!(user_book_id: userbook1.id, borrower_id: borrower.id, status: 2)
+      expect(book1.find_borrower(lender.id)).to eq(borrower)
+    end
   end
 
   describe "#class_methods" do

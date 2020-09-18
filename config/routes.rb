@@ -16,6 +16,8 @@ Rails.application.routes.draw do
 
   resources :borrow_requests, as: 'borrow', except: [:new, :edit, :show]
 
+  resources :loaned_books, as: 'loan', only: [:index]
+
   resources :return, only: [:index, :show]
   namespace :user do
     get '/dashboard', to: 'dashboard#show', as: 'dashboard'
