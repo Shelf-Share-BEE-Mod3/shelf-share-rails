@@ -60,3 +60,19 @@ body {
   width: 150px;
   height: 200px;
 }
+
+.book-shelf {
+  display: flex;
+}
+
+.book-card {
+  border-style: dashed;
+  border-width: 3px;
+  border-color: cyan;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  transition: .2s;
+}
