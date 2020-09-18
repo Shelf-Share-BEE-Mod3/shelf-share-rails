@@ -17,7 +17,7 @@
         <%= link_to book.title, book_path(book, friend_id: friend.id) %>
         <%= book.author %>
         <%= book.category %>
-        <%= image_tag(book.thumbnail, alt: "#{book.title} cover image") %>
+        <%= render partial: '/partials/book_thumbnail', locals: { book: book } %>
       </div>
     <% end %>
   </section>

@@ -5,7 +5,7 @@
   </p>
 </header>
 <main>
-  <%= image_tag(book.thumbnail, alt: "#{book.title} cover image") %>
+  <%= render partial: '/partials/book_thumbnail', locals: { book: book } %>
   <p>
     Genre: <%= book.category %><br/>
   </p>
