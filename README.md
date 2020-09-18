@@ -208,7 +208,7 @@ DISCLAIMER:  The ShelfShare platform is a proof-of-concept and not likely to b
 
     Lito White - [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/litowhite/) - [GitHub](https://github.com/ljwhite) - [Email](mailto:leland.white@gmail.com)
 
- Jonathan Wilson - [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/jonathan--wilson/) - [GitHub](https://github.com/Jonathan-M-Wilson) - [Email](jonathanmorrillwilson@gmail.com)
+ Jonathan Wilson - [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/jonathan--wilson/) - [GitHub](https://github.com/Jonathan-M-Wilson) - [Email](mailto:jonathanmorrillwilson@gmail.com)
 
 Project Link: [ShelfShare](https://github.com/Shelf-Share-BEE-Mod3)
 
