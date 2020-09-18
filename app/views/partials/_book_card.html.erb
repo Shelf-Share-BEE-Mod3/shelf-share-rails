@@ -1,0 +1,5 @@
+<article class="book-card">
+  <%= tag.h3 (link_to book.title, book_path(book), params: { friend_id: friend_id }) %><br>
+  <%= render partial: '/partials/book_thumbnail', locals: { book: book } %>
+  <%= tag.h4 book.author %><br>
+</article>
