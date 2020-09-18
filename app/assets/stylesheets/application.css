@@ -136,3 +136,12 @@ body {
   display: flex;
   justify-content: space-around;
 }
+
+.book-show {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.book-show-footer {
+  grid-column: 1 / span 2;
+}

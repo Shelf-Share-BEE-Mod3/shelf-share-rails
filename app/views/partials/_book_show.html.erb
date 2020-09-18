@@ -1,13 +1,13 @@
-<header>
-  <p>
-    <%= book.title %><br/>
-    <%= book.author %><br/>
-  </p>
-</header>
-<main>
-  <%= render partial: '/partials/book_thumbnail', locals: { book: book } %>
-  <p>
-    <%= book.description %><br/>
-    Genre: <%= book.category %><br/>
-  </p>
-</main>
+<div class="book-show">
+  <header>
+    <%= tag.h1 book.title %>
+    <%= tag.h2 book.author %>
+  </header>
+  <main>
+    <%= render partial: '/partials/book_thumbnail', locals: { book: book } %>
+  </main>
+  <footer class="book-show-footer">
+    <%= tag.p book.description %>
+    <%= tag.p "Genre: #{book.category}" %>
+  </footer>
+</div>

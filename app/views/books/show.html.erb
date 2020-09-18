@@ -3,7 +3,7 @@
 <article class="book">
   <%= render partial: 'partials/book_show', locals: {book: @book} %>
   <footer>
-    Belongs to <%= @friend.first_name %>
+    <%= tag.p "Belongs to #{@friend.first_name}" %>
     <% if @book.find_status == 'available' %>
       <% if current_user.address.nil? %>
         <%= button_to "Ask to Borrow", address_prompt_path, method: :get %>
