@@ -19,7 +19,17 @@
 <section class="borrowed-books" tabindex="0">
   <header>
     <h4>Borrowed Books</h4>
-    <%= button_to "See all borrowed books", "/return", method: :get %>
+    <% if @borrowed_books.empty? %>
+      <p>No borrowed books</p>
+    <% else %>
+      <p>
+        You are borrowing
+        <a href="<%= return_index_path %>">
+          <%= pluralize @borrowed_books.size, "book" %>
+        </a>
+      </p>
+    <% end %>
+      <%# <%= link_to "See all borrowed books", "/return", method: :get %> %>
   </header>
 </section>
 
