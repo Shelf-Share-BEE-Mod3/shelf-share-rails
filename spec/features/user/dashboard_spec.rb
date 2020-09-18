@@ -78,11 +78,6 @@ RSpec.describe 'As a registered user' do
       end
     end
 
-    xit 'I see a section telling me about in transit books' do
-      within ".in-transit" do
-        expect(page).to have_content("In Transit Books: #{@user.transit_titles}") # Create a transit_titles method?
-      end
-    end
 
     xit 'I see a link to Add Friends' do
       expect(page).to have_link("Add Friends")
