@@ -11,12 +11,19 @@
 
 <% @books.each do |book| %>
   <article class="book">
-    <%= render partial: 'partials/book_index', locals: {book: book} %>
-    <footer>
-      Borrow from these friends:
-      <% current_user.friends.who_owns_this_book(book).each do |friend| %>
-        <%= link_to friend.first_name, book_path(book, friend_id: friend.id) %>
-      <% end %>
-    </footer>
+    <article class="book-card">
+      <%= tag.h2 book.title %><br>
+      <%= render partial: '/partials/book_thumbnail', locals: { book: book } %>
+      <%= tag.h3 book.author %><br>
+      <p class="extra"><%= book.category %></p><br/>
+      <footer class="extra">
+        <p>Borrow from these friends:</p><br/>
+        <div class="extra">
+          <% current_user.friends.who_owns_this_book(book).each do |friend| %>
+            <%= link_to friend.first_name, book_path(book, friend_id: friend.id) %><br/>
+          <% end %>
+        </div>
+      </footer>
+    </article>
   </article>
 <% end %>

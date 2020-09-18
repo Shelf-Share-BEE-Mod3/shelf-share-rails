@@ -3,7 +3,8 @@
 <% @loaned_books.each do |loan_book| %>
 <div class="borrowed-books" id="borrow-<%= loan_book.id %>">
   <% borrower = loan_book.find_borrower(current_user.id) %>
-  <%= image_tag(loan_book.thumbnail, alt: "#{loan_book.title} cover image") %>
+  <%= render partial: '/partials/book_card', locals: { book: loan_book, friend_id: current_user.id, extra: nil } %>
+
   <p><%= "Currently lent to #{borrower.full_name}" %></p>
 </div>
 <% end %>

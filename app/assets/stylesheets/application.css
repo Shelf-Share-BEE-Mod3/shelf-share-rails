@@ -1,35 +1,42 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+* This is a manifest file that'll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+* vendor/assets/stylesheets directory can be referenced here using a relative path.
+*
+* You're free to add application-wide styles to this file and they'll appear at the bottom of the
+* compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+* files in this directory. Styles in this file should be added after the last require_* statement.
+* It is generally better to create a new file per style scope.
+*
+*= require_tree .
+*= require_self
+*/
 
 * {
   box-sizing: border-box;
   padding: 0;
-  /* border-style: solid;
-  border-width: 2px;
-  border-color: blue; */
+  font-family: 'Sanchez', serif;
+}
+
+a {
+  color: blue;
 }
 
 body {
-  margin: 1rem 2rem;
+  background-color: #f6f6f6;
+  margin: 2rem 2rem 1rem 2rem;
   display: grid;
   grid-template-columns: 2fr 12fr;
 }
 
+.about {
+  grid-column: 3 / span 12;
+}
+
 .skip-link {
-  color: white;
+  color: #f6f6f6;
 }
 
 .skip-link:focus {
@@ -40,7 +47,6 @@ body {
   display: grid;
   justify-items: center;
   align-items: center;
-  margin-top: 1rem;
   margin-right: 1rem;
   height: 300px;
 }
@@ -49,11 +55,93 @@ body {
   display: grid;
 }
 
-.page {
+#main {
   margin-top: 1rem;
 }
 
-img {
-  width: 200px;
+#main:focus {
+  outline: 1px solid rgba(255,255,255,1);
+}
+
+.book-thumbnail {
+  width: 150px;
   height: 200px;
+}
+
+.book-shelf {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  display: flex;
+  flex-basis: 20%;
+}
+
+.book-card {
+  background-color: #DCDCDC;
+  border-style: dashed;
+  border-width: 3px;
+  border-color: black;
+
+  width: 200px;
+  height: 450px;
+  margin-right: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.extra {
+  /* margin-top: -2rem; */
+}
+
+.dashboard-container {
+  background-color: #f6f6f6;
+  margin: 20px auto;
+  width:800px;
+  height:400px;
+  display:grid;
+  grid-template-columns: 300px 300px;
+  grid-row: auto auto;
+  grid-column-gap: 60px;
+  grid-row-gap: 60px;
+}
+.box{
+  background-color:#DCDCDC;
+  padding:10px;
+  border-radius:10px;
+  color:#000000;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  font-size:15px;
+}
+.header{
+  grid-column: 1 / span 2;
+  text-align:center;
+}
+
+.dashboard-component {
+  background-color:#DCDCDC;
+}
+
+.dashboard-component > * {
+  background-color: inherit;
+}
+
+.book {
+  width: 400px;
+}
+
+.profile-links {
+  display: flex;
+  justify-content: space-around;
+}
+
+.book-show {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.book-show-footer {
+  grid-column: 1 / span 2;
 }

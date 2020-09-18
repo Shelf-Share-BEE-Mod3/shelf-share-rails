@@ -1,48 +1,21 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>ShelfShare</title>
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
+<html lang="en">
+  <head>
+    <title>ShelfShare</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
-</head>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <link href="https://fonts.googleapis.com/css2?family=Sanchez&display=swap" rel="stylesheet">
+  </head>
 
   <body>
-     <% if current_user %>
-      <nav class="nav">
-        <header>
-          <a class="skip-link" href='#main'>Skip to content</a>
-        </header>
-
-        <%= link_to "ShelfShare", root_path %>
-        <%= link_to "Dashboard", user_dashboard_path %>
-        <%= link_to "Books", books_path %>
-        <%= link_to "Friends", user_friends_path %>
-        <%= link_to "Profile", user_books_path %>
-        <span>
-          <%= "Logged in as #{current_user.first_name}"%>.
-        </span>
-        <span>
-          (<%= link_to "Logout", logout_path %>)
-        </span>
-      </nav>
-    <% end %>
-    <% flash.each do |name, msg| %>
-      <% if name == "missing_details" %>
-        <% msg.each do |m| %>
-          <div class= "<%=name%>-flash">
-            <p><%= m %></p>
-          </div>
-        <% end %>
-      <% else %>
-      <div class= "<%=name%>-flash">
-        <p><%= msg %></p>
-      </div>
-      <% end %>
+    <% if current_user %>
+      <%= render '/partials/nav_bar' %>
     <% end %>
     <main id="main" tabindex="-1">
+      <%= render '/partials/flash_messages' %>
       <%= yield %>
     </main>
   </body>

@@ -1,17 +1,18 @@
+<h1 class="header">Friends</h1>
 
-<section class="friend-list">
-  <h3>Friends</h3>
-  <% if current_user.friends.empty? %>
-    <p>You have no friends :(<p>
+<section class="friend-requests header">
+  <% if current_user.current_friend_requests.empty? %>
+    <p>No friend requests<p>
   <% else %>
-    <% current_user.friends.each do |friend| %>
-      <%= link_to friend.first_name, "/user/friends/#{friend.id}" %>
-      <!-- make link to friend's shelf -->
+    <% @friend_requests.each do |friend_request| %>
+      <p><%= "#{friend_request.friend.first_name} wants to be your friend" %></p>
+      <%= link_to "Accept", user_friend_request_path(friend_request.request.id), method: :patch %>
+      <%= link_to "Decline", user_friend_request_path(friend_request.request.id), method: :delete %>
     <% end %>
   <% end %>
 </section>
 
-<section class="add-friend-form">
+<section class="add-friend-form header">
   <%= form_tag user_friend_requests_path, method: :post do %>
     <%= label_tag "Add Friends" %>
     <%= text_field_tag :email, nil, placeholder: "Friend's Email" %>
@@ -19,14 +20,17 @@
   <% end %>
 </section>
 
-<section class="friend-requests">
-  <% if current_user.current_friend_requests.empty? %>
-    <p>No friend requests<p>
+<section class="friend-list">
+  <% if @friends.empty? %>
+    <p>You have no friends :(<p>
   <% else %>
-      <% @friend_requests.each do |friend_request| %>
-        <p><%= "#{friend_request.friend.first_name} wants to be your friend" %></p>
-        <%= link_to "Accept", user_friend_request_path(friend_request.request.id), method: :patch %>
-        <%= link_to "Decline", user_friend_request_path(friend_request.request.id), method: :delete %>
+    <% @friends.each do |friend| %>
+      <h2 class="librarian-name"><%= link_to "#{friend.first_name}'s Books", user_friend_path(friend) %></h2>
+      <section class="book-shelf">
+        <% friend.books[0..5].shuffle.each do |book| %>
+          <%= render partial: '/partials/book_card', locals: {book: book, friend_id: friend.id, extra: "#{book.category}"} %>
+        <% end %>
+      </section>
     <% end %>
   <% end %>
 </section>

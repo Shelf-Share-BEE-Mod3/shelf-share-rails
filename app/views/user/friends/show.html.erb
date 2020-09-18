@@ -5,18 +5,22 @@
 <% if @friend.books.available.present? %>
   <h4>Available Books</h4>
   <% @friend.books.available.each do |book| %>
-    <div class="available_book" id="book-<%= book.id %>">
-    <%= link_to(image_tag(book.thumbnail, alt: "#{book.title} cover image"), book_path(book, friend_id: @friend.id)) %>
-    </div>
+    <section class="book-shelf">
+      <div class="available_book" id="book-<%= book.id %>">
+        <%= render partial: '/partials/book_card', locals: { book: book, friend_id: current_user.id, extra: nil } %>
+      </div>
+    </section>
   <% end %>
 <% end %>
 
 <% if @friend.books.lent_to_user(current_user.id).present? %>
   <h4>Books currently borrowed from <%= @friend.first_name %></h4>
   <% @friend.books.lent_to_user(current_user.id).each do |book| %>
-    <div class="borrowed_from_user" id="book-<%= book.id %>">
-    <%= link_to(image_tag(book.thumbnail, alt: "#{book.title} cover image"), book_path(book, friend_id: @friend.id)) %>
-    </div>
+    <section class="book-shelf">
+      <div class="borrowed_from_user" id="book-<%= book.id %>">
+        <%= render partial: '/partials/book_card', locals: { book: book, friend_id: current_user.id, extra: nil } %>
+      </div>
+    </section>
   <% end %>
 <% end  %>
 
@@ -24,7 +28,7 @@
   <h4>Books currently lent to <%= @friend.first_name %></h4>
   <% current_user.books.lent_to_user(@friend.id).each do |book| %>
     <div class="lent_to_user" id="book-<%= book.id %>">
-    <%= link_to(image_tag(book.thumbnail, alt: "#{book.title} cover image"), book_path(book, friend_id: current_user.id)) %>
+      <%= render partial: '/partials/book_card', locals: { book: book, friend_id: current_user.id, extra: nil } %>
     </div>
   <% end %>
 <% end  %>
