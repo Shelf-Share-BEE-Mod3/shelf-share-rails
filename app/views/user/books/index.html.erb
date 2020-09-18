@@ -3,7 +3,7 @@
 
 <%= link_to "My Shipping Information", current_user.address.nil? ? new_address_path : user_account_path %>
 
-<section class='available'
+<section class='available'>
 <h5>On The Shelf</h5>
 <% if @available_books.present?  %>
   <% @available_books.each do |book| %>
