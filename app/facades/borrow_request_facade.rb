@@ -11,6 +11,16 @@ class BorrowRequestFacade
     end
   end
 
+  def self.find_current_friend_requests(current_user)
+    requests = current_user.current_friend_requests
+    requests.map do |request, friend|
+      OpenStruct.new(
+        request: request,
+        friend: friend
+      )
+    end
+  end
+
   def self.convert_to_poro(borrow_request)
     params = {
       id: borrow_request.id,
