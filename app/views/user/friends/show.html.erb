@@ -4,13 +4,13 @@
 
 <% if @friend.books.available.present? %>
   <h4>Available Books</h4>
-  <% @friend.books.available.each do |book| %>
-    <section class="book-shelf">
-      <div class="available_book" id="book-<%= book.id %>">
-        <%= render partial: '/partials/book_card', locals: { book: book, friend_id: current_user.id, extra: nil } %>
-      </div>
-    </section>
-  <% end %>
+  <section class="book-shelf">
+    <% @friend.books.available.each do |book| %>
+        <div class="available_book" id="book-<%= book.id %>">
+          <%= render partial: '/partials/book_card', locals: { book: book, friend_id: current_user.id, extra: nil } %>
+        </div>
+    <% end %>
+  </section>
 <% end %>
 
 <% if @friend.books.lent_to_user(current_user.id).present? %>
