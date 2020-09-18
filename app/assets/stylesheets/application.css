@@ -81,6 +81,7 @@ body {
   border-color: black;
 
   width: 200px;
+  height: 400px;
   margin-right: 1rem;
   display: flex;
   flex-direction: column;
