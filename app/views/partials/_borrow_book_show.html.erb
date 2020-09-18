@@ -1,0 +1,9 @@
+<div class="book-show">
+  <header>
+    <%= tag.h2 book.title %>
+    <%= tag.p "Borrowed from #{librarian}" %>
+  </header>
+  <main>
+    <%= render partial: '/partials/book_thumbnail', locals: { book: book } %>
+  </main>
+</div>
