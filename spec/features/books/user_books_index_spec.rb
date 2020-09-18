@@ -63,5 +63,6 @@ RSpec.describe 'User Book Index Page' do
     expect(page).to have_content("On The Shelf")
     expect(page).to have_content("Off The Shelf")
     expect(page).to have_content("No books are currently unavailable")
+    save_and_open_page
   end
 end
