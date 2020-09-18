@@ -23,6 +23,7 @@ class BookBuddyService
   end
 
   def self.conn
+    # make url ENV
     url = 'https://still-ridge-56956.herokuapp.com/'
     @conn ||= Faraday.new(url)
   end
