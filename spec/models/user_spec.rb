@@ -96,8 +96,9 @@ RSpec.describe User, type: :model do
       @user1.friends << @user2
       @user2.friends << @user1
       @book = create(:book)
+      @book2 = create(:book)
       @user_book1 = create(:user_book, user: @user2, book: @book)
-      @user_book2 = create(:user_book, user: @user2, book: @book, status: 'unavailable')
+      @user_book2 = create(:user_book, user: @user2, book: @book2, status: 'unavailable')
       @borrow_request1 = create(:borrow_request, borrower: @user1, user_book: @user_book1)
       @borrow_request2 = create(:borrow_request, borrower: @user1, user_book: @user_book2, status: 2)
       # user1 is asking for a book from user2
@@ -105,6 +106,10 @@ RSpec.describe User, type: :model do
     it 'incoming_book_borrow_requests' do
       expect(@user2.incoming_book_borrow_requests).to include(@borrow_request1)
       expect(@user2.incoming_book_borrow_requests).to_not include(@borrow_request2)
+    end
+    it "find loaned_books" do
+      expect(@user2.loaned_books).to include(@book2)
+      expect(@user2.loaned_books).to_not include(@book)
     end
   end
 end
