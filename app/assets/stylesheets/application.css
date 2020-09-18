@@ -63,6 +63,7 @@ body {
 
 .book-shelf {
   display: flex;
+  flex-direction: row;
 }
 
 .book-card {
