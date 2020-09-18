@@ -15,11 +15,17 @@
  */
 
 * {
+  background-color: #f6f6f6;
   box-sizing: border-box;
   padding: 0;
+  font-family: 'Sanchez', serif;
   /* border-style: solid;
   border-width: 2px;
   border-color: cyan; */
+}
+
+a {
+  color: blue;
 }
 
 body {
@@ -29,7 +35,7 @@ body {
 }
 
 .skip-link {
-  color: white;
+  color: #f6f6f6;
 }
 
 .skip-link:focus {
@@ -62,20 +68,24 @@ body {
 }
 
 .book-shelf {
+  padding-left: 2rem;
+  padding-right: 2rem;
   display: flex;
-  flex-direction: row;
+  flex-basis: 20%;
 }
 
 .book-card {
+  background-color: #DCDCDC;
   border-style: dashed;
   border-width: 3px;
-  border-color: cyan;
-  justify-content: center;
-  align-items: center;
+  border-color: black;
+
+  width: 200px;
+  margin-right: 1rem;
   display: flex;
   flex-direction: column;
-  width: 200px;
-  transition: .2s;
+  justify-content: center;
+  align-items: center;
 }
 
 .extra {
