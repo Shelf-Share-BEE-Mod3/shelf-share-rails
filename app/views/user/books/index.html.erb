@@ -7,8 +7,8 @@
 <h5>On The Shelf</h5>
 <% if @available_books.present?  %>
   <% @available_books.each do |book| %>
-    <div class="available_book" id="book-<%= book.id %>">
-    <%= link_to(image_tag(book.thumbnail, alt: "#{book.title} cover image"), user_book_path(book)) %>
+    <div class="available_book book-shelf" id="book-<%= book.id %>">
+      <%= render partial: '/partials/book_card', locals: { book: book, friend_id: current_user.id, extra: nil } %>
     </div>
   <% end %>
 <% else %>
@@ -20,9 +20,9 @@
 <h5>Off The Shelf</h5>
 <% if @unavailable_books.present?  %>
   <% @unavailable_books.each do |book| %>
-    <div class="unavailable_book" id="book-<%= book.id %>">
-    <%= link_to(image_tag(book.thumbnail, alt: "#{book.title} cover image"), user_book_path(book)) %>
-  </div>
+    <div class="unavailable_book book-shelf" id="book-<%= book.id %>">
+      <%= render partial: '/partials/book_card', locals: { book: book, friend_id: current_user.id, extra: nil } %>
+    </div>
   <% end %>
 <% else %>
   <p>No books are currently unavailable</p>
