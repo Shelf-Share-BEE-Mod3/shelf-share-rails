@@ -78,9 +78,5 @@ RSpec.describe 'As a registered user' do
       end
     end
 
-
-    xit 'I see a link to Add Friends' do
-      expect(page).to have_link("Add Friends")
-    end
   end
 end
