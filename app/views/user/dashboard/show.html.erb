@@ -35,6 +35,16 @@
 <section class="loaned-books" tabindex="0">
   <header>
     <h4>Loaned books</h4>
+    <% if @loaned_books.empty? %>
+      <p>No loaned books</p>
+    <% else %>
+      <p>
+        You have loaned
+        <a href="<%= loan_index_path %>">
+          <%= pluralize @loaned_books.size, "book" %>
+        </a>
+      </p>
+    <% end %>
   </header>
 </section>
 
