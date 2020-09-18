@@ -33,11 +33,7 @@ class User::BooksController < ApplicationController
   def update
     book = Book.find(params[:id])
     ub = current_user.user_books.where(book: book).first
-    if ub.status == 'available'
-      ub.update(status: 'unavailable')
-    else
-      ub.update(status: 'available')
-    end
+    ub.change_status
     flash[:success] = "Status changed for #{book.title}"
     redirect_to user_books_path
   end

@@ -13,7 +13,6 @@ RSpec.describe 'Friend Book Show Page Spec' do
 
   it "I can visit my book show page for an available book in my shelf" do
     visit user_books_path
-
     click_link @available_book.title
     expect(current_path).to eq(user_book_path(@available_book))
   end
@@ -32,7 +31,6 @@ RSpec.describe 'Friend Book Show Page Spec' do
 
   it "I can visit my book show page for an UNavailable book in my shelf" do
     visit user_books_path
-
     click_link @unavailable_book.title
     expect(current_path).to eq(user_book_path(@unavailable_book))
   end
@@ -61,20 +59,25 @@ RSpec.describe 'Friend Book Show Page Spec' do
     visit user_book_path(@available_book)
     expect(page).to have_content(@available_book.title)
     click_button 'Change Status'
+    @available_book.reload
+    @available_book.user_books[0].reload
 
     expect(current_path).to eq(user_books_path)
-    expect(page).to have_content("Status changed for #{@available_book.title}")
 
-    within('.unavailable-books') do
-      expect(page).to have_content(@available_book.title)
+    expect(page).to have_content("Status changed for #{@available_book.title}")
+    visit current_path
+
+    expect(page).to have_css('.unavailable_book')
+    within('.unavailable') do
+      expect(page).to have_css("img[src*='#{@available_book.thumbnail}']")
     end
     visit user_book_path(@available_book)
     click_button 'Change Status'
 
     expect(current_path).to eq(user_books_path)
     expect(page).to have_content("Status changed for #{@available_book.title}")
-    within('.available-books') do
-      expect(page).to have_content(@available_book.title)
+    within('.available') do
+      expect(page).to have_css("img[src*='#{@available_book.thumbnail}']")
     end
   end
 end

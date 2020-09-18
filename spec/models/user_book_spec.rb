@@ -75,5 +75,11 @@ RSpec.describe UserBook, type: :model do
     it "can change the books status to available" do
       expect(@ub2.status_change_to_available).to eq(@ub2.status = "available")
     end
+    it 'can change the status to either available or unavailable' do
+      expect(@ub1.status).to eq('available')
+      expect(@ub2.status).to eq('unavailable')
+      expect(@ub1.change_status).to eq(@ub1.status = 'unavailable')
+      expect(@ub2.change_status).to eq(@ub2.status = 'available')
+    end
   end
 end
