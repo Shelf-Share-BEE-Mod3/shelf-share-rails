@@ -1,5 +1,5 @@
 # ShelfShare
-
+Click [here](https://shelf-share.herokuapp.com/) to try out ShelfShare on herokuapp!
   <!-- TO DO: Add screenshots for about, dashboard, books, and profile. Once we create a demo video, link that below Logo in the "view Demo" link, as well as in the demonstration link under the Usage section. Check verbiage. Remove logo photo? Add more resources to the acknowledgements section. -->
 
 
@@ -8,6 +8,7 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
+[![Build Status](https://travis-ci.com/travis-ci/travis-web.svg?branch=master)](https://travis-ci.com/travis-ci/travis-web)
 
 
 <!-- PROJECT LOGO photo -->
@@ -108,7 +109,7 @@ After running your migrations, your schema will look something like this!
 
 ### Architecture
 
-To view the project board we used for the architecture and wireframe design of ShelfShare, please visit our Miro Board  [here](https://miro.com/app/board/o9J_klm2Drc=/).
+To view and explore the project board we used for the architecture and wireframing of ShelfShare, please visit our Miro Board [here](https://miro.com/app/board/o9J_klm2Drc=/).
 
 ### Installation
 
@@ -142,7 +143,7 @@ GOOGLE_CLIENT_SECRET: 'ENTER IN YOUR SECRET API KEY'
 
 Run ```rails s``` in your terminal and navigate to ```http://localhost:3000/``` in your local browser.
 
-Once you sign in with Google, you will be asked to allow Shelf Share access to your Google Books. This will only be triggered the first time you log in.
+Once you sign in with Google, you will be asked to allow ShelfShare access to your Google Books. This consent will only be triggered the first time you log in.
 
 Your **Dashboard** is a convenient place to view all the books you have borrowed or lent out, as well as new friend and book requests.
 [![dashboard-screenshot][dashboard-screenshot]](https://example.com)
@@ -155,6 +156,22 @@ To add books that you own to your shelf, navigate to the **Profile** tab, where 
 
 _For more examples, please refer to this demonstration [Documentation](Enter Video Link HERE!)_
 
+
+<!-- Optimization -->
+## Optimization
+We are using the active record method ```.includes``` to implement eager loading in two separate controllers. You can find these implementations below in the following code snippets.
+
+The first snippet can be found in the book controller under the index method.
+<br />
+<p align="center">
+    <img src="app/assets/images/book_controller_eager_loading.png" alt="database"
+  </p>
+
+The second snippet can be found in the borrow request controller under the show method.
+
+  <p align="center">
+      <img src="app/assets/images/borrow_request_eager_loading.png" alt="database"
+    </p>
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -179,19 +196,19 @@ Contributions are what make this community such an amazing and fun place to lear
 <!-- LICENSE -->
 ## License
 
-DISCLAIMER: The ShelfShare platform is a proof-of-concept and not likely to be maintained over time. Thus, any address information submitted will remain in our database indefinitely unless you delete it.  For concerns regarding your privacy, please do not submit any real location information to this website.
+DISCLAIMER:  The ShelfShare platform is a proof-of-concept and not likely to be maintained over time. Thus, any address information submitted will remain in our database indefinitely unless you delete it.  For concerns regarding your privacy, please do not submit any real location information to this website.
 
 
 <!-- CONTACT -->
 ## Contact
 
-Phillip S - [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/phillipstrom/) - [GitHub](https://github.com/Strompy) - [Email](phillip.strom@gmail.com)
+     Phillip S - [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/phillipstrom/) - [GitHub](https://github.com/Strompy) - [Email](phillip.strom@gmail.com)
 
-AJ Tran - [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/ajtran-dev/) - [GitHub](https://github.com/ajtran303) - [Email](anh.jamietran@gmail.com)
+     AJ Tran - [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/ajtran-dev/) - [GitHub](https://github.com/ajtran303) - [Email](anh.jamietran@gmail.com)
 
-Lito White - [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/litowhite/) - [GitHub](https://github.com/ljwhite) - [Email](leland.white@gmail.com)
+    Lito White - [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/litowhite/) - [GitHub](https://github.com/ljwhite) - [Email](leland.white@gmail.com)
 
-Jonathan Wilson - [![LinkedIn][linkedin-shield]](www.linkedin.com/in/jonathan--wilson) - [GitHub](https://github.com/Jonathan-M-Wilson) - [Email](jonathanmorrillwilson@gmail.com)
+ Jonathan Wilson - [![LinkedIn][linkedin-shield]](www.linkedin.com/in/jonathan--wilson) - [GitHub](https://github.com/Jonathan-M-Wilson) - [Email](jonathanmorrillwilson@gmail.com)
 
 Project Link: [ShelfShare](https://github.com/Shelf-Share-BEE-Mod3)
 
