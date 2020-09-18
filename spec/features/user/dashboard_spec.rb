@@ -71,12 +71,5 @@ RSpec.describe 'As a registered user' do
         expect(page).to have_content("Lent To: #{@user.lent_book_to}")
       end
     end
-
-    xit 'I see a section listing a random sample of book recommendations' do
-      within ".book-recommendations" do
-        expect(page).to have_css() # We are grabbing the recommended book covers and displaying them here.
-      end
-    end
-
   end
 end
