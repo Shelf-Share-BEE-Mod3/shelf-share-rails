@@ -38,10 +38,6 @@ class User < ApplicationRecord
       requests[friend] = User.find(friend.from)
     end
     requests
-     #x=  FriendRequest.where(status: 0).where(user_id: current_user.id)
-     # Presenter class? Need friend name
-     # Iterate in view, have another method to find name of requestor 
-
   end
 
   def available_books
