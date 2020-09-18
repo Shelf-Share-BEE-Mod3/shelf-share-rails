@@ -8,6 +8,7 @@ RSpec.describe "Borrow Requests Index Page Spec" do
     @borrower.friends << @book_owner
     @book_owner.friends << @borrower
     @book = create(:book)
+    @book2 = create(:book)
 
     #pending request
     @user_book1 = create(:user_book, user: @book_owner, book: @book)
@@ -32,7 +33,7 @@ RSpec.describe "Borrow Requests Index Page Spec" do
     visit loan_index_path
 
     expect(page).to have_content("Books Out On Loan")
-    expect(page).to have_content(@book.thumbnail)
-    expect(page).to have_content(@borrower.name)
+    expect(page).to have_css("img[src*='#{@book.thumbnail}']")
+    expect(page).to have_content(@borrower.full_name)
   end
 end
