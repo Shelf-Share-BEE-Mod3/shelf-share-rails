@@ -1,0 +1,46 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://still-ridge-56956.herokuapp.com/search?isbn=9780441569595
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: 'OK '
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html;charset=utf-8
+      Content-Length:
+      - '433'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server:
+      - WEBrick/1.4.2 (Ruby/2.6.6/2020-03-31)
+      Date:
+      - Fri, 18 Sep 2020 00:57:25 GMT
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: '{"data":{"id":null,"type":"book","attributes":{"title":"Neuromancer","author":"William
+        Gibson","description":"Case, a burned out computer whiz, is asked to steal
+        a security code that is locked in the most heavily guarded databank in the
+        solar system","thumbnail":"http://books.google.com/books/content?id=-8FyDwAAQBAJ\u0026printsec=frontcover\u0026img=1\u0026zoom=1\u0026source=gbs_api","isbn":"9780441569595","category":"Fiction"}}}'
+  recorded_at: Fri, 18 Sep 2020 00:57:25 GMT
+recorded_with: VCR 6.0.0
