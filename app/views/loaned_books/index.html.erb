@@ -6,7 +6,7 @@
     <% borrower = loan_book.find_borrower(current_user.id) %>
     <%= render partial: '/partials/book_card', locals: { book: loan_book, friend_id: current_user.id, extra: nil } %>
 
-    <p><%= "Currently lent to #{borrower.full_name}" %></p>
+    <p><%= "Borrowed by #{borrower.full_name}" %></p>
   </div>
   <% end %>
 </section>
