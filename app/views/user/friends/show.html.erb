@@ -15,20 +15,22 @@
 
 <% if @friend.books.lent_to_user(current_user.id).present? %>
   <h4>Books currently borrowed from <%= @friend.first_name %></h4>
-  <% @friend.books.lent_to_user(current_user.id).each do |book| %>
     <section class="book-shelf">
-      <div class="borrowed_from_user" id="book-<%= book.id %>">
-        <%= render partial: '/partials/book_card', locals: { book: book, friend_id: current_user.id, extra: nil } %>
-      </div>
+      <% @friend.books.lent_to_user(current_user.id).each do |book| %>
+          <div class="borrowed_from_user" id="book-<%= book.id %>">
+            <%= render partial: '/partials/book_card', locals: { book: book, friend_id: current_user.id, extra: nil } %>
+          </div>
+      <% end %>
     </section>
-  <% end %>
 <% end  %>
 
 <% if current_user.books.lent_to_user(@friend.id).present? %>
   <h4>Books currently lent to <%= @friend.first_name %></h4>
-  <% current_user.books.lent_to_user(@friend.id).each do |book| %>
-    <div class="lent_to_user" id="book-<%= book.id %>">
-      <%= render partial: '/partials/book_card', locals: { book: book, friend_id: current_user.id, extra: nil } %>
-    </div>
-  <% end %>
+    <section class="book-shelf">
+      <% current_user.books.lent_to_user(@friend.id).each do |book| %>
+        <div class="lent_to_user" id="book-<%= book.id %>">
+          <%= render partial: '/partials/book_card', locals: { book: book, friend_id: current_user.id, extra: nil } %>
+        </div>
+      <% end %>
+    </section>
 <% end  %>
